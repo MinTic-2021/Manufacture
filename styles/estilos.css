@@ -1,0 +1,17 @@
+body {
+    margin: 0px;
+  } 
+  .mainButton {
+    background-color: white;
+    color: gold;
+    border: 0px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+  }
+  
+  .mainButton:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px white;
+    transform: scale(1.2);
+  }
