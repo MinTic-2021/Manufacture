@@ -70,7 +70,7 @@ body {
     width: 100%;
   }
 
-  .table-class tr:first-child>th{
+  tr:first-child>th{
     position: sticky;
     top: 0;
 }
