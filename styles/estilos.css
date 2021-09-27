@@ -1,6 +1,7 @@
 body {
     margin: 0px;
   } 
+
   .mainButton {
     background-color: white;
     color: gold;
@@ -34,7 +35,7 @@ body {
     border: 1px solid black;
     height: 14px;
     border-radius: 3px;
-    background-color: white;
+    background-color: white;  
   }
   
   th{
@@ -58,3 +59,18 @@ body {
     font-weight: bold;
     font-size: large;
   }
+
+  .scroll{
+    overflow-y: scroll;
+    height: 20vh;
+    width: 100%;
+  }
+
+  table{
+    width: 100%;
+  }
+
+  .table-class tr:first-child>th{
+    position: sticky;
+    top: 0;
+}
