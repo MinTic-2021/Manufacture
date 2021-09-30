@@ -15,3 +15,7 @@ body {
     box-shadow: 1px 1px white;
     transform: scale(1.2);
   }
+
+  .logo {
+    height: 70px;
+  }
