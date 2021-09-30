@@ -2,8 +2,8 @@ body {
     margin: 0px;
   } 
   .mainButton {
-    background-color: white;
-    color: gold;
+    background-color: #f8f1e5;
+    color: #f9ba32;
     border: 0px;
     padding: 5px 10px;
     border-radius: 10px;
@@ -12,10 +12,17 @@ body {
   
   .mainButton:hover {
     cursor: pointer;
-    box-shadow: 1px 1px white;
+    box-shadow: 1px 1px #f8f1e5;
     transform: scale(1.2);
   }
 
   .logo {
     height: 70px;
+  }
+
+  .redondeado {
+    border-radius: 5px;
+  }
+  .colfondo {
+    background-color: #f8f1e5;
   }
