@@ -4,13 +4,121 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/estilos.css" />
     <title>Gestión de ventas</title>
 </head>
 <body>
     <header>Aquí va el header</header>
     <main>
-        <section>Gestión de ventas</section>
-        <section>Estado de venta</section>
+        <section class="ventas">
+            <h2 class="titulo2">Gestión de ventas</h2>
+            <span>Buscar venta:</span>
+            <div class="menu">
+                <select>
+                    <option value="id">ID</option>
+                    <option value="producto">Producto</option>
+                    <option value="vendedor">Vendedor</option>
+                    <option value="todo">Mostrar todo</option>
+                </select>
+                <input type="text"/>
+                <button type="submit">Buscar</button>
+            </div>
+            <div class="scroll">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Valor total</th>
+                        <th>Fecha inicial</th>
+                        <th>Fecha pago</th>
+                        <th>Vendedor</th>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="ventas">
+            <h2>Estado de ventas</h2>
+            <span>Buscar pedido: </span>
+            <div class="menu">
+                ID venta
+                <input type="text"/>
+                <button type="submit">Buscar</button>
+            </div>
+            <div class="scroll">
+                <table>
+                    <tr>
+                        <th>ID venta</th>
+                        <th>Descripción venta</th>
+                        <th>Estado</th>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
     </main>
     <footer>Aquí va el footer</footer>
 </body>
