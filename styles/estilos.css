@@ -1,114 +1,110 @@
 body {
-    margin: 0px;
-  } 
-  
-  .menu{
-    padding-bottom: 10px;
-  }
+  margin: 0px;
+} 
+
+.menu{
+  padding-bottom: 10px;
+}
 
 .ventas{
-  display:flex;
-  flex-direction: column;
+display:flex;
+flex-direction: column;
+border: 1px solid black;
+border-radius: 5px;
+margin: 2vh 8vh 8vh 8vh;
+padding: 3vh;
+background-color: #F8F1E5;
+}
+
+td{
   border: 1px solid black;
-  border-radius: 5px;
-  margin: 2vh 8vh 8vh 8vh;
-  padding: 3vh;
-  background-color: #F8F1E5;
+  height: 14px;
+  border-radius: 3px;
+  background-color: white;  
 }
 
-.prueba{
-  width: 30%;
-  margin: 2vh;
+th{
+  border: 1px solid black;
+  color: white;
+  border-radius: 3px;
+  background-color: #426E86;
 }
 
-  td{
-    border: 1px solid black;
-    height: 14px;
-    border-radius: 3px;
-    background-color: white;  
-  }
-  
-  th{
-    border: 1px solid black;
-    color: white;
-    border-radius: 3px;
-    background-color: #426E86;
-  }
+.titulo2{
+  margin-top: 0vh;
+  margin-bottom: 1.2vh;
+  padding-bottom: 1vh;
+  display: flex;
+  justify-content: center;
+  border-bottom: 0.3vh solid #2F3131;
+}
 
-  .titulo2{
-    margin-top: 0vh;
-    margin-bottom: 1.2vh;
-    padding-bottom: 1vh;
-    display: flex;
-    justify-content: center;
-    border-bottom: 0.3vh solid #2F3131;
-  }
+span{
+  padding-bottom: 1vh;
+  font-weight: bold;
+  font-size: large;
+}
 
-  span{
-    padding-bottom: 1vh;
-    font-weight: bold;
-    font-size: large;
-  }
+.scroll{
+  overflow-y: scroll;
+  height: 20vh;
+  width: 100%;
+}
 
-  .scroll{
-    overflow-y: scroll;
-    height: 20vh;
-    width: 100%;
-  }
+table{
+  width: 100%;
+}
 
-  table{
-    width: 100%;
-  }
-
-  tr:first-child>th{
-    position: sticky;
-    top: 0;
+tr:first-child>th{
+  position: sticky;
+  top: 0;
 }
 
 .vert{
-  display: flex;
-  flex-direction: column;
-  margin: 2vh 8vh 3vh 8vh;
+display: flex;
+flex-direction: column;
+margin: 2vh 8vh 3vh 8vh;
 }
 
 .foto{
-  width: 150px;
-  border: 1px solid black;
-  margin-bottom: 2vh;
-  border-radius: 1vh;
+width: 150px;
+border: 1px solid black;
+margin-bottom: 2vh;
+border-radius: 1vh;
 }
 
 .hor{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 6vh 8vh 3vh 8vh;
-  padding-bottom: 0vh;
+display: flex;
+flex-direction: row;
+align-items: center;
+margin: 6vh 8vh 3vh 8vh;
+padding-bottom: 0vh;
+justify-content: center;
 }
 
 label{
-  display: grid;
-  grid-template-columns: 14% 20%;
-  margin-bottom: 2vh;
+display: grid;
+grid-template-columns: 14% 20%;
+margin-bottom: 2vh;
 }
 
 label > input{
-  border-radius: 3px;
-  border: 1px solid black;
-  height: 4vh;
+border-radius: 3px;
+border: 1px solid black;
+height: 4vh;
 }
 
 form > button{
-  margin-left: 15vh;
-  margin-top: 2.5vh;
-  width: 15vh;
+margin-left: 15vh;
+margin-top: 2.5vh;
+width: 15vh;
 }
 
 form{
-  padding: 5vh 5vh 4vh 3vh;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #F8F1E5;
+padding: 5vh 5vh 4vh 3vh;
+border: 1px solid black;
+border-radius: 5px;
+background-color: #F8F1E5;
 } 
 
 .usuario{
@@ -122,18 +118,19 @@ background-color: #F8F1E5;
 }
 
 .logo {
-  height: 70px;
+height: 70px;
 }
 
 .footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  height: 30px;
-  color: white;
+position: relative;
+bottom: 0;
+width: 100%;
+height: 30px;
+color: white;
 }
 
 .formVenta{
+<<<<<<< HEAD
   /* Centrar el formulario en la página */
   margin: 0 auto;
   width: 1000px;
@@ -146,22 +143,48 @@ ul {
   list-style:none;
   padding: 0;
   margin: 0;
+=======
+/* Centrar el formulario en la página */
+margin: 0 auto;
+width: 400px;
+/* Esquema del formulario */
+padding: 1em;
+border: 1px solid #CCC;
+border-radius: 1em;
+}
+ul {
+list-style: none;
+padding: 0;
+margin: 0;
+>>>>>>> 7d66fee9af725db33a988b6fe7ae5a1768a0f42e
 }
 .formVenta li + li {
-  margin-top: 1em;
+margin-top: 1em;
 }
 
 .Ventalabel {
+<<<<<<< HEAD
   /* Tamaño y alineación uniforme */
   display:list-item;
   width: 150px;
   text-align:center;
+=======
+/* Tamaño y alineación uniforme */
+display: inline-block;
+width: 180px;
+text-align: right;
+>>>>>>> 7d66fee9af725db33a988b6fe7ae5a1768a0f42e
 }
 
 .button2 {
-  /* Alinear los botones con los campos de texto */
-  padding-left: 140px; /* mismo tamaño que los elementos de la etiqueta */
-  margin-left: .5em;
+/* Alinear los botones con los campos de texto */
+padding-left: 140px; /* mismo tamaño que los elementos de la etiqueta */
+margin-left: .5em;
+}
+
+.estado{
+  border:none;
+  outline: none;
 }
 
 .formVenta > ul {

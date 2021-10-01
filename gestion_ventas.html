@@ -11,6 +11,7 @@
 <body>
     <header>Aquí va el header</header>
     <main>
+<<<<<<< HEAD
         <div class="hor">
             <section class ="ventas">
                 <h2 class="titulo2">Formulario</h2>
@@ -41,6 +42,46 @@
                 </div>
             </section>
         </div>
+=======
+        <section class ="ventas">
+            <h2 class="titulo2">Formulario</h2>
+            <form class="formVenta">
+                <ul>
+                    <li>
+                        <label class="Ventalabel">Identificador de venta:</label>
+                        <input type="text" id="identificador" name="identificador">
+                    </li>
+                    <li>
+                        <label class="Ventalabel">Valor total de la venta:</label>
+                        <input type="number" id="venta" name="valor_venta">
+                    </li>
+                    <li>
+                        <label class="Ventalabel">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad">
+                    </li>
+                    <li>
+                        <label class="Ventalabel">Precio unitario:</label>
+                        <input type="number" id="PrecioU" name="precio_unitario">
+                    </li>
+                    <li>
+                        <label class="Ventalabel">Fecha de venta:</label>
+                        <input type="date" id="fecha" name="fecha_venta">
+                    </li>
+                    <li>
+                        <label class="Ventalabel">ID cliente:</label>
+                        <input type="number" id="IDCliente" name="ID_cliente">
+                    </li>
+                    <li>
+                        <label class="Ventalabel">Nombre cliente:</label>
+                        <input type="text" id="nombreCliente" name="nombreCliente">
+                    </li>
+                    <li class="button2">
+                        <button type="submit">Registrar venta</button>
+                      </li>
+                </ul>                
+            </form>
+        </section>
+>>>>>>> 7d66fee9af725db33a988b6fe7ae5a1768a0f42e
         <section class="ventas">
             <h2 class="titulo2">Agregar nueva venta</h2>
             <div>
@@ -181,6 +222,35 @@
                         <td> </td>
                         <td> </td>
                         <td> </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="ventas">
+            <h2 class="titulo2">Estado de ventas</h2>
+            <span>Buscar pedido: </span>
+            <div class="menu">
+                ID venta
+                <input type="text"/>
+                <button type="submit">Buscar</button>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th>ID venta</th>
+                        <th>Descripción venta</th>
+                        <th>Estado</th>
+                    </tr>
+                    <tr>
+                        <td width=15%> </td>
+                        <td> </td>
+                        <td width=8%> 
+                            <select class="estado">
+                                <option value="id">En proceso</option>
+                                <option value="producto">Cancelada</option>
+                                <option value="vendedor">Entregada</option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
             </div>
