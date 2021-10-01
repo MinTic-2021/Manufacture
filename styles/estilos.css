@@ -159,3 +159,8 @@ text-align: right;
 padding-left: 140px; /* mismo tamaño que los elementos de la etiqueta */
 margin-left: .5em;
 }
+
+.estado{
+  border:none;
+  outline: none;
+}
