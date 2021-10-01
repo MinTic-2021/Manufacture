@@ -11,36 +11,70 @@
 <body>
     <header>Aquí va el header</header>
     <main>
-        <section class ="ventas">
-            <h2 class="titulo2">Formulario</h2>
-            <form class="formVenta">
-                <ul>
-                    <li>
-                        <label class="Ventalabel">Nombre del usuario:</label>
-                        <input type="text" id="usuario" name="usuario">
-                    </li>
-                    <li>
-                        <label class="Ventalabel">Rol:</label>
-                        <select>
-                            <option value="admin">Administrador</option>
-                            <option value="vend">Vendedor</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label class="Ventalabel">Teléfono:</label>
-                        <input type="number" id="cantidad" name="cantidad">
-                    </li>
-                    <li>
-                        <label class="Ventalabel">Fecha de ingreso:</label>
-                        <input type="date" id="fecha_ingreso" name="fecha_ingreso">
-                    </li>
-                    <li class="button2">
-                        <button type="submit">Registrar usuario</button>
-                      </li>
-                </ul>                
-            </form>
-
-        </section>
+        <div class="roles">
+            <section class="ventas">
+                <h2 class="titulo2">Formulario</h2>
+                <form class="formVenta">
+                    <ul>
+                        <li>
+                            <label class="Ventalabel">Nombre del usuario:</label>
+                            <input type="text" id="usuario" name="usuario">
+                        </li>
+                        <li>
+                            <label class="Ventalabel">Rol:</label>
+                            <select>
+                                <option value="admin">Administrador</option>
+                                <option value="vend">Vendedor</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label class="Ventalabel">Teléfono:</label>
+                            <input type="number" id="cantidad" name="cantidad">
+                        </li>
+                        <li>
+                            <label class="Ventalabel">Fecha de ingreso:</label>
+                            <input type="date" id="fecha_ingreso" name="fecha_ingreso">
+                        </li>
+                        <li class="button2">
+                            <button type="submit">Registrar usuario</button>
+                          </li>
+                    </ul>                
+                </form>
+            </section>
+            <section class="ventas">
+                <h2 class="titulo2">Cambio de Roles</h2>
+                <div class="menu">
+                    ID Usuario
+                    <input type="text" />
+                    <button type="submit">Buscar</button>
+                </div>
+                <div class="table">
+                    <table>
+                        <tr>
+                            <th width=40%>ID Usuario</th>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>Rol Antiguo</th>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>Rol Nuevo</th>
+                            <td> 
+                                <select class="estado" id="A">
+                                    <option value="admin">Administrador</option>
+                                    <option value="vendedor">Vendedor</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>            
+            </section>
+        </div>
         <section class="usuario">
             <h2 class="titulo2">Gestión de usuarios</h2>
             <span>Buscar usuario:</span>
@@ -100,30 +134,6 @@
                     </tr>
                 </table>
             </div>
-        </section>
-        <section class="usuario">
-            <h2 class="titulo2">Cambio de Roles</h2>
-            <div class="menu">
-                ID Usuario
-                <input type="text" />
-                <button type="submit">Buscar</button>
-            </div>
-            <div class="table">
-                <table>
-                    <tr>
-                        <th>ID Usuario</th>
-                        <th>Nombre</th>
-                        <th>Rol Antiguo</th>
-                        <th>Rol Nuevo</th>
-                    </tr>
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                </table>
-            </div>            
         </section>
     </main>
     <footer class="footer">
