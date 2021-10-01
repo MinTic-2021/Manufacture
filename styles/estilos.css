@@ -132,6 +132,15 @@ color: white;
 .formVenta{
   /* Centrar el formulario en la página */
   margin: 0 auto;
+  width: 380px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+.formVenta1{
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
   width: 1000px;
   /* Esquema del formulario */
   padding: 1em;
@@ -143,11 +152,21 @@ ul {
   padding: 0;
   margin: 0;
 }
-.formVenta li + li {
+.formVenta1 li + li {
 margin-top: 1em;
 }
 
+.formVenta li + li {
+  margin-top: 1em;
+  }
+
 .Ventalabel {
+  /* Tamaño y alineación uniforme */
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+.Ventalabel1 {
   /* Tamaño y alineación uniforme */
   display:flex;
   width: 150px;
@@ -156,7 +175,7 @@ margin-top: 1em;
 
 .button2 {
 /* Alinear los botones con los campos de texto */
-padding-left: 140px; /* mismo tamaño que los elementos de la etiqueta */
+padding-left: 120px; /* mismo tamaño que los elementos de la etiqueta */
 margin-left: .5em;
 }
 
@@ -175,7 +194,7 @@ margin-left: .5em;
   width: 100%;
 }
 
-.formVenta > ul {
+.formVenta1 > ul {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   align-items: center;
