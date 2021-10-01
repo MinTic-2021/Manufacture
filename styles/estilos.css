@@ -16,6 +16,11 @@ body {
   background-color: #F8F1E5;
 }
 
+.prueba{
+  width: 30%;
+  margin: 2vh;
+}
+
   td{
     border: 1px solid black;
     height: 14px;
