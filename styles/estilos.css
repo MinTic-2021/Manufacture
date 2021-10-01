@@ -122,9 +122,40 @@ background-color: #F8F1E5;
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   height: 30px;
   color: white;
+}
+
+.formVenta{
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.formVenta li + li {
+  margin-top: 1em;
+}
+
+.Ventalabel {
+  /* Tamaño y alineación uniforme */
+  display: inline-block;
+  width: 180px;
+  text-align: right;
+}
+
+.button2 {
+  /* Alinear los botones con los campos de texto */
+  padding-left: 140px; /* mismo tamaño que los elementos de la etiqueta */
+  margin-left: .5em;
 }
