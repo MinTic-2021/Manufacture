@@ -130,28 +130,28 @@ color: white;
 }
 
 .formVenta{
-/* Centrar el formulario en la página */
-margin: 0 auto;
-width: 400px;
-/* Esquema del formulario */
-padding: 1em;
-border: 1px solid #CCC;
-border-radius: 1em;
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 1000px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
 }
 ul {
-list-style: none;
-padding: 0;
-margin: 0;
+  list-style:none;
+  padding: 0;
+  margin: 0;
 }
 .formVenta li + li {
 margin-top: 1em;
 }
 
 .Ventalabel {
-/* Tamaño y alineación uniforme */
-display: inline-block;
-width: 180px;
-text-align: right;
+  /* Tamaño y alineación uniforme */
+  display:flex;
+  width: 150px;
+  text-align:center;
 }
 
 .button2 {
@@ -173,4 +173,11 @@ margin-left: .5em;
 
 #A{
   width: 100%;
+}
+
+.formVenta > ul {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  align-items: center;
+  justify-items: center;
 }
