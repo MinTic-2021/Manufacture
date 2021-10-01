@@ -129,3 +129,10 @@ background-color: #F8F1E5;
   height: 30px;
   color: white;
 }
+
+.button{
+  color: gold;
+  background-color: black;
+  border-radius: 10%;
+  border: 1px solid #F8F1E5;
+}
