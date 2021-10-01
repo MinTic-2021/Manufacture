@@ -14,41 +14,6 @@
         <div class="hor">
             <section class ="ventas">
                 <h2 class="titulo2">Formulario</h2>
-                <form class="formVenta">
-                    <ul>
-                        <li>
-                            <label class="Ventalabel">Identificador de venta:</label>
-                            <input type="text" id="identificador" name="identificador">
-                        </li>
-                        <li>
-                            <label class="Ventalabel">Valor total de la venta:</label>
-                            <input type="number" id="venta" name="valor_venta">
-                        </li>
-                        <li>
-                            <label class="Ventalabel">Cantidad:</label>
-                            <input type="number" id="cantidad" name="cantidad">
-                        </li>
-                        <li>
-                            <label class="Ventalabel">Precio unitario:</label>
-                            <input type="number" id="PrecioU" name="precio_unitario">
-                        </li>
-                        <li>
-                            <label class="Ventalabel">Fecha de venta:</label>
-                            <input type="date" id="fecha" name="fecha_venta">
-                        </li>
-                        <li>
-                            <label class="Ventalabel">ID cliente:</label>
-                            <input type="number" id="IDCliente" name="ID_cliente">
-                        </li>
-                        <li>
-                            <label class="Ventalabel">Nombre cliente:</label>
-                            <input type="text" id="nombreCliente" name="nombreCliente">
-                        </li>
-                        <li class="button2">
-                            <button type="submit">Registrar venta</button>
-                          </li>
-                    </ul>                
-                </form>
             </section>
             <section class="ventas prueba">
                 <h2 class="titulo2">Estado de ventas</h2>
@@ -76,6 +41,84 @@
                 </div>
             </section>
         </div>
+        <section class="ventas">
+            <h2 class="titulo2">Agregar nueva venta</h2>
+            <div>
+                <span>Formulario</span>
+                <form class="formVenta">
+                    <ul>
+                        <li>
+                            <label class="Ventalabel">Identificador de venta:</label>
+                            <input type="text" id="identificador" name="identificador">
+                        </li>
+                        <li>
+                            <label class="Ventalabel">Fecha de venta:</label>
+                            <input type="date" id="fecha" name="fecha_venta">
+                        </li>
+                        <li>
+                            <label class="Ventalabel">ID cliente:</label>
+                            <input type="number" id="IDCliente" name="ID_cliente">
+                        </li>
+                        <li>
+                            <label class="Ventalabel">Nombre cliente:</label>
+                            <input type="text" id="nombreCliente" name="nombreCliente">
+                        </li>
+                        <li>
+                            <label class="Ventalabel">ID vendedor:</label>
+                            <input type="text" id="nombreVendedor" name="nombreVendedor">
+                        </li>
+                    </ul>                
+                </form>
+                
+            </div>
+            <div>
+                <span>Factura</span>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Valor unitario</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
         <section class="ventas">
             <h2 class="titulo2">Gestión de ventas</h2>
             <span>Buscar venta:</span>
