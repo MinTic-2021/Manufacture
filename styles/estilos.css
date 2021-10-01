@@ -1,21 +1,6 @@
 body {
     margin: 0px;
   } 
-
-  .mainButton {
-    background-color: white;
-    color: gold;
-    border: 0px;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-weight: bolder;
-  }
-  
-  .mainButton:hover {
-    cursor: pointer;
-    box-shadow: 1px 1px white;
-    transform: scale(1.2);
-  }
   
   .menu{
     padding-bottom: 10px;
@@ -130,4 +115,16 @@ border-radius: 5px;
 margin: 8vh;
 padding: 3vh;
 background-color: #F8F1E5;
+}
+
+.logo {
+  height: 70px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  color: white;
 }
