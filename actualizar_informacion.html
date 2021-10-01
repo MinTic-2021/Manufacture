@@ -4,16 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/estilos.css" />
     <title>Actualizar información</title>
 </head>
 <body>
     <header>
-        <h1>ACTUALIZAR INFORMACION</h1>
+        Aquí va el header
     </header>
     <main>
-        <section>FOTO</section>
-        <section>Información de Usuario</section>
+        <section class="hor">
+            <div class="vert">
+                <img src="./media/3099407_worker_man_office_icon.png" alt="foto" class="foto"/>
+                <input type="file"/>
+            </div>
+            <h2>ACTUALIZAR INFORMACION</h2>
+        </section>
+        <section>
+            <form class="vert">
+                <label>Nombres:
+                    <input type="text"/>
+                </label>
+                <label>Apellidos:
+                    <input type="text"/>
+                </label>
+                <label>Correo electrónico:
+                    <input type="email"/>
+                </label>
+                <label>Teléfono: 
+                    <input type="number"/>
+                </label>
+                <label>Dirección:
+                    <input type="text"/>
+                </label>
+                <button type="submit">Actualizar</button>
+            </form>
+        </section>
     </main>
-    <footer>Aquí va el footer</footer>
+    <footer class="footer">
+        <div class="table">
+            <table>
+                <tr>
+                    <th><div>Versión Alpha</div>
+                    <div>"Información contacto soporte"</div></th>
+                    <th><img src="./media/logo.jpg" alt="logo devfull" class="logo" /></th>
+                </tr>
+            </table>
+        </div>        
+    </footer>
 </body>
 </html>
