@@ -1,110 +1,110 @@
 body {
-    margin: 0px;
-  } 
-  
-  .menu{
-    padding-bottom: 10px;
-  }
+  margin: 0px;
+} 
 
-.ventas{
-  display:flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: 8vh;
-  padding: 3vh;
-  background-color: #F8F1E5;
+.menu{
+  padding-bottom: 10px;
 }
 
-  td{
-    border: 1px solid black;
-    height: 14px;
-    border-radius: 3px;
-    background-color: white;  
-  }
-  
-  th{
-    border: 1px solid black;
-    color: white;
-    border-radius: 3px;
-    background-color: #426E86;
-  }
+.ventas{
+display:flex;
+flex-direction: column;
+border: 1px solid black;
+border-radius: 5px;
+margin: 2vh 8vh 8vh 8vh;
+padding: 3vh;
+background-color: #F8F1E5;
+}
 
-  .titulo2{
-    margin-top: 0vh;
-    margin-bottom: 1.2vh;
-    padding-bottom: 1vh;
-    display: flex;
-    justify-content: center;
-    border-bottom: 0.3vh solid #2F3131;
-  }
+td{
+  border: 1px solid black;
+  height: 14px;
+  border-radius: 3px;
+  background-color: white;  
+}
 
-  span{
-    padding-bottom: 1vh;
-    font-weight: bold;
-    font-size: large;
-  }
+th{
+  border: 1px solid black;
+  color: white;
+  border-radius: 3px;
+  background-color: #426E86;
+}
 
-  .scroll{
-    overflow-y: scroll;
-    height: 20vh;
-    width: 100%;
-  }
+.titulo2{
+  margin-top: 0vh;
+  margin-bottom: 1.2vh;
+  padding-bottom: 1vh;
+  display: flex;
+  justify-content: center;
+  border-bottom: 0.3vh solid #2F3131;
+}
 
-  table{
-    width: 100%;
-  }
+span{
+  padding-bottom: 1vh;
+  font-weight: bold;
+  font-size: large;
+}
 
-  tr:first-child>th{
-    position: sticky;
-    top: 0;
+.scroll{
+  overflow-y: scroll;
+  height: 20vh;
+  width: 100%;
+}
+
+table{
+  width: 100%;
+}
+
+tr:first-child>th{
+  position: sticky;
+  top: 0;
 }
 
 .vert{
-  display: flex;
-  flex-direction: column;
-  margin: 2vh 8vh 3vh 8vh;
+display: flex;
+flex-direction: column;
+margin: 2vh 8vh 3vh 8vh;
 }
 
 .foto{
-  width: 150px;
-  border: 1px solid black;
-  margin-bottom: 2vh;
-  border-radius: 1vh;
+width: 150px;
+border: 1px solid black;
+margin-bottom: 2vh;
+border-radius: 1vh;
 }
 
 .hor{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 6vh 8vh 3vh 8vh;
-  border-bottom: 0.1vh solid #2F3131;
-  padding-bottom: 0vh;
+display: flex;
+flex-direction: row;
+align-items: center;
+margin: 6vh 8vh 3vh 8vh;
+padding-bottom: 0vh;
+justify-content: center;
 }
 
 label{
-  display: grid;
-  grid-template-columns: 14% 20%;
-  margin-bottom: 2vh;
+display: grid;
+grid-template-columns: 14% 20%;
+margin-bottom: 2vh;
 }
 
 label > input{
-  border-radius: 3px;
-  border: 1px solid black;
-  height: 4vh;
+border-radius: 3px;
+border: 1px solid black;
+height: 4vh;
 }
 
 form > button{
-  margin-left: 15vh;
-  margin-top: 2.5vh;
-  width: 15vh;
+margin-left: 15vh;
+margin-top: 2.5vh;
+width: 15vh;
 }
 
 form{
-  padding: 5vh 5vh 4vh 3vh;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #F8F1E5;
+padding: 5vh 5vh 4vh 3vh;
+border: 1px solid black;
+border-radius: 5px;
+background-color: #F8F1E5;
 } 
 
 .usuario{
@@ -118,14 +118,83 @@ background-color: #F8F1E5;
 }
 
 .logo {
-  height: 70px;
+height: 70px;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 30px;
-  color: white;
+position: relative;
+bottom: 0;
+width: 100%;
+height: 30px;
+color: white;
 }
 
+.formVenta{
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 380px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+
+ul {
+  list-style:none;
+  padding: 0;
+  margin: 0;
+}
+.formVenta1 li + li {
+margin-top: 1em;
+}
+
+.formVenta li + li {
+  margin-top: 1em;
+  }
+
+.Ventalabel {
+  /* Tamaño y alineación uniforme */
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+.Ventalabel1 {
+  /* Tamaño y alineación uniforme */
+  display:flex;
+  width: 150px;
+  text-align:center;
+}
+
+.button2 {
+/* Alinear los botones con los campos de texto */
+padding-left: 120px; /* mismo tamaño que los elementos de la etiqueta */
+margin-left: .5em;
+}
+
+.estado{
+  border:none;
+  outline: none;
+}
+
+.roles{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#A{
+  width: 100%;
+}
+
+.formVenta1 > ul {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  align-items: center;
+  justify-items: center;
+  padding-bottom: 2vh;
+}
+
+.formVenta1 {
+  border:none;
+  padding: 0.5vh 2vh 1vh 2vh;
+}
