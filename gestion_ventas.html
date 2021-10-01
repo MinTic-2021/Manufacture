@@ -13,7 +13,6 @@
     <main>
         <section class="ventas">
             <h2 class="titulo2">Agregar nueva venta</h2>
-            <div>
                 <span>Formulario</span>
                 <form class="formVenta1">
                     <ul>
@@ -39,10 +38,6 @@
                         </li>
                     </ul>                
                 </form>
-                
-            </div>
-            <div>
-                <span>Factura</span>
                 <table>
                     <tr>
                         <th width=8%>ID</th>
@@ -87,12 +82,14 @@
                         <td> </td>
                     </tr>
                 </table>
-                <div class="menu">
-                    Total de la venta
-                    <input type="text" contenteditable="false"/>
-                    <button type="submit">Agregar venta</button>
+                <div style="padding-top:1vh">
+                <span>Total de la venta</span>
+                <input type="text" disabled/>
                 </div>
-            </div>
+                <div style="padding-top: 1vh;">
+                <button type="submit">Agregar venta</button>
+                <button type="submit">Limpiar</button>
+                </div>
         </section>
         <section class="ventas">
             <h2 class="titulo2">Gestión de ventas</h2>

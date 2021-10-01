@@ -138,15 +138,7 @@ color: white;
   border: 1px solid #CCC;
   border-radius: 1em;
 }
-.formVenta1{
-  /* Centrar el formulario en la página */
-  margin: 0 auto;
-  width: 1000px;
-  /* Esquema del formulario */
-  padding: 1em;
-  border: 1px solid #CCC;
-  border-radius: 1em;
-}
+
 ul {
   list-style:none;
   padding: 0;
@@ -199,4 +191,10 @@ margin-left: .5em;
   grid-template-columns: 20% 20% 20% 20% 20%;
   align-items: center;
   justify-items: center;
+  padding-bottom: 2vh;
+}
+
+.formVenta1 {
+  border:none;
+  padding: 0.5vh 2vh 1vh 2vh;
 }
