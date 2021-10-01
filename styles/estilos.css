@@ -11,7 +11,7 @@ body {
   flex-direction: column;
   border: 1px solid black;
   border-radius: 5px;
-  margin: 8vh;
+  margin: 2vh 8vh 8vh 8vh;
   padding: 3vh;
   background-color: #F8F1E5;
 }
@@ -83,7 +83,6 @@ body {
   flex-direction: row;
   align-items: center;
   margin: 6vh 8vh 3vh 8vh;
-  border-bottom: 0.1vh solid #2F3131;
   padding-bottom: 0vh;
 }
 
