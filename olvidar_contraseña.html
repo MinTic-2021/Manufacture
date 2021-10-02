@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./media/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="./styles/estilos.css">
-    <title>Login de Usuarios</title>
+    <title>Recuperar Contraseña</title>
 </head>
 <body>
     <header>
@@ -15,6 +15,7 @@
                 <tr>
                     <th><img src="./media/logo.png" alt="logo devfull" class="logo" /></th>
                     <th><h2>DevFull Manufacture</h2></th>
+                    <th><button onclick="location.href='./login_usuarios.html'">Regresar</button></th>
                 </tr>
             </table>
         </div>   
@@ -23,21 +24,10 @@
         <form class="vert">
             <h2>Iniciar Sesión</h2>
             <label>E-MAIL:
-                <input type="text" placeholder="Ingrese E-mail" required>
+                <input type="email" placeholder="Ingrese E-mail" required>
             </label>
-            <label>CONTRASEÑA:
-                <input type="password" placeholder="Contraseña" required>
             <div style="padding-top: 2vh;">
-                <button type="submit">Ingresar</button>
-            </div>
-            <div style="padding-top: 2vh;">
-                <button type="submit">Ingresar Con Gmail</button>
-            </div>
-            <div style="padding-top: 2vh;">
-                <th><button onclick="location.href='./registro.html'">Registro</button></th>
-            </div>
-            <div style="padding-top: 2vh;">
-                <th><button onclick="location.href='./olvidar_contraseña.html'">Olvide Mi Contraseña</button></th>
+                <button type="submit">Recuperar Contraseña</button>
             </div>
         </form>
     </section>

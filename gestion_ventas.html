@@ -23,13 +23,93 @@
     </header>   
     <main>
         <section class="ventas">
+            <h2 class="titulo2">Agregar nueva venta</h2>
+                <span>Formulario</span>
+                <form class="formVenta1">
+                    <ul>
+                        <li style="margin:16px 0px 0px;">
+                            <label class="Ventalabel1">Identificador de venta:</label>
+                            <input type="text" id="identificador" name="identificador">
+                        </li>
+                        <li>
+                            <label class="Ventalabel1">Fecha de venta:</label>
+                            <input type="date" id="fecha" name="fecha_venta">
+                        </li>
+                        <li>
+                            <label class="Ventalabel1">ID cliente:</label>
+                            <input type="number" id="IDCliente" name="ID_cliente">
+                        </li>
+                        <li>
+                            <label class="Ventalabel1">Nombre cliente:</label>
+                            <input type="text" id="nombreCliente" name="nombreCliente">
+                        </li>
+                        <li>
+                            <label class="Ventalabel1">ID vendedor:</label>
+                            <input type="number" id="nombreVendedor" name="nombreVendedor">
+                        </li>
+                    </ul>                
+                </form>
+                <table>
+                    <tr>
+                        <th width=8%>ID</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Valor unitario</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                </table>
+                <div style="padding-top:1vh">
+                <span>Total de la venta</span>
+                <input type="text" disabled/>
+                </div>
+                <div style="padding-top: 1vh;">
+                <button type="submit">Agregar venta</button>
+                <button type="submit">Limpiar</button>
+                </div>
+        </section>
+        <section class="ventas">
             <h2 class="titulo2">Gestión de ventas</h2>
             <span>Buscar venta:</span>
             <div class="menu">
                 <select>
-                    <option value="id">ID</option>
-                    <option value="producto">Producto</option>
-                    <option value="vendedor">Vendedor</option>
+                    <option value="id">ID venta</option>
+                    <option value="producto">ID Cliente</option>
+                    <option value="vendedor">Nombre cliente</option>
                     <option value="todo">Mostrar todo</option>
                 </select>
                 <input type="text"/>
@@ -38,30 +118,16 @@
             <div class="scroll">
                 <table>
                     <tr>
-                        <th>ID</th>
-                        <th>Descripción</th>
+                        <th>ID venta</th>
                         <th>Valor total</th>
-                        <th>Fecha inicial</th>
-                        <th>Fecha pago</th>
-                        <th>Vendedor</th>
+                        <th>Fecha venta</th>
+                        <th>ID cliente</th>
+                        <th>Nombre cliente</th>
+                        <th>ID vendedor</th>
+                        <th>Detalle venta</th>
                     </tr>
                     <tr>
                         <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                    <tr>
                         <td> </td>
                         <td> </td>
                         <td> </td>
@@ -76,8 +142,28 @@
                         <td> </td>
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                     </tr>
                     <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
                         <td> </td>
                         <td> </td>
                         <td> </td>
@@ -104,9 +190,15 @@
                         <th>Estado</th>
                     </tr>
                     <tr>
+                        <td width=15%> </td>
                         <td> </td>
-                        <td> </td>
-                        <td> </td>
+                        <td width=8%> 
+                            <select class="estado">
+                                <option value="id">En proceso</option>
+                                <option value="producto">Cancelada</option>
+                                <option value="vendedor">Entregada</option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
             </div>

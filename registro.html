@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./media/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="./styles/estilos.css">
-    <title>Login de Usuarios</title>
+    <title>Registro</title>
 </head>
 <body>
     <header>
@@ -15,29 +15,37 @@
                 <tr>
                     <th><img src="./media/logo.png" alt="logo devfull" class="logo" /></th>
                     <th><h2>DevFull Manufacture</h2></th>
+                    <th><button onclick="location.href='./login_usuarios.html'">Regresar</button></th>
                 </tr>
             </table>
         </div>   
     </header>
     <section>
         <form class="vert">
-            <h2>Iniciar Sesión</h2>
+            <h2>Registrarse</h2>
             <label>E-MAIL:
-                <input type="text" placeholder="Ingrese E-mail" required>
+                <input type="email" placeholder="Ingrese E-mail" required>
             </label>
             <label>CONTRASEÑA:
                 <input type="password" placeholder="Contraseña" required>
+            </label>
+            <label>NOMBRES:
+                <input type="text" placeholder="Nombres" required>
+            </label>
+            <label>APELLIDOS:
+                <input type="text" placeholder="Apellidos" required>
+            </label>
+            <label>TELÉFONO:
+                <input type="tel" placeholder="Teléfono" required>
+            </label>
+            <label>DIRECCIÓN:
+                <input type="text" placeholder="Dirección" required>
+            </label>
             <div style="padding-top: 2vh;">
-                <button type="submit">Ingresar</button>
+                <button type="submit">Registrar</button>
             </div>
             <div style="padding-top: 2vh;">
-                <button type="submit">Ingresar Con Gmail</button>
-            </div>
-            <div style="padding-top: 2vh;">
-                <th><button onclick="location.href='./registro.html'">Registro</button></th>
-            </div>
-            <div style="padding-top: 2vh;">
-                <th><button onclick="location.href='./olvidar_contraseña.html'">Olvide Mi Contraseña</button></th>
+                <button type="submit">Registrar Con Gmail</button>
             </div>
         </form>
     </section>
