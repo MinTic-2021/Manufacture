@@ -13,9 +13,8 @@
         <div class="table">
             <table>
                 <tr>
-                    <th><img src="./media/logo.png" alt="logo devfull" class="logo" /></th>
+                    <th><a href="./pagina_principal.html" ><img src="./media/logo.png" alt="logo devfull" class="logo"/></a></th>
                     <th><h2>DevFull Manufacture</h2></th>
-                    <th><button onclick="location.href='./login_usuarios.html'">Regresar</button></th>
                 </tr>
             </table>
         </div>   
@@ -27,6 +26,9 @@
                 <input type="email" placeholder="Ingrese E-mail" required>
             </label>
             <label>CONTRASEÑA:
+                <input type="password" placeholder="Contraseña" required>
+            </label>
+            <label>REPETIR CONTRASEÑA:
                 <input type="password" placeholder="Contraseña" required>
             </label>
             <label>NOMBRES:
@@ -46,6 +48,8 @@
             </div>
             <div style="padding-top: 2vh;">
                 <button type="submit">Registrar Con Gmail</button>
+            <div style="padding-top: 2vh;">
+                <button onclick="location.href='./login_usuarios.html'">Cancelar</button>    
             </div>
         </form>
     </section>
