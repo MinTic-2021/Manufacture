@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/estilos.css" rel="stylesheet">
+    <link rel="stylesheet" href="./estilosPropios.css" />
+    <title>Registro</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid" style="display:grid; grid-template-columns: 10% 80%;">
+                <img src="./media/Devfull.png" style="height: 35px; padding-right: 20px;"/>
+                <h3 class="navbar-brand" style="margin-left: 50vh;">
+                    Manufactura
+                </h3>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>            
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h4 style="display:flex; justify-content: center; padding-top: 3vh; padding-bottom: 3vh;">
+                Formulario de Registro
+            </h4>
+            <form style="margin: 5vh 10vh 3vh 10vh;">
+                <div class="row" style="display: flex; padding-bottom: 2vh;">
+                    <div class="col">
+                        <label style="padding-bottom: 1vh;">Nombres:</label>
+                        <input type="text" class="form-control" placeholder="Nombres">
+                    </div>
+                    <div class="col">
+                        <label style="padding-bottom: 1vh;">Apellidos:</label>
+                        <input type="text" class="form-control" placeholder="Apellidos">
+                    </div>
+                </div>
+                <div class="row" style="display: flex; padding-bottom: 2vh;">
+                    <div class="col" >
+                        <label style="padding-bottom: 1vh;">Correo electrónico:</label>
+                        <input type="email" class="form-control" placeholder="E-mail">
+                    </div>
+                    <div class="col" >
+                        <label style="padding-bottom: 1vh;">Teléfono:</label>
+                        <input type="number" class="form-control" placeholder="Celular">
+                    </div>
+                </div>
+                <div class="row" style="display: flex; padding-bottom: 2vh;">
+                    <div class="col" >
+                        <label style="padding-bottom: 1vh;">Contraseña:</label>
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="col" >
+                        <label style="padding-bottom: 1vh;">Repetir contraseña:</label>
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+            </form>
+            <div style="margin: 2vh 0vh 0vh 10vh;">
+                <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
+                    Enviar
+                </button>
+                <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
+                    Cancelar
+                </button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

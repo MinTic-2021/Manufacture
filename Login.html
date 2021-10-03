@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/estilos.css" rel="stylesheet">
+    <link rel="stylesheet" href="./estilosPropios.css" />
+    <title>Ingreso</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid" style="display:grid; grid-template-columns: 10% 80%;">
+                <img src="./media/Devfull.png" style="height: 35px; padding-right: 20px;"/>
+                <h3 class="navbar-brand" style="margin-left: 50vh;">
+                    Manufactura
+                </h3>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>            
+        </nav>
+    </header>
+    <main>
+        <div class="cointainer-sm" style="margin:6vh 70vh 3vh 70vh;">
+            <h4 style="display:flex; justify-content: center; padding-bottom: 3vh;">
+                Iniciar sesión
+            </h4>
+            <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Correo electrónico:</label>
+                  <input type="email" class="form-control" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Contraseña:</label>
+                  <input type="password" class="form-control">
+                </div>
+                <div style="display:flex; flex-direction: row; justify-content: space-around;">
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Recuerdáme</label>
+                    </div>
+                    <label style="color:blue; text-decoration: underline; cursor:pointer">
+                        Olvidé la contraseña
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin: 1vh 0vh 2vh 17vh; width: 40%;">
+                    Ingresar
+                </button>
+              </form>
+              <div style="display:flex; flex-direction: row; justify-content: space-between;">
+                <label>¿No tienes cuenta?</label>
+                <label style="color:blue; text-decoration: underline; cursor:pointer">
+                    Registrarse
+                </label>
+            </div>
+            <span>
+                -----------------------------<b> o </b>------------------------------
+            </span>
+        </div>
+    </main>
+</body>
+</html>
