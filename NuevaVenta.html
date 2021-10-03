@@ -74,11 +74,32 @@
 
 
       <main>
-        <div style="padding-bottom: 20px;"></div>
         <div class="container-sm">
-
-            <center><h4 style="padding-bottom: 20px; padding-top: 20px;">Adición de una nueva venta</h4></center>
-            <center style="padding-bottom: 20px;">Aquí va el formulario de adición de venta</center>
+          <h4 style="padding-bottom: 20px; padding-top: 24px; display: flex; justify-content: center;">Adición de una nueva venta</h4>
+            <form style="padding-bottom: 20px;">
+              <div class="row">
+                <div class="col">
+                  <label>Identificador de venta:</label>
+                  <input type="text" class="form-control" placeholder="ID">
+                </div>
+                <div class="col">
+                  <label>Fecha de venta:</label>
+                  <input type="date" class="form-control">
+                </div>
+                <div class="col">
+                  <label>Id cliente:</label>
+                  <input type="number" class="form-control" placeholder="ID cliente">
+                </div>
+                <div class="col">
+                  <label>Nombre cliente:</label>
+                  <input type="text" class="form-control" placeholder="cliente">
+                </div>
+                <div class="col">
+                  <label>Id vendedor:</label>
+                  <input type="number" class="form-control" placeholder="vendedor">
+                </div>
+              </div>
+            </form>
             <div>
             <table class="table table-hover" style="padding-left: 50px;">
                 <thead>
@@ -131,10 +152,10 @@
         </div>
             Total de la venta: <input type="text" disabled/>
             <div style="padding-top: 12px;">
-            <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
-                Agregar venta
-            </button>
-            <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">Limpiar</button>
+              <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
+                  Agregar venta
+              </button>
+              <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">Limpiar</button>
             </div>
         </div>
 
