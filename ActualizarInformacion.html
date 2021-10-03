@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="css/estilos.css" rel="stylesheet">
     <link rel="stylesheet" href="./estilosPropios.css" />
-    <title>Agregar Usuarios</title>
+    <title>Actualizar Información</title>
 </head>
 <body>
     <header>
@@ -71,64 +71,58 @@
         </nav>
     </header>
     <main>
-        <div class="container-sm">
-            <h3 style="margin-top: 3vh; margin-bottom:5vh; display:flex; justify-content: center;">
-                Agregar Usuario Nuevo
-            </h3>
-            <form style="margin-left:10vh; margin-right:10vh;">
-                <div class="row" style="display: flex; padding-bottom: 2vh;">
-                    <div class="col">
-                        <label style="padding-bottom: 1vh;">Nombres:</label>
-                        <input type="text" class="form-control" placeholder="Nombres">
-                    </div>
-                    <div class="col">
-                        <label style="padding-bottom: 1vh;">Apellidos:</label>
-                        <input type="text" class="form-control" placeholder="Apellidos">
-                    </div>
+        <div class="cointainer-sm">
+            <section style="display: grid; align-items: center; grid-template-columns: 30% 70%;">
+                <div style="display: flex; flex-direction: column; margin-inline: 10vh;">
+                    <img src="media/foto.png" alt="foto" style="width: 30vh; padding-bottom: 1vh;"/>
+                    <input type="file"/>
                 </div>
-                <div class="row" style="display: flex; padding-bottom: 2vh;">
-                    <div class="col" >
-                        <label style="padding-bottom: 1vh;">Correo electrónico:</label>
-                        <input type="email" class="form-control" placeholder="E-mail">
+                <h3>
+                    Actualizar Información de Usuario
+                </h3>
+            </section>
+            <section>
+                <form style="margin: 5vh 10vh 3vh 10vh;">
+                    <div class="row" style="display: flex; padding-bottom: 2vh;">
+                        <div class="col">
+                            <label style="padding-bottom: 1vh;">Nombres:</label>
+                            <input type="text" class="form-control" placeholder="Nombres">
+                        </div>
+                        <div class="col">
+                            <label style="padding-bottom: 1vh;">Apellidos:</label>
+                            <input type="text" class="form-control" placeholder="Apellidos">
+                        </div>
                     </div>
-                    <div class="col" >
-                        <label style="padding-bottom: 1vh;">Teléfono:</label>
-                        <input type="number" class="form-control" placeholder="Celular">
+                    <div class="row" style="display: flex; padding-bottom: 2vh;">
+                        <div class="col" >
+                            <label style="padding-bottom: 1vh;">Correo electrónico:</label>
+                            <input type="email" class="form-control" placeholder="E-mail">
+                        </div>
+                        <div class="col" >
+                            <label style="padding-bottom: 1vh;">Teléfono:</label>
+                            <input type="number" class="form-control" placeholder="Celular">
+                        </div>
                     </div>
+                    <div class="row" style="display: flex; padding-bottom: 2vh;">
+                        <div class="col" >
+                            <label style="padding-bottom: 1vh;">Contraseña:</label>
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="col" >
+                            <label style="padding-bottom: 1vh;">Repetir contraseña:</label>
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                </form>
+                <div style="margin: 2vh 0vh 0vh 10vh;">
+                    <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
+                        Actualizar información
+                    </button>
+                    <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
+                        Cancelar
+                    </button>
                 </div>
-                <div class="row" style="display: flex; padding-bottom: 2vh;">
-                    <div class="col" >
-                        <label style="padding-bottom: 1vh;">Contraseña:</label>
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="col" >
-                        <label style="padding-bottom: 1vh;">Repetir contraseña:</label>
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                </div>
-                <div class="row" style="display: flex; padding-bottom: 2vh;">
-                    <div class="col" >
-                        <label style="padding-bottom: 1vh;">Fecha de ingreso:</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col" >
-                        <label style="padding-right: 60vh; padding-bottom: 1vh;">Rol:</label>
-                        <select class="form-select form-select-sm" style="width: 30%; height: 55%;">
-                            <option>Seleccione uno</option>
-                            <option>Administrador</option>
-                            <option>Vendedor</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-            <div style="margin: 3vh 0vh 0vh 10vh;">
-                <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
-                    Agregar usuario
-                </button>
-                <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
-                    Cancelar
-                </button>
-            </div>
+            </section>
         </div>
     </main>
 </body>
