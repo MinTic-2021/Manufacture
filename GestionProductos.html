@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="css/estilos.css" rel="stylesheet">
     <link rel="stylesheet" href="./estilosPropios.css" />
-    <title>Gestión de Usuarios</title>
+    <title>Gestión de Productos</title>
 </head>
 <body>
     <header>
@@ -73,14 +73,13 @@
     <main>
         <div class="container-sm">
             <h4 style="padding-bottom: 20px; padding-top: 20px; display: flex; justify-content: center;">
-              Gestión de usuarios
+              Gestión de productos
             </h4>
-            <h6>Buscar usuario:</h6>
+            <h6>Buscar producto:</h6>
             <div style="display: flex; justify-content: left; align-items: center;">
                 <select class="form-select form-select-sm" style="width: 13%;">
-                    <option value="nombre">Nombre</option>
-                    <option value="rol">Rol</option>
-                    <option value="id">ID</option>
+                    <option value="nombre">ID</option>
+                    <option value="rol">Descripción</option>
                     <option value="todo">Mostrar todo</option>
                 </select> 
                 <div style="padding-right: 12px; padding-left: 12px;">     
@@ -95,87 +94,81 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Rol</th>
-                        <th>Teléfono</th>
-                        <th>Fecha Ingreso</th>
+                        <th>Descripción</th>
+                        <th>Valor unitario</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody style="height: 20vh;">
                     <tr style="height: 5vh;">
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         <td width=13% style="padding-top: 0%; padding-bottom: 0%; padding-right: 0%;">
                             <select class="form-select form-select-sm" style="width: 100%; border-color:rgba(255, 255, 255, 0);">
-                              <option value="mayor">Administrador</option>
-                              <option value="menor">Vendedor</option>
+                              <option value="mayor">Disponible</option>
+                              <option value="menor">No disponible</option>
                             </select>  
                         </td>
-                        <td> </td>
-                        <td> </td>
                     </tr>
                     <tr style="height: 5vh;">
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         <td width=12% style="padding-top: 0%; padding-bottom: 0%; padding-right: 0%;">
                             <select class="form-select form-select-sm" style="width: 100%; border-color:rgba(255, 255, 255, 0);">
-                              <option value="mayor">Administrador</option>
-                              <option value="menor">Vendedor</option>
+                              <option value="mayor">Disponible</option>
+                              <option value="menor">No disponible</option>
                             </select>  
                         </td>
-                        <td> </td>
-                        <td> </td>
                     </tr>
                     <tr style="height: 5vh;">
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         <td width=12% style="padding-top: 0%; padding-bottom: 0%; padding-right: 0%;">
                             <select class="form-select form-select-sm" style="width: 100%; border-color:rgba(255, 255, 255, 0);">
-                              <option value="mayor">Administrador</option>
-                              <option value="menor">Vendedor</option>
+                              <option value="mayor">Disponible</option>
+                              <option value="menor">No Disponible</option>
                             </select>  
                         </td>
-                        <td> </td>
-                        <td> </td>
                     </tr>
                     <tr style="height: 5vh;">
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         <td width=12% style="padding-top: 0%; padding-bottom: 0%; padding-right: 0%;">
                             <select class="form-select form-select-sm" style="width: 100%; border-color:rgba(255, 255, 255, 0);">
-                              <option value="mayor">Administrador</option>
-                              <option value="menor">Vendedor</option>
+                              <option value="mayor">Disponible</option>
+                              <option value="menor">No Disponible</option>
                             </select>  
                         </td>
-                        <td> </td>
-                        <td> </td>
                     </tr>
                     <tr style="border-bottom-color: black; height: 5vh;">
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         <td width=12% style="padding-top: 0%; padding-bottom: 0%; padding-right: 0%;">
                             <select class="form-select form-select-sm" style="width: 100%; border-color:rgba(255, 255, 255, 0);">
-                              <option value="mayor">Administrador</option>
-                              <option value="menor">Vendedor</option>
+                              <option value="mayor">Disponible</option>
+                              <option value="menor">No Disponible</option>
                             </select>  
                         </td>
-                        <td> </td>
-                        <td> </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div style="padding-top: 12px;">
             <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
-                Eliminar
+              Modificar
             </button>
+            <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
+              Eliminar
+            </button>          
             <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
                 Guardar cambios
             </button>
-            <button type="button" class="btn btn-secondary" style="padding-top: 0.8px; padding-bottom: 1px;">
-                Cancelar
-            </button>
-        </div>
+          </div>
     </main>
     <footer>
 
