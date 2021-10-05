@@ -37,7 +37,7 @@ const Login = () => {
                         </div>
                     </Link>
                 </form>
-                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '2vh'}}>
                     <label>¿No tienes cuenta?</label>
                     <Link to="/registro">
                         <label style={{color: 'blue', textDecoration: 'underline', cursor:'pointer'}}>
@@ -48,9 +48,9 @@ const Login = () => {
                 <span>
                     -----------------------------<b> o </b>------------------------------
                 </span>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center', marginBottom: '5vh', marginTop: '2vh'}}>
                     <button type="button" className="btn btn-light">
-                        <img src={google} alt="Google" style={{height: '4vh'}}/>
+                        <img src={google} alt="Google" style={{height: '4vh', marginRight: '2vh'}}/>
                         Ingresar con Google
                     </button>
                 </div>
