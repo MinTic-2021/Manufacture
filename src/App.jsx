@@ -36,7 +36,7 @@ function App() {
               <Route path='/gusu-agregar'>
                 <AgregarUsuario/>
               </Route>
-              <Route path='/gven-agregar'>
+              <Route path='/gven-nueva'>
                 <NuevaVenta/>
               </Route>
               <Route path='/gven-admin'>
