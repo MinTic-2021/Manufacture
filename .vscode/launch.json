@@ -3,6 +3,7 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+<<<<<<< HEAD
     "configurations": [
         {
             "type": "pwa-chrome",
@@ -12,4 +13,7 @@
             "webRoot": "${workspaceFolder}"
         }
     ]
+=======
+    "configurations": []
+>>>>>>> 4a5afcf5c17a0392caf975e925c912ef7ec3b303
 }
