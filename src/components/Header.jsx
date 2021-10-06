@@ -1,62 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import devfull from 'media/Devfull.png'
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+  } from 'reactstrap';
 
-const Header = () => {
+
+const Header = (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
     return (
         <header >
-            <nav class="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "f1f1f1"}}>
-                <div class="container-fluid">
-                <img src={devfull} style={{height: "35px", paddingRight: "20px"}} alt="logo"/>
-                <a class="navbar-brand" href="/#">Manufactura</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle" href="/#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ventas
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/#">Nueva venta</a></li>
-                            <li><a class="dropdown-item" href="/#">Gestión venta</a></li>
-                        </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <Navbar color="light" light expand="md" >
+                <img src={devfull} style={{height: "35px", paddingRight: "20px", paddingLeft: "10px"}} alt="logo"/>
+                <NavbarBrand href="/bienvenida">Manufactura</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                <Nav className="mr-auto" navbar>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                            Ventas
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href="/gven-nueva">
+                            Nueva venta
+                            </DropdownItem>
+                            <DropdownItem href="/gven-admin">
+                            Gestión venta
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
                             Productos
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/#">Nuevo producto</a></li>
-                            <li><a class="dropdown-item" href="/#">Gestión producto</a></li>
-                        </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href="/gprod-agregar">
+                            Nuevo producto
+                            </DropdownItem>
+                            <DropdownItem href="/gprod-admin">
+                            Gestión producto
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
                             Usuarios
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/#">Registrar usuario</a></li>
-                            <li><a class="dropdown-item" href="/#">Gestión usuario</a></li>
-                        </ul>
-                    </li>
-                    </ul>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-lg-end">
-                    <li><a class="dropdown-item" href="/#">Solicitudes</a></li>
-                    <li><a class="dropdown-item" href="/#">Actualizar información</a></li>
-                    <li><a class="dropdown-item" href="/#">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-                </div>
-            </nav>
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href="/gusu-agregar">
+                            Registrar usuario
+                            </DropdownItem>
+                            <DropdownItem href="/gusu-admin">
+                            Gestión usuario
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    <UncontrolledDropdown nav inNavbar style={{position: "absolute", right: "0", bottom: "0"}}>
+                        <DropdownToggle nav caret>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href="/solicitudes">
+                            Solicitudes
+                            </DropdownItem>
+                            <DropdownItem href="/gusu-admin">
+                            Actualizar información
+                            </DropdownItem>
+                            <DropdownItem href="/">
+                            Cerrar sesión
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </Nav>
+                </Collapse>
+            </Navbar>
         </header>
     )
 }
