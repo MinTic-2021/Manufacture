@@ -16,7 +16,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
-    <Router>
+    <Router>|
       <Switch>
         <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle']}> 
           <PrivateLayout>
