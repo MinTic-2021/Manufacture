@@ -12,7 +12,7 @@ const Login = () => {
                     Iniciar sesión
                 </h4>
                 <form>
-                    <div classNameName="mb-3">
+                    <div className="mb-3">
                         <label for="exampleInputEmail1" className="form-label">Correo electrónico:</label>
                         <input type="email" className="form-control" aria-describedby="emailHelp" />
                     </div>
