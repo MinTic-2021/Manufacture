@@ -7,7 +7,7 @@ const Login = () => {
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <div className="cointainer-sm" style={{width: '61vh'}}>
-                <img src={devfull} alt="DevFull" style={{height: '25vh', padding: '0vh 2vh 3vh 7vh'}}/>
+                <img src={devfull} alt="DevFull" style={{height: '25vh', padding: '0vh 2vh 3vh 7vh', marginTop: '3vh'}}/>
                 <h4 style={{display: 'flex', justifyContent: 'center', paddingBottom: '3vh'}}>
                     Iniciar sesión
                 </h4>
@@ -29,13 +29,13 @@ const Login = () => {
                             Olvidé la contraseña
                         </label>
                     </div>
-                    <Link to="/bienvenida">
-                        <div style={{display: 'flex', justifyContent: 'center'}}>
-                            <button type="submit" className="btn btn-primary" style={{marginBottom: '1vh', width: '40%', backgroundColor:  '#426E86'}}>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <Link to="/bienvenida">
+                            <button type="submit" className="btn btn-primary" style={{marginBottom: '1vh', backgroundColor:  '#426E86'}}>
                                 Ingresar
                             </button>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                 </form>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '2vh'}}>
                     <label>¿No tienes cuenta?</label>

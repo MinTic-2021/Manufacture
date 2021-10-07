@@ -19,7 +19,7 @@ const Inicio = () => {
                 de forma segura y eficiente.
                 </span>
                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                <img src={calculator} style={{height: '150px', borderRadius: '0%'}}/>
+                <img src={calculator} style={{height: '150px', borderRadius: '0%'}} alt=""/>
                 </div>
             </div> 
         </div>

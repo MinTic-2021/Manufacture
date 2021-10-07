@@ -13,12 +13,13 @@ import NuevaVenta from 'pages/gestion-ventas/NuevaVenta';
 import GestionVenta from 'pages/gestion-ventas/GestionVenta';
 import DetalleVenta from 'pages/gestion-ventas/DetalleVenta';
 import 'bootstrap/dist/css/bootstrap.css';
+import ActualizarInformacion from 'pages/ActualizarInformacion';
 
 function App() {
   return (
-    <Router>|
+    <Router>
       <Switch>
-        <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle']}> 
+        <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
           <PrivateLayout>
             <Switch>
               <Route path='/bienvenida'>
@@ -44,6 +45,9 @@ function App() {
               </Route>
               <Route path='/gven-detalle'>
                 <DetalleVenta />
+              </Route>
+              <Route path='/actualizar'>
+                <ActualizarInformacion />
               </Route>
             </Switch>
           </PrivateLayout>

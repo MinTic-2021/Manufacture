@@ -30,7 +30,7 @@ const AgregarProducto = () => {
                 </div>
             </form>
             <div style={{margin: '2vh 0vh 0vh 10vh'}}>
-                <button type="button" className="btn btn-secondary" onclick="alert('Producto agregado exitosamente')" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
+                <button type="button" className="btn btn-secondary" onclick="alert('Producto agregado exitosamente')" style={{paddingTop: '0.8px', paddingBotton: '1px', marginRight: '2vh'}}>
                     Agregar producto
                 </button>
                 <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>

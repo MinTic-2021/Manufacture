@@ -5,7 +5,7 @@ const ActualizarInformacion = () => {
     return (
             <div style={{paddingBottom: '40px'}}>
                 <div className="cointainer-sm">
-                    <div style="display: grid; align-items: center; grid-template-columns: 30% 70%;">
+                    <div style={{display: 'grid', alignItems: 'center', gridTemplateColumns: '30% 70%'}}>
                         <div style={{display: 'flex', flexDirection: 'column', marginInline: '10vh'}}>
                             <img src={foto} alt="foto" style={{width: '30vh', paddingBottom: '1vh'}}/>
                             <input className="form-control form-control-sm" id="formFileSm" type="file"/>
@@ -48,7 +48,7 @@ const ActualizarInformacion = () => {
                             </div>
                         </form>
                         <div style={{margin: '2vh 0vh 0vh 10vh'}}>
-                            <button type="button" className="btn btn-secondary" onclick="alert('Información actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                            <button type="button" className="btn btn-secondary" onclick="alert('Información actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '2vh'}}>
                                 Actualizar información
                             </button>
                             <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>

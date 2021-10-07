@@ -81,7 +81,7 @@ const NuevaVenta = () => {
                 </div>
                 Total de la venta: <input type="text" disabled/>
                 <div style={{paddingTop: '12px'}}>
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '2vh'}}>
                         Agregar venta
                     </button>
                     <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>Limpiar</button>

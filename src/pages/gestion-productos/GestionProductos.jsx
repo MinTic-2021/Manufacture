@@ -90,10 +90,10 @@ const GestionProductos = () => {
             </table>
         </div>
         <div style={{paddingTop: '12px'}}>
-            <button type="button" class="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
+            <button type="button" class="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px', marginRight: '2vh'}}>
               Modificar
             </button>
-            <button type="button" class="btn btn-secondary" onclick="alert('Producto eliminado exitosamente')" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
+            <button type="button" class="btn btn-secondary" onclick="alert('Producto eliminado exitosamente')" style={{paddingTop: '0.8px', paddingBotton: '1px', marginRight: '2vh'}}>
               Eliminar
             </button>          
             <button type="button" class="btn btn-secondary" onclick="alert('Información actualizada')" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
