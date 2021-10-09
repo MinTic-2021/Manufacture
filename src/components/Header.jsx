@@ -74,7 +74,7 @@ const Header = (props) => {
                             <DropdownItem href="/solicitudes">
                             Solicitudes
                             </DropdownItem>
-                            <DropdownItem href="/gusu-admin">
+                            <DropdownItem href="/actualizar">
                             Actualizar información
                             </DropdownItem>
                             <DropdownItem href="/">
