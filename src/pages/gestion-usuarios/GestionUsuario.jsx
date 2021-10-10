@@ -44,23 +44,28 @@ export default GestionUsuario
 
 const Tabla = ({listaUsuarios})  => {
 
-    const [sel, setSel] = useState([])
+    const sel = []
+    const [reloadInfo, setReloadInfo] = useState(false)
+
+    useEffect(() => {
+        setReloadInfo(false)
+    }, [reloadInfo])
 
     const guardar = () => {
-        //enviar al backend
+        listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
         toast.success("Operación realizada con éxito")
+        //enviar al backend
         console.log(listaUsuarios)
     }
 
     const eliminar = () => {
-        console.log(sel)
-        const llaves = Object.keys(sel)
+        const llaves = Object.values(sel)
         llaves.forEach(llave => {delete listaUsuarios[llave]})
         listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
-        //enviar al backend
         toast.success("Operación realizada con éxito")
+        setReloadInfo(true)
+        //enviar al backend
         console.log(listaUsuarios)
-        //console.log(info)
     }
 
     return (
@@ -82,7 +87,7 @@ const Tabla = ({listaUsuarios})  => {
                             <tr style={{height: '5vh'}} key={nanoid()}>
                                 <td>
                                     <div className="form-check">
-                                        <input name='check' onChange={(e) => {sel.push(usuario.id)}} className="form-check-input" type="checkbox"/>
+                                        <input name='check' onChange={(e) => {sel.push(usuario.id-1)}} className="form-check-input" type="checkbox"/>
                                     </div>
                                 </td>
                                 <td>{usuario.id}</td>
