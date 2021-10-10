@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import datos from 'datos.json'
-import { nanoid } from 'nanoid'
+import React, { useEffect, useState } from 'react';
+import datos from 'datos.json';
+import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Tooltip, Dialog } from '@material-ui/core';
 
 const GestionUsuario = () => {
 
@@ -28,7 +29,7 @@ const GestionUsuario = () => {
                         <option value="todo">Mostrar todo</option>
                     </select> 
                     <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
-                        <input type="text"/>
+                        <input type="text" style={{borderRadius: '5px', border: '1px solid #C0C6C7', height: '4.7vh'}}/>
                     </div>   
                     <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
                         Buscar
@@ -46,6 +47,7 @@ const Tabla = ({listaUsuarios})  => {
 
     const sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         setReloadInfo(false)
@@ -54,6 +56,7 @@ const Tabla = ({listaUsuarios})  => {
     const guardar = () => {
         listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
         toast.success("Operación realizada con éxito")
+        setOpen(false)
         //enviar al backend
         console.log(listaUsuarios)
     }
@@ -87,7 +90,9 @@ const Tabla = ({listaUsuarios})  => {
                             <tr style={{height: '5vh'}} key={nanoid()}>
                                 <td>
                                     <div className="form-check">
-                                        <input name='check' onChange={(e) => {sel.push(usuario.id-1)}} className="form-check-input" type="checkbox"/>
+                                        <Tooltip title="Seleccionar usuario">
+                                            <input name='check' onChange={(e) => {sel.push(usuario.id-1)}} className="form-check-input" type="checkbox"/>
+                                        </Tooltip>
                                     </div>
                                 </td>
                                 <td>{usuario.id}</td>
@@ -110,10 +115,23 @@ const Tabla = ({listaUsuarios})  => {
                 <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Eliminar
                 </button>
-                <button type="button" onClick={guardar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Guardar cambios
                 </button>
             </div>
+            <Dialog open={open}>
+                <div style={{margin: '3vh'}}>
+                    <h6>¿Desea confirmar los cambios?</h6>
+                    <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
+                        <button onClick={guardar} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
+                            Sí
+                        </button>
+                        <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
+                            No
+                        </button>
+                    </div>
+                </div>
+            </Dialog>
         </div>
     )
 }
