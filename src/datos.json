@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "nombre": "Carlos Mendieta",
+        "rol": "administrador",
+        "telefono": "3232453424",
+        "ingreso": "17/05/2020"
+    },
+    {
+        "id": "2",
+        "nombre": "Lucia Marin",
+        "rol": "vendedor",
+        "telefono": "3134233345",
+        "ingreso": "13/08/2021"
+    },
+    {
+        "id": "3",
+        "nombre": "Sara Ortiz",
+        "rol": "vendedor",
+        "telefono": "3163123412",
+        "ingreso": "17/05/2020"
+    },
+    {
+        "id": "4",
+        "nombre": "Carlos Mendieta",
+        "rol": "administrador",
+        "telefono": "3232453424",
+        "ingreso": "17/05/2020"
+    },
+    {
+        "id": "5",
+        "nombre": "Lucia Marin",
+        "rol": "vendedor",
+        "telefono": "3134233345",
+        "ingreso": "13/08/2021"
+    },
+    {
+        "id": "6",
+        "nombre": "Sara Ortiz",
+        "rol": "vendedor",
+        "telefono": "3163123412",
+        "ingreso": "17/05/2020"
+    }
+]
