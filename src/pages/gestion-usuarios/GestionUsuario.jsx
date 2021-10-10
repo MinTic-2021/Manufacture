@@ -8,6 +8,23 @@ import { Tooltip, Dialog } from '@material-ui/core';
 const GestionUsuario = () => {
 
     const [usuarios, setUsuarios] = useState([]);
+    let [busqueda, setBusqueda] = useState('')
+    const [criterio, setCriterio] = useState('nombre')
+
+    const buscar = () =>{
+        const filtro = []
+        if(busqueda === '' || criterio === 'todo'){
+            console.log(datos)
+            setUsuarios(datos)
+        }else{
+            for (let i = 0; i < usuarios.length; i++){
+                if(usuarios[i][criterio].toLowerCase() === busqueda){
+                    filtro.push(usuarios[i])
+                }
+            }
+            setUsuarios(filtro)
+        }
+    }
 
     useEffect(() => {
         // obtención datos backend
@@ -22,17 +39,20 @@ const GestionUsuario = () => {
                 </h4>
                 <h6>Buscar usuario:</h6>
                 <div style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
-                    <select className="form-select form-select-sm" style={{width: '13%'}}>
+                    <select className="form-select form-select-sm" onChange={((e) => {setCriterio(e.target.value.toLowerCase())})} style={{width: '13%'}}>
                         <option value="nombre">Nombre</option>
                         <option value="rol">Rol</option>
                         <option value="id">ID</option>
                         <option value="todo">Mostrar todo</option>
                     </select> 
                     <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
-                        <input type="text" style={{borderRadius: '5px', border: '1px solid #C0C6C7', height: '4.7vh'}}/>
+                        <input onChange={((e) => {setBusqueda(e.target.value.toLowerCase())})} type="text" style={{borderRadius: '5px', border: '1px solid #C0C6C7', height: '4.7vh'}}/>
                     </div>   
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                    <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
                         Buscar
+                    </button>
+                    <button type="button" onClick={() => {setUsuarios(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                        Limpiar
                     </button>
                 </div>
                 <Tabla listaUsuarios={usuarios} />
@@ -62,8 +82,7 @@ const Tabla = ({listaUsuarios})  => {
     }
 
     const eliminar = () => {
-        const llaves = Object.values(sel)
-        llaves.forEach(llave => {delete listaUsuarios[llave]})
+        sel.forEach(llave => {delete listaUsuarios[llave]})
         listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
         toast.success("Operación realizada con éxito")
         setReloadInfo(true)
