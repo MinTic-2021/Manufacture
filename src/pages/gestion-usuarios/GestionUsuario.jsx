@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import datos from 'datos.json'
+import { nanoid } from 'nanoid'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GestionUsuario = () => {
+
+    const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+        // obtención datos backend
+        setUsuarios(datos);
+    }, [])
+
     return (
         <div style={{paddingBottom: '40px'}}>
             <div className="container-sm">
@@ -22,95 +34,82 @@ const GestionUsuario = () => {
                         Buscar
                     </button>
                 </div>
-                <div style={{paddingTop: '20px'}}>
-                    <table className="table table-hover" style={{paddingLeft: '50px'}}>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Rol</th>
-                                <th>Teléfono</th>
-                                <th>Fecha Ingreso</th>
-                            </tr>
-                        </thead>
-                        <tbody style={{height: '20vh'}}>
-                            <tr style={{height: '5vh'}}>
-                                <td> </td>
-                                <td> </td>
-                                <td style={{width: '13%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" style={{width: '100%', borderColor: 'rgba(255, 255, 255, 0)'}}>
-                                        <option value="mayor">Administrador</option>
-                                        <option value="menor">Vendedor</option>
-                                    </select>  
-                                </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr style={{height: '5vh'}}>
-                                <td> </td>
-                                <td> </td>
-                                <td style={{paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%', width: '12%'}}>
-                                    <select className="form-select form-select-sm" style={{width: '100%', borderColor: 'rgba(255, 255, 255, 0)'}}>
-                                        <option value="mayor">Administrador</option>
-                                        <option value="menor">Vendedor</option>
-                                    </select>  
-                                </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr style={{height: '5vh'}}>
-                                <td> </td>
-                                <td> </td>
-                                <td style={{paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%', width: '12%'}}>
-                                    <select className="form-select form-select-sm" style={{width: '100%', borderColor: 'rgba(255, 255, 255, 0)'}}>
-                                        <option value="mayor">Administrador</option>
-                                        <option value="menor">Vendedor</option>
-                                    </select>  
-                                </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr style={{height: '5vh'}}>
-                                <td> </td>
-                                <td> </td>
-                                <td style={{paddingTop: '0vh', paddingBottom: '0vh', paddingRight: '0vh', width: '12%'}}>
-                                    <select className="form-select form-select-sm" style={{width: '100%', borderColor: 'rgba(255, 255, 255, 0)'}}>
-                                        <option value="mayor">Administrador</option>
-                                        <option value="menor">Vendedor</option>
-                                    </select>  
-                                </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr style={{borderBottomColor: 'black', height : '5vh'}}>
-                                <td> </td>
-                                <td> </td>
-                                <td style={{paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%', width: '12%'}}>
-                                    <select className="form-select form-select-sm" style={{width: '100%', borderColor: 'rgba(255, 255, 255, 0)'}}>
-                                        <option value="mayor">Administrador</option>
-                                        <option value="menor">Vendedor</option>
-                                    </select>  
-                                </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div style={{paddingTop: '12px'}}>
-                    <button type="button" className="btn btn-secondary" onclick="alert('Usuario eliminado exitosamente')" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-                        Eliminar
-                    </button>
-                    <button type="button" className="btn btn-secondary" onclick="alert('Información actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-                        Guardar cambios
-                    </button>
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
-                        Cancelar
-                    </button>
-                </div>
+                <Tabla listaUsuarios={usuarios} />
             </div>
         </div>
     )
 }
 
 export default GestionUsuario
+
+const Tabla = ({listaUsuarios})  => {
+
+    const [sel, setSel] = useState([])
+
+    const guardar = () => {
+        //enviar al backend
+        toast.success("Operación realizada con éxito")
+        console.log(listaUsuarios)
+    }
+
+    const eliminar = () => {
+        console.log(sel)
+        const llaves = Object.keys(sel)
+        llaves.forEach(llave => {delete listaUsuarios[llave]})
+        listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
+        //enviar al backend
+        toast.success("Operación realizada con éxito")
+        console.log(listaUsuarios)
+        //console.log(info)
+    }
+
+    return (
+        <div style={{paddingTop: '20px'}}>
+            <table className="table table-hover" style={{paddingLeft: '50px'}}>
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Fecha Ingreso</th>
+                        <th style={{paddingLeft: '3vh'}}>Rol</th>
+                    </tr>
+                </thead>
+                <tbody style={{height: '20vh'}}>
+                    {listaUsuarios.map((usuario) => {
+                        return(
+                            <tr style={{height: '5vh'}} key={nanoid()}>
+                                <td>
+                                    <div className="form-check">
+                                        <input name='check' onChange={(e) => {sel.push(usuario.id)}} className="form-check-input" type="checkbox"/>
+                                    </div>
+                                </td>
+                                <td>{usuario.id}</td>
+                                <td>{usuario.nombre}</td>
+                                <td>{usuario.telefono}</td>
+                                <td>{usuario.ingreso}</td>
+                                <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
+                                    <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {usuario.rol = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="vendedor">Vendedor</option>
+                                    </select>  
+                                </td>
+                            </tr>
+                        )}
+                    )}
+                </tbody>
+            </table>
+            <ToastContainer position="bottom-center" autoClose={5000} />
+            <div style={{paddingTop: '12px'}}>
+                <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                    Eliminar
+                </button>
+                <button type="button" onClick={guardar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                    Guardar cambios
+                </button>
+            </div>
+        </div>
+    )
+}
+

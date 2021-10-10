@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import devfull from 'media/Devfull.png'
+import devfull from 'media/Devfull.png';
 import {
     Collapse,
     Navbar,
@@ -11,7 +11,7 @@ import {
     DropdownMenu,
     DropdownItem,
   } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +29,15 @@ const Header = (props) => {
                             Ventas
                         </DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem href="/gven-nueva">
-                            Nueva venta
+                            <DropdownItem href="">
+                            <Link to="/gven-nueva" style={{textDecoration: 'none', color: 'black'}}>
+                                Nueva venta
+                            </Link>
                             </DropdownItem>
-                            <DropdownItem href="/gven-admin">
-                            Gestión venta
+                            <DropdownItem href="">
+                                <Link to="/gven-admin" style={{textDecoration: 'none', color: 'black'}}>
+                                    Gestión venta
+                                </Link>
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
@@ -42,11 +46,15 @@ const Header = (props) => {
                             Productos
                         </DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem href="/gprod-agregar">
-                            Nuevo producto
+                            <DropdownItem href="">
+                                <Link to="/gprod-agregar" style={{textDecoration: 'none', color: 'black'}}>
+                                    Nuevo producto
+                                </Link>
                             </DropdownItem>
-                            <DropdownItem href="/gprod-admin">
-                            Gestión producto
+                            <DropdownItem href="">
+                                <Link to="/gprod-admin" style={{textDecoration: 'none', color: 'black'}}>
+                                    Gestión producto
+                                </Link>
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
@@ -55,30 +63,40 @@ const Header = (props) => {
                             Usuarios
                         </DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem href="/gusu-agregar">
-                            Registrar usuario
+                            <DropdownItem href="">
+                                <Link to="/gusu-agregar" style={{textDecoration: 'none', color: 'black'}}>
+                                    Registrar usuario
+                                </Link>
                             </DropdownItem>
-                            <DropdownItem href="/gusu-admin">
-                            Gestión usuario
+                            <DropdownItem href="">
+                                <Link to="/gusu-admin" style={{textDecoration: 'none', color: 'black'}}>
+                                    Gestión usuario
+                                </Link>
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <UncontrolledDropdown nav inNavbar style={{position: "absolute", right: "0", bottom: "0"}}>
                         <DropdownToggle nav caret>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" className="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                             </svg>
                         </DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem href="/solicitudes">
-                            Solicitudes
+                            <DropdownItem href="">
+                                <Link to="/solicitudes" style={{textDecoration: 'none', color: 'black'}}>
+                                    Solicitudes
+                                </Link> 
                             </DropdownItem>
-                            <DropdownItem href="/gusu-admin">
-                            Actualizar información
+                            <DropdownItem href="">
+                                <Link to="/actualizar" style={{textDecoration: 'none', color: 'black'}}>
+                                    Actualizar información
+                                </Link>   
                             </DropdownItem>
-                            <DropdownItem href="/">
-                            Cerrar sesión
+                            <DropdownItem href="">
+                                <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
+                                    Cerrar sesión
+                                </Link>
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
