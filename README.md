@@ -45,4 +45,4 @@ Estudiante de Ingeniería Forestal en la Universidad Nacional de Colombia sede M
 </p>
 
 ***
-<p align = "center"> <img src="/src/media/Devfull.png" style="height: 10px" /> </p>
+<p align = "center"> <img src="/src/media/Devfull.png" style="height: 40px" /> </p>
