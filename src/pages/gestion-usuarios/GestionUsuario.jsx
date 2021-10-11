@@ -12,17 +12,21 @@ const GestionUsuario = () => {
     const [criterio, setCriterio] = useState('nombre')
 
     const buscar = () =>{
-        const filtro = []
-        if(busqueda === '' || criterio === 'todo'){
-            console.log(datos)
-            setUsuarios(datos)
-        }else{
-            for (let i = 0; i < usuarios.length; i++){
-                if(usuarios[i][criterio].toLowerCase() === busqueda){
-                    filtro.push(usuarios[i])
+        try{
+            const filtro = []
+            if(busqueda === '' || criterio === 'todo'){
+                console.log(datos)
+                setUsuarios(datos)
+            }else{
+                for (let i = 0; i < usuarios.length; i++){
+                    if(usuarios[i][criterio].toLowerCase() === busqueda){
+                        filtro.push(usuarios[i])
+                    }
                 }
+                setUsuarios(filtro)
             }
-            setUsuarios(filtro)
+        } catch {
+            toast.error("La búsqueda no se puede realizar")
         }
     }
 
@@ -97,8 +101,10 @@ const Tabla = ({listaUsuarios})  => {
                     <tr>
                         <th> </th>
                         <th>ID</th>
-                        <th>Nombre</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>Teléfono</th>
+                        <th>Correo electrónico</th>
                         <th>Fecha Ingreso</th>
                         <th style={{paddingLeft: '3vh'}}>Rol</th>
                     </tr>
@@ -116,7 +122,9 @@ const Tabla = ({listaUsuarios})  => {
                                 </td>
                                 <td>{usuario.id}</td>
                                 <td>{usuario.nombre}</td>
+                                <td>{usuario.apellido}</td>
                                 <td>{usuario.telefono}</td>
+                                <td>{usuario.correo}</td>
                                 <td>{usuario.ingreso}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
                                     <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {usuario.rol = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
