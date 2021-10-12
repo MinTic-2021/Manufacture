@@ -4,6 +4,30 @@ import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+function CurrencyFormatted(N) {
+    N=parseFloat(N);
+    if(!isNaN(N))N=N.toFixed(2);
+    else N='0.00';
+    const Mstring = String (N);
+    var nValor = "";
+    var cont = 0;
+    for(let step=0; step<Mstring.length; step++){
+        nValor += Mstring.charAt(Mstring.length-step-1);
+        cont += 1;
+        if(cont > 5 & cont%3 === 0){
+            nValor += ",";
+        }
+    }
+    var total = "";
+    for(let step=0; step<nValor.length; step++){
+        total += nValor.charAt(nValor.length-step-1);
+    }
+    if(total.charAt(0)===","){
+        total = total.slice(1);
+    }
+    return "$ " + total;
+}
+
 const GestionVenta = () => {
 
     const [ventas, setVentas] = useState([]);
@@ -30,6 +54,8 @@ const GestionVenta = () => {
         }
         console.log(criterio,busqueda)
     }
+
+    
 
     useEffect(() => {
         // obtención datos backend
@@ -64,7 +90,7 @@ const GestionVenta = () => {
                 
                 <Tabla listaVentas={ventas} />
                 
-                <h4 style={{paddingBottom: '20px', paddingTop: '20px', display: 'flex', justifyContent: 'center'}}>
+                <h4 style={{paddingBottom: '20px', paddingTop: '50px', display: 'flex', justifyContent: 'center'}}>
                     Estado de ventas
                 </h4>
                 <h6>Buscar pedido:</h6>
@@ -141,7 +167,7 @@ const Tabla = ({listaVentas})  => {
                         return(
                             <tr style={{height: '5vh'}} key={nanoid()}>
                                 <td>{ventas.idVenta}</td>
-                                <td>{ventas.valorTotal}</td>
+                                <td>{CurrencyFormatted(ventas.valorTotal)}</td>
                                 <td>{ventas.fechaVenta}</td>
                                 <td>{ventas.idCliente}</td>
                                 <td>{ventas.nombreCliente}</td>
