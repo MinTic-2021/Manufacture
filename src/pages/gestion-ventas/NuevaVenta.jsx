@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+
 
 const NuevaVenta = () => {
+
     return (
         <div style={{paddingBottom: '40px'}}>
             <div className="container-sm">
@@ -8,24 +10,24 @@ const NuevaVenta = () => {
                 <form style={{paddingBottom: '20px'}}>
                     <div className="row">
                         <div className="col">
-                        <label>Identificador de venta:</label>
-                        <input type="text" className="form-control" placeholder="ID"/>
+                        <label htmlFor='idVenta'>Identificador de venta:</label>
+                        <input type="text" name='idVenta' className="form-control" placeholder="ID" required/>
                         </div>
                         <div className="col">
-                        <label>Fecha de venta:</label>
-                        <input type="date" className="form-control"/>
+                        <label htmlFor='fechaVenta'>Fecha de venta:</label>
+                        <input type="date" name='fechaVenta' className="form-control" required/>
                         </div>
                         <div className="col">
-                        <label>Id cliente:</label>
-                        <input type="number" className="form-control" placeholder="ID cliente"/>
+                        <label htmlFor='idCliente'>Id cliente:</label>
+                        <input type="number" name='idCliente' className="form-control" placeholder="ID cliente" required/>
                         </div>
                         <div className="col">
-                        <label>Nombre cliente:</label>
-                        <input type="text" className="form-control" placeholder="cliente"/>
+                        <label htmlFor='nombreCliente'>Nombre cliente:</label>
+                        <input type="text" name='nombreCliente' className="form-control" placeholder="cliente" required/>
                         </div>
                         <div className="col">
-                        <label>Id vendedor:</label>
-                        <input type="number" className="form-control" placeholder="vendedor"/>
+                        <label htmlFor='idVendedor'>Id vendedor:</label>
+                        <input type="number" name='idVendedor' className="form-control" placeholder="vendedor"/>
                         </div>
                     </div>
                 </form>

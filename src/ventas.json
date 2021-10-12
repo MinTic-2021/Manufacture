@@ -1,0 +1,50 @@
+[
+    {
+        "idVenta": "1",
+        "valorTotal": "5000000",
+        "fechaVenta": "9/10/2021",
+        "idCliente": "40093573",
+        "nombreCliente": "Teresa Machado",
+        "idVendedor": "1110575672"
+    },
+    {
+        "idVenta": "2",
+        "valorTotal": "5400000",
+        "fechaVenta": "19/10/2020",
+        "idCliente": "40093572",
+        "nombreCliente": "Juan Cubillos",
+        "idVendedor": "1210575672"
+    },
+    {
+        "idVenta": "3",
+        "valorTotal": "6400000",
+        "fechaVenta": "15/10/2020",
+        "idCliente": "30093572",
+        "nombreCliente": "Sofia Perez",
+        "idVendedor": "1410675673"
+    },
+    {
+        "idVenta": "4",
+        "valorTotal": "3400000",
+        "fechaVenta": "19/10/2020",
+        "idCliente": "33093975",
+        "nombreCliente": "Alberto Martinez",
+        "idVendedor": "1410675673"
+    },
+    {
+        "idVenta": "5",
+        "valorTotal": "2894000",
+        "fechaVenta": "13/11/2020",
+        "idCliente": "40093572",
+        "nombreCliente": "Juan Cubillos",
+        "idVendedor": "1210575672"
+    },
+    {
+        "idVenta": "6",
+        "valorTotal": "3400000",
+        "fechaVenta": "19/12/2020",
+        "idCliente": "33093975",
+        "nombreCliente": "Alberto Martinez",
+        "idVendedor": "1410675673"
+    }
+]
