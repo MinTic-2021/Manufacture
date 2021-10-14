@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AgregarUsuario = () => {
 
-    const form = useRef(null)
+    const form = useRef()
 
     const submitform = (e) => {
         e.preventDefault()
