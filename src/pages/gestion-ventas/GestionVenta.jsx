@@ -3,6 +3,7 @@ import datos from 'ventas.json';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Dialog } from '@material-ui/core';
 
 function CurrencyFormatted(N) {
     N=parseFloat(N);
@@ -100,11 +101,19 @@ export default GestionVenta
 
 const Tabla = ({listaVentas})  => {
 
+    const sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         setReloadInfo(false)
     }, [reloadInfo])
+
+    const detalle = () => {
+        toast.success("Operación realizada con éxito")
+        setOpen(false)
+        //enviar al backend
+    }
 
     const guardar = () => {
         listaVentas = listaVentas.filter(value => JSON.stringify(value) !== '{}')
@@ -140,7 +149,7 @@ const Tabla = ({listaVentas})  => {
                                 <td>{ventas.idVendedor}</td>
                                 <td style={{textAlign: 'right', paddingRight: '30px', width:'26vh'}}>{CurrencyFormatted(ventas.valorTotal)}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" defaultValue={ventas.estado} name='estado' onChange={(e) => {ventas.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                    <select className="form-select form-select-sm" defaultValue={ventas.estado} name='estado' onChange={(e) => {ventas.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)',marginTop:'4px',marginBottom:'3px'}}>
                                         <option value="enProceso">En proceso</option>
                                         <option value="cancelada">Cancelada</option>
                                         <option value="entregada">Entregada</option>
@@ -148,7 +157,7 @@ const Tabla = ({listaVentas})  => {
                                 </td>
                                 <td style={{paddingTop: '5px', paddingBottom: '0%'}}>
                                     <div style={{paddingLeft: '40px'}}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-up-right-square" viewBox="0 0 16 16" style={{cursor: 'pointer'}}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-up-right-square" viewBox="0 0 16 16" type="button" onClick={() => {setOpen(true)}} onChange={(e) => {sel.push(ventas.idVenta-1)}} style={{cursor: 'pointer'}}>
                                         <path fillRule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
                                         </svg>
                                     </div>
@@ -164,7 +173,73 @@ const Tabla = ({listaVentas})  => {
                     <button type="button" className="btn btn-secondary" onClick= {guardar} style={{paddingTop: '0px', paddingBottom: '1px'}}>
                         Actualizar Estado
                     </button>
-                </div>
+            </div>
+
+            {listaVentas.map((ventas) => {
+                        return(
+                            <Dialog open={open}>
+                        <div style={{margin: '3vh'}}>
+                            <h5 style={{paddingBottom: '20px', paddingTop: '24px', display: 'flex', justifyContent: 'center'}}>Detalle de venta</h5>
+                            <ul className="list-unstyled">
+                                <li><b>Identificador de venta:</b> <span>{ventas.idVenta}</span></li>
+                                <li><b>Fecha de venta:</b> <span>{ventas.fechaVenta}</span></li>
+                                <li><b>Id cliente:</b> <span>{ventas.idCliente}</span></li>
+                                <li><b>Nombre cliente:</b> <span>{ventas.nombreCliente}</span></li>
+                                <li><b>Id vendedor:</b> <span>{ventas.idVendedor}</span></li>
+                            </ul>
+                            <div>
+                                <table className="table table-hover" style={{paddingLeft: '50px'}}>
+                                <thead>
+                                <tr>
+                                    <th width='8%'>ID</th>
+                                    <th width='25%'>Descripción</th>
+                                    <th width='12%'>Cantidad</th>
+                                    <th width='15%'>Valor unitario</th>
+                                    <th width='15%'>Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style={{height: '5vh'}}>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            Total de la venta: <input type="text" disabled/>
+                            <div style={{paddingTop: '12px'}}>
+                                <button onClick={detalle} type="button" className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                                    Modificar
+                                </button>
+                                <button type="button" className="btn btn-secondary" onclick="alert('Venta eliminada')"style={{paddingTop: '0.8px', paddingBottom: '1px',marginLeft: '1vh',marginRight: '1vh'}}>
+                                    Eliminar
+                                </button>
+                                <button onClick={() => {setOpen(false)}} type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </Dialog>
+                        )}
+                    )}
+            
             
         </div>
     )
