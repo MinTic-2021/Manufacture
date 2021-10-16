@@ -2,10 +2,11 @@
     {
         "idVenta": "1",
         "valorTotal": "5000000",
-        "fechaVenta": "9/10/2021",
+        "fechaVenta": "09/10/2021",
         "idCliente": "40093573",
         "nombreCliente": "Teresa Machado",
-        "idVendedor": "1110575672"
+        "idVendedor": "1110575672",
+        "estado": "En proceso"
     },
     {
         "idVenta": "2",
@@ -13,7 +14,8 @@
         "fechaVenta": "19/10/2020",
         "idCliente": "40093572",
         "nombreCliente": "Juan Cubillos",
-        "idVendedor": "1210575672"
+        "idVendedor": "1210575672",
+        "estado": "Cancelada"
     },
     {
         "idVenta": "3",
@@ -21,7 +23,8 @@
         "fechaVenta": "15/10/2020",
         "idCliente": "30093572",
         "nombreCliente": "Sofia Perez",
-        "idVendedor": "1410675673"
+        "idVendedor": "1410675673",
+        "estado": "En proceso"
     },
     {
         "idVenta": "4",
@@ -29,7 +32,8 @@
         "fechaVenta": "19/10/2020",
         "idCliente": "33093975",
         "nombreCliente": "Alberto Martinez",
-        "idVendedor": "1410675673"
+        "idVendedor": "1410675673",
+        "estado": "Entregada"
     },
     {
         "idVenta": "5",
@@ -37,7 +41,8 @@
         "fechaVenta": "13/11/2020",
         "idCliente": "40093572",
         "nombreCliente": "Juan Cubillos",
-        "idVendedor": "1210575672"
+        "idVendedor": "1210575672",
+        "estado": "Cancelada"
     },
     {
         "idVenta": "6",
@@ -45,6 +50,7 @@
         "fechaVenta": "19/12/2020",
         "idCliente": "33093975",
         "nombreCliente": "Alberto Martinez",
-        "idVendedor": "1410675673"
+        "idVendedor": "1410675673",
+        "estado": "Entregada"
     }
 ]

@@ -109,7 +109,7 @@ const Tabla = ({listaUsuarios})  => {
                         <th style={{paddingLeft: '3vh'}}>Rol</th>
                     </tr>
                 </thead>
-                <tbody style={{height: '20vh'}}>
+                <tbody>
                     {listaUsuarios.map((usuario) => {
                         return(
                             <tr style={{height: '5vh'}} key={nanoid()}>

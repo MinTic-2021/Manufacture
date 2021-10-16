@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import datos from 'ventas.json';
 import { nanoid } from 'nanoid';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CurrencyFormatted(N) {
@@ -34,6 +34,8 @@ const GestionVenta = () => {
     let [busqueda, setBusqueda] = useState('')
     const [criterio, setCriterio] = useState('idVenta')
 
+
+
     const buscar = () =>{
         try{
             const filtro = []
@@ -54,8 +56,6 @@ const GestionVenta = () => {
         }
         console.log(criterio,busqueda)
     }
-
-    
 
     useEffect(() => {
         // obtención datos backend
@@ -90,48 +90,6 @@ const GestionVenta = () => {
                 
                 <Tabla listaVentas={ventas} />
                 
-                <h4 style={{paddingBottom: '20px', paddingTop: '50px', display: 'flex', justifyContent: 'center'}}>
-                    Estado de ventas
-                </h4>
-                <h6>Buscar pedido:</h6>
-                <div style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
-                    <span>ID venta</span>
-                    <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
-                    <input type="text"/>
-                    </div>   
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
-                        Buscar
-                    </button>
-                </div>
-                <div style={{paddingTop: '20px'}}>
-                    <table className="table table-hover" style={{paddingLeft: '50px'}}>
-                        <thead>
-                        <tr>
-                            <th>ID venta</th>
-                            <th>Descripción venta</th>
-                            <th>Estado</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr style={{borderBottomColor: 'black'}}>
-                                <td width= '15%'> </td>
-                                    <td> </td>
-                                    <td width='20%' style={{paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                        <select className="form-select form-select-sm" style={{width: '100%', borderColor: 'rgba(255, 255, 255, 0)'}}>
-                                            <option value="id">En proceso</option>
-                                            <option value="producto">Cancelada</option>
-                                            <option value="vendedor">Entregada</option>
-                                        </select>  
-                                    </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div style={{paddingTop: '12px', paddingBottom: '60px', display: 'flex', justifyContent: 'left'}}>
-                    <button type="button" className="btn btn-secondary" onclick="alert('Información actualizada')" style={{paddingTop: '0px', paddingBottom: '1px'}}>
-                        Actualizar Estado
-                    </button>
-                </div>
             </div>
         </div>
     )
@@ -143,10 +101,17 @@ const Tabla = ({listaVentas})  => {
 
     const [reloadInfo, setReloadInfo] = useState(false)
 
-
     useEffect(() => {
         setReloadInfo(false)
     }, [reloadInfo])
+
+    const guardar = () => {
+        listaVentas = listaVentas.filter(value => JSON.stringify(value) !== '{}')
+        toast.success("Operación realizada con éxito")
+        setReloadInfo(true)
+        //enviar al backend
+        console.log(listaVentas)
+    }
 
     return (
         <div style={{paddingTop: '20px'}}>
@@ -154,24 +119,32 @@ const Tabla = ({listaVentas})  => {
                 <thead>
                     <tr>
                         <th>ID venta</th>
-                        <th>Valor total</th>
                         <th>Fecha venta</th>
                         <th>ID cliente</th>
                         <th>Nombre cliente</th>
                         <th>ID vendedor</th>
+                        <th style={{textAlign: 'right', paddingRight: '30px', width:'26vh'}}>Valor total</th>
+                        <th style={{paddingLeft: '3vh'}}>Estado</th>
                         <th>Detalle venta</th>
                     </tr>
                 </thead>
-                <tbody style={{height: '20vh'}}>
+                <tbody>
                     {listaVentas.map((ventas) => {
                         return(
                             <tr style={{height: '5vh'}} key={nanoid()}>
                                 <td>{ventas.idVenta}</td>
-                                <td>{CurrencyFormatted(ventas.valorTotal)}</td>
                                 <td>{ventas.fechaVenta}</td>
                                 <td>{ventas.idCliente}</td>
                                 <td>{ventas.nombreCliente}</td>
                                 <td>{ventas.idVendedor}</td>
+                                <td style={{textAlign: 'right', paddingRight: '30px', width:'26vh'}}>{CurrencyFormatted(ventas.valorTotal)}</td>
+                                <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
+                                    <select className="form-select form-select-sm" defaultValue={ventas.estado} name='estado' onChange={(e) => {ventas.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                        <option value="enProceso">En proceso</option>
+                                        <option value="cancelada">Cancelada</option>
+                                        <option value="entregada">Entregada</option>
+                                    </select>  
+                                </td>
                                 <td style={{paddingTop: '5px', paddingBottom: '0%'}}>
                                     <div style={{paddingLeft: '40px'}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-up-right-square" viewBox="0 0 16 16" style={{cursor: 'pointer'}}>
@@ -184,7 +157,15 @@ const Tabla = ({listaVentas})  => {
                     )}
                 </tbody>
             </table>
+            <ToastContainer position="bottom-center" autoClose={3000} />
+
+            <div style={{paddingTop: '12px', paddingBottom: '60px', display: 'flex', justifyContent: 'left'}}>
+                    <button type="button" className="btn btn-secondary" onClick= {guardar} style={{paddingTop: '0px', paddingBottom: '1px'}}>
+                        Actualizar Estado
+                    </button>
+                </div>
             
         </div>
     )
 }
+
