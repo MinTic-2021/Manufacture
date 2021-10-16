@@ -57,6 +57,7 @@ const GestionVenta = () => {
         console.log(criterio,busqueda)
     }
 
+
     useEffect(() => {
         // obtención datos backend
         setVentas(datos);
@@ -78,12 +79,12 @@ const GestionVenta = () => {
                         <option value="todo">Mostrar todo</option>
                     </select> 
                     <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
-                        <input onChange={((e) => {setBusqueda(e.target.value.toLowerCase())})} type="text"/>
+                        <input id="input1" onChange={((e) => {setBusqueda(e.target.value.toLowerCase())})} type="text"/>
                     </div>   
                     <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
                         Buscar
                     </button>
-                    <button type="button" onClick={() => {setVentas(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                    <button type="button" onClick={() => {setVentas(datos); document.getElementById("input1").value = ""}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                         Limpiar
                     </button>
                 </div>
