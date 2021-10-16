@@ -76,12 +76,6 @@ const Tabla = ({listaUsuarios})  => {
         setReloadInfo(false)
     }, [reloadInfo])
 
-    const guardar = () => {
-        sel.forEach(id => eliminarUsuario(id))
-        window.location.reload()
-        setOpen(false)
-    }
-
     const modificar = (e, identificador) => {
         const usuario = listaUsuarios.find(usuario => usuario._id === identificador)
         usuario.rol = e.target.value
@@ -90,7 +84,8 @@ const Tabla = ({listaUsuarios})  => {
     }
 
     const eliminar = (sel) => {
-               
+        sel.forEach(id => eliminarUsuario(id))
+        window.location.reload()               
     }
 
     const seleccion = (id) => {
@@ -145,18 +140,15 @@ const Tabla = ({listaUsuarios})  => {
             </table>
             <ToastContainer position="bottom-center" autoClose={5000} />
             <div style={{paddingTop: '12px'}}>
-                <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Eliminar
-                </button>
-                <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-                    Guardar cambios
                 </button>
             </div>
             <Dialog open={open}>
                 <div style={{margin: '3vh'}}>
                     <h6>¿Desea confirmar los cambios?</h6>
                     <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
-                        <button onClick={guardar} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
+                        <button style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
                             Sí
                         </button>
                         <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>

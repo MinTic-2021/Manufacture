@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const obtenerUsuarios = async (setUsuarios) => {
-    const options = {method: 'GET', url: 'http://localhost:5000/gusu/admin'};
+    const options = {method: 'GET', url: 'http://localhost:5000/gusu/'};
     
     await axios.request(options).then(function (response) {
     setUsuarios(response.data)
@@ -15,7 +15,7 @@ export const obtenerUsuarios = async (setUsuarios) => {
 export const crearUsuario = async (datos) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:5000/gusu/nuevo',
+    url: 'http://localhost:5000/gusu/',
     headers: {'Content-Type': 'application/json'},
     data: datos
   };
@@ -32,7 +32,7 @@ export const crearUsuario = async (datos) => {
 export const editarUsuario = async(datos) => {
   const options = {
     method: 'PATCH',
-    url: 'http://localhost:5000/gusu/editar',
+    url: `http://localhost:5000/gusu/${datos._id}/`,
     headers: {'Content-Type': 'application/json'},
     data: datos
   };
@@ -50,7 +50,7 @@ export const eliminarUsuario = async(id) => {
   
   const options = {
     method: 'DELETE',
-    url: 'http://localhost:5000/gusu/eliminar',
+    url: `http://localhost:5000/gusu/${id}/`,
     headers: {'Content-Type': 'application/json'},
     data: {"id": id}
   };
