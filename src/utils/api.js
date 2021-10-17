@@ -29,12 +29,12 @@ export const crearUsuario = async (datos) => {
   });
 }
 
-export const editarUsuario = async(datos) => {
+export const editarUsuario = async(id, nuevo) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:5000/gusu/${datos._id}/`,
+    url: `http://localhost:5000/gusu/${id}/`,
     headers: {'Content-Type': 'application/json'},
-    data: datos
+    data: {"rol": nuevo}
   };
   
   await axios.request(options).then(function (response) {

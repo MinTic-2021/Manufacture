@@ -3,7 +3,7 @@ import { obtenerUsuarios, editarUsuario, eliminarUsuario } from 'utils/api';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Tooltip, Dialog } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 
 const GestionUsuario = () => {
     
@@ -15,7 +15,6 @@ const GestionUsuario = () => {
         try{
             const filtro = []
             if(busqueda === '' || criterio === 'todo'){
-                //console.log(datos)
                 obtenerUsuarios(setUsuarios)
             }else{
                 for (let i = 0; i < usuarios.length; i++){
@@ -70,18 +69,10 @@ const Tabla = ({listaUsuarios})  => {
 
     var sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
-    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         setReloadInfo(false)
     }, [reloadInfo])
-
-    const modificar = (e, identificador) => {
-        const usuario = listaUsuarios.find(usuario => usuario._id === identificador)
-        usuario.rol = e.target.value
-        console.log(usuario)
-        editarUsuario(usuario)
-    }
 
     const eliminar = (sel) => {
         sel.forEach(id => eliminarUsuario(id))
@@ -128,7 +119,7 @@ const Tabla = ({listaUsuarios})  => {
                                 <td>{usuario.correo}</td>
                                 <td>{usuario.ingreso}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {modificar(e, usuario._id)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                    <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {editarUsuario(usuario._id, e.target.value)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="administrador">Administrador</option>
                                         <option value="vendedor">Vendedor</option>
                                     </select>  
@@ -144,19 +135,6 @@ const Tabla = ({listaUsuarios})  => {
                     Eliminar
                 </button>
             </div>
-            <Dialog open={open}>
-                <div style={{margin: '3vh'}}>
-                    <h6>¿Desea confirmar los cambios?</h6>
-                    <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
-                        <button style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            Sí
-                        </button>
-                        <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            No
-                        </button>
-                    </div>
-                </div>
-            </Dialog>
         </div>
     )
 }
