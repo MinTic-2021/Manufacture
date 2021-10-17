@@ -18,6 +18,12 @@ const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const { logout } = useAuth0();
+
+    const cerrarSesion = () => {
+        logout({ returnTo: window.location.origin })
+        localStorage.setItem('Token', null)
+    }
+
     return (
         <header >
             <Navbar color="light" light expand="md" >
@@ -95,7 +101,7 @@ const Header = (props) => {
                                     Actualizar información
                                 </Link>   
                             </DropdownItem>
-                            <DropdownItem onClick={() => logout({ returnTo: window.location.origin })} href="">
+                            <DropdownItem onClick={() => cerrarSesion()} href="">
                                 Cerrar sesión
                             </DropdownItem>
                         </DropdownMenu>

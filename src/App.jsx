@@ -21,7 +21,8 @@ function App() {
     <Auth0Provider
     domain="mintinc-manufacture.us.auth0.com"
     clientId="vs5Q2z3dkLPTtisE135M4SXlHUg8WqX3"
-    redirectUri={window.location.origin}>
+    redirectUri={window.location.origin}
+    audience="api-autenticacion-manufacture">
       <Router>
         <Switch>
           <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
