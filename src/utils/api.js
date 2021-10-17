@@ -57,7 +57,6 @@ export const eliminarUsuario = async(id) => {
   
   axios.request(options).then(function (response) {
     console.log(response.data);
-    toast.success('usuario eliminado exitosamente')
   }).catch(function (error) {
     console.error(error);
     toast.success('Ocurrió un error al eliminar el usuario ', id)

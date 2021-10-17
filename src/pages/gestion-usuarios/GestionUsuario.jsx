@@ -76,7 +76,8 @@ const Tabla = ({listaUsuarios})  => {
 
     const eliminar = (sel) => {
         sel.forEach(id => eliminarUsuario(id))
-        window.location.reload()               
+        window.location.reload()
+        toast.success('usuario eliminado exitosamente')               
     }
 
     const seleccion = (id) => {
