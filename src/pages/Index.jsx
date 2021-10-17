@@ -1,8 +1,11 @@
 import React from 'react'
 import devfull from 'media/Devfull.png'
-import { Link } from 'react-router-dom'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Index = () => {
+
+    const { loginWithRedirect } = useAuth0();
+    
     return (
         <div>
             <div style={{paddingBottom: '40px'}}>
@@ -23,9 +26,7 @@ const Index = () => {
                         de forma segura y eficiente.
                     </span>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <Link to={'/login'}>
-                            <button type="submit" className="btn btn-primary" style={{backgroundColor:  '#426E86'}}>Iniciar sesión</button>
-                        </Link>
+                        <button onClick={() => loginWithRedirect()} type="submit" className="btn btn-primary" style={{backgroundColor:  '#426E86'}}>Iniciar sesión</button>
                     </div>
                 </div>
             </div>

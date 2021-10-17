@@ -12,10 +12,12 @@ import {
     DropdownItem,
   } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const { logout } = useAuth0();
     return (
         <header >
             <Navbar color="light" light expand="md" >
@@ -93,10 +95,8 @@ const Header = (props) => {
                                     Actualizar información
                                 </Link>   
                             </DropdownItem>
-                            <DropdownItem href="">
-                                <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
-                                    Cerrar sesión
-                                </Link>
+                            <DropdownItem onClick={() => logout({ returnTo: window.location.origin })} href="">
+                                Cerrar sesión
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>

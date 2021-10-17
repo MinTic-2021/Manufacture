@@ -14,61 +14,67 @@ import GestionVenta from 'pages/gestion-ventas/GestionVenta';
 import DetalleVenta from 'pages/gestion-ventas/DetalleVenta';
 import 'bootstrap/dist/css/bootstrap.css';
 import ActualizarInformacion from 'pages/ActualizarInformacion';
+import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
-          <PrivateLayout>
-            <Switch>
-              <Route path='/bienvenida'>
-                <Inicio />
-              </Route>
-              <Route path='/gprod-agregar'>
-                <AgregarProducto/>
-              </Route>
-              <Route path='/gprod-admin'>
-                <GestionProductos />
-              </Route>
-              <Route path='/gusu-admin'>
-                <GestionUsuario />
-              </Route>
-              <Route path='/gusu-agregar'>
-                <AgregarUsuario/>
-              </Route>
-              <Route path='/gven-nueva'>
-                <NuevaVenta/>
-              </Route>
-              <Route path='/gven-admin'>
-                <GestionVenta />
-              </Route>
-              <Route path='/gven-detalle'>
-                <DetalleVenta />
-              </Route>
-              <Route path='/actualizar'>
-                <ActualizarInformacion />
-              </Route>
-            </Switch>
-          </PrivateLayout>
-        </Route>
-        <Route  path={['/', '/login', '/registro']}>
-          <PublicLayout>
-            <Switch>
-              <Route path='/login'>
-                <Login />
-              </Route>
-              <Route path='/registro'>
-                <Registro />
-              </Route>
-              <Route path='/'>
-                <Index />
-              </Route>
-            </Switch>
-          </PublicLayout>
-        </Route>
-      </Switch>
-    </Router>
+    <Auth0Provider
+    domain="mintinc-manufacture.us.auth0.com"
+    clientId="vs5Q2z3dkLPTtisE135M4SXlHUg8WqX3"
+    redirectUri={window.location.origin}>
+      <Router>
+        <Switch>
+          <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
+            <PrivateLayout>
+              <Switch>
+                <Route path='/bienvenida'>
+                  <Inicio />
+                </Route>
+                <Route path='/gprod-agregar'>
+                  <AgregarProducto/>
+                </Route>
+                <Route path='/gprod-admin'>
+                  <GestionProductos />
+                </Route>
+                <Route path='/gusu-admin'>
+                  <GestionUsuario />
+                </Route>
+                <Route path='/gusu-agregar'>
+                  <AgregarUsuario/>
+                </Route>
+                <Route path='/gven-nueva'>
+                  <NuevaVenta/>
+                </Route>
+                <Route path='/gven-admin'>
+                  <GestionVenta />
+                </Route>
+                <Route path='/gven-detalle'>
+                  <DetalleVenta />
+                </Route>
+                <Route path='/actualizar'>
+                  <ActualizarInformacion />
+                </Route>
+              </Switch>
+            </PrivateLayout>
+          </Route>
+          <Route  path={['/', '/login', '/registro']}>
+            <PublicLayout>
+              <Switch>
+                <Route path='/login'>
+                  <Login />
+                </Route>
+                <Route path='/registro'>
+                  <Registro />
+                </Route>
+                <Route path='/'>
+                  <Index />
+                </Route>
+              </Switch>
+            </PublicLayout>
+          </Route>
+        </Switch>
+      </Router>
+    </Auth0Provider>
   );
 };
 
