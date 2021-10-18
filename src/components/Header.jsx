@@ -17,7 +17,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const { logout } = useAuth0();
+    const { user, logout } = useAuth0();
+
+    console.log(user)
 
     const cerrarSesion = () => {
         logout({ returnTo: window.location.origin })
@@ -84,11 +86,13 @@ const Header = (props) => {
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <UncontrolledDropdown nav inNavbar style={{position: "absolute", right: "0", bottom: "0"}}>
-                        <DropdownToggle nav caret>
+                        <DropdownToggle style={{paddingRight: '3vh'}} nav caret>
+                            <span style={{paddingRight: '1vh'}}> {user.name} </span>
+                            {user.picture ? <img src={user.picture} alt="Foto" style={{height: '6.5vh', borderRadius: '3vh', paddingTop: '2px'}}/> :
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" className="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                 <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                            </svg>
+                            </svg>}
                         </DropdownToggle>
                         <DropdownMenu right style={{right: '10px'}}>
                             <DropdownItem href="">
