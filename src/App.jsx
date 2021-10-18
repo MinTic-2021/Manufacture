@@ -21,7 +21,7 @@ function App() {
     <Auth0Provider
     domain="mintinc-manufacture.us.auth0.com"
     clientId="vs5Q2z3dkLPTtisE135M4SXlHUg8WqX3"
-    redirectUri={window.location.origin}
+    redirectUri='http://localhost:3000/bienvenida'
     audience="api-autenticacion-manufacture">
       <Router>
         <Switch>

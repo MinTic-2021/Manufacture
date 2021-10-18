@@ -1,5 +1,6 @@
 import React, { useEffect} from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
+import ReactLoading from 'react-loading';
 
 const PrivateRoute = ({ children }) => {
 
@@ -16,7 +17,12 @@ const PrivateRoute = ({ children }) => {
         }
     }, [isAuthenticated, getAccessTokenSilently])
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return(
+        <div style={{display: 'flex', justifyContent: 'center', margin: '50vh'}} >
+            <ReactLoading type={"spokes"} color={"#95CCBB"} height={'20%'} width={'20%'} />
+        </div>
+        ) 
+        
     if (!isAuthenticated){
         return loginWithRedirect()
     }
