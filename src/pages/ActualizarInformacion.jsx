@@ -1,13 +1,19 @@
 import React from 'react'
 import foto from 'media/foto.png'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ActualizarInformacion = () => {
+
+    const {user} = useAuth0()
+
     return (
             <div style={{paddingBottom: '40px'}}>
                 <div className="cointainer-sm">
                     <div style={{display: 'grid', alignItems: 'center', gridTemplateColumns: '30% 70%'}}>
                         <div style={{display: 'flex', flexDirection: 'column', marginInline: '10vh'}}>
-                            <img src={foto} alt="foto" style={{width: '30vh', paddingBottom: '1vh'}}/>
+                            {user.picture ? 
+                                <img src={user.picture} alt="foto" style={{height: '19vh', width: '17vh', borderRadius: '1vh', marginTop: '3vh', marginBottom: '1vh'}}/> : 
+                                <img src={foto} alt="foto" style={{width: '30vh', paddingBottom: '1vh'}}/>}
                             <input className="form-control form-control-sm" id="formFileSm" type="file"/>
                         </div>
                         <h3>
