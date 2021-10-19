@@ -253,7 +253,7 @@ const Dialogo = (props) => {
                                     </td>
                                     <td contenteditable="true">{ventas.idProducto}</td>
                                     <td>{ventas.descripción}</td>
-                                    <td><input style={{textAlign: 'center', width:'30px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {ventas.cantidad = e.target.value; setRecarga(true); toast.success("Cantidad modificada con éxito")}} placeholder={ventas.cantidad}/></td>
+                                    <td><input style={{textAlign: 'center', width:'30px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {ventas.cantidad = e.target.value; setRecarga(true); toast.success("Cantidad modificada con éxito")}} value={ventas.cantidad}/></td>
                                     <td>{CurrencyFormatted(ventas.valorUnitario)}</td>
                                     <td>{CurrencyFormatted(parseInt(ventas.cantidad)*parseInt(ventas.valorUnitario))}</td>
                                 </tr>

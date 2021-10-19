@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import datos from 'productos.json';
+//import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from '@material-ui/core';
 
 
@@ -32,9 +34,14 @@ const NuevaVenta = () => {
 
     const [newProduct, setNewProduct] = useState(false);
     const [filas, setFilas] = useState([]);
+    const [ventas, setVentas] = useState([]);
     const [recarga, setRecarga] = useState(false);
     const sel = [];
     const [reloadInfo, setReloadInfo] = useState(false);
+
+    useEffect(() => {
+        setVentas([{idVenta:"",fechaVenta:"",idCliente:"",nombreCliente:"",idVendedor:"",productos:[{idProducto:"",descripcion:"",cantidad:"",valorUnitario:""}]}])
+    }, [])
 
     useEffect(() => {
         setReloadInfo(false)
@@ -60,15 +67,19 @@ const NuevaVenta = () => {
     }
 
     const encontrar = (fila) => {
-        var filtro = []
-        if(fila.idProducto === ''){
-            filtro = [{idProducto:"",descripcion:"",valorUnitario:""}]
-            return(filtro)
-        }
-        else{
-            filtro = datos.find(producto => producto.idProducto === fila.idProducto)
-            return(filtro)
-        } 
+        try{
+            var filtro = []
+            if(fila.idProducto === ''){
+                filtro = [{idProducto:"",descripcion:"",valorUnitario:""}]
+                return(filtro)
+            }
+            else{
+                filtro = datos.find(producto => producto.idProducto === fila.idProducto)
+                return(filtro)
+            }
+        } catch {
+            toast.error("La búsqueda no se puede realizar")
+        }         
     }
 
     const total = (filas) => {
@@ -85,7 +96,9 @@ const NuevaVenta = () => {
     const enviarDatos = () => {
         // enviar al backend
         //window.location.reload()
-        console.log(filas)
+        ventas.estado = "En proceso"
+        ventas.Productos = filas
+        console.log(ventas)
     }
 
     const eliminar = () => {
@@ -95,8 +108,10 @@ const NuevaVenta = () => {
         for(let i=0; i<sel.length; i++){
             delete filas[x.indexOf(sel[i])]
         }
-        var filasN = filas.filter(value => value.idProducto !== '{}')
+        console.log(filas)
+        var filasN = filas.filter(value => value !== '{}')
         setFilas(filasN)
+        console.log(filasN)
         toast.success("Operación realizada con éxito")
         setReloadInfo(true)
     }
@@ -110,23 +125,23 @@ const NuevaVenta = () => {
                     <div className="row">
                         <div className="col">
                         <label htmlFor='idVenta'>Identificador de venta:</label>
-                        <input type="text" name='idVenta' className="form-control" placeholder="ID" required/>
+                        <input type="text" name='idVenta' onChange={(e) => {ventas.idVenta = e.target.value}} className="form-control" placeholder="ID" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='fechaVenta'>Fecha de venta:</label>
-                        <input type="date" name='fechaVenta' className="form-control" required/>
+                        <input type="date" name='fechaVenta' onChange={(e) => {ventas.fechaVenta = e.target.value}} className="form-control" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='idCliente'>Id cliente:</label>
-                        <input type="number" name='idCliente' className="form-control" placeholder="ID cliente" required/>
+                        <input type="number" name='idCliente' onChange={(e) => {ventas.idCliente = e.target.value}} className="form-control" placeholder="ID cliente" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='nombreCliente'>Nombre cliente:</label>
-                        <input type="text" name='nombreCliente' className="form-control" placeholder="cliente" required/>
+                        <input type="text" name='nombreCliente' onChange={(e) => {ventas.nombreCliente = e.target.value}} className="form-control" placeholder="cliente" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='idVendedor'>Id vendedor:</label>
-                        <input type="number" name='idVendedor' className="form-control" placeholder="vendedor"/>
+                        <input type="number" name='idVendedor' onChange={(e) => {ventas.idVendedor = e.target.value}} className="form-control" placeholder="vendedor"/>
                         </div>
                     </div>
                 </form>
@@ -145,7 +160,7 @@ const NuevaVenta = () => {
                         <tbody>
                             {filas.map((fila) => {
                                 return(
-                                    <tr>
+                                    <tr /*key={nanoid()}*/ >
                                         <td>
                                             <div className="form-check">
                                                 <Tooltip title="Seleccionar producto">
@@ -153,9 +168,9 @@ const NuevaVenta = () => {
                                                 </Tooltip>
                                             </div>
                                         </td>
-                                        <td><input style={{textAlign: 'left', width:'60px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {fila.idProducto = e.target.value; setRecarga(true)}}/>  </td>
+                                        <td><input style={{textAlign: 'left', width:'60px', border: '0px', backgroundColor: 'transparent'}} value={fila.idProducto} onChange={(e) => {fila.idProducto = e.target.value; setRecarga(true)}}/>  </td>
                                         <td> {fila.descripcion = encontrar(fila).descripcion} </td>
-                                        <td> <input style={{textAlign: 'center', width:'70px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {fila.cantidad = e.target.value; setRecarga(true)}}/> </td>
+                                        <td> <input style={{textAlign: 'center', width:'70px', border: '0px', backgroundColor: 'transparent'}} value={fila.cantidad} onChange={(e) => {fila.cantidad = e.target.value; setRecarga(true)}}/> </td>
                                         <td> {CurrencyFormatted(fila.valorUnitario = encontrar(fila).valorUnitario)} </td>
                                         <td> {CurrencyFormatted(parseInt(fila.cantidad)*parseInt(encontrar(fila).valorUnitario))} </td>
                                     </tr>
