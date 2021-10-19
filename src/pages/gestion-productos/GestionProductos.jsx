@@ -4,6 +4,8 @@ import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip, Dialog } from '@material-ui/core';
+import { obtenerProductos } from 'utils/apiprod';
+import { eliminarProducto } from 'utils/apiprod';
 
 const GestionProductos = () => {
 
@@ -15,8 +17,7 @@ const GestionProductos = () => {
             try{
                 const filtro = []
                 if(busqueda === '' || criterio === 'todo'){
-                    console.log(datos)
-                    setProductos(datos)
+                    obtenerProductos(setProductos)
                 }else{
                     for (let i = 0; i < productos.length; i++){
                         if(productos[i][criterio].toLowerCase() === busqueda){
@@ -32,12 +33,13 @@ const GestionProductos = () => {
     
         useEffect(() => {
             // obtención datos backend
-            setProductos(datos);
+            obtenerProductos(setProductos);
         }, [])
+        console.log(productos)
 
 
     return (
-        <div class="container-sm">
+        <div className="container-sm">
             <h4 style={{paddingBotton: '20px', paddingTop: '20px', display: 'flex', justifyContent: 'center'}}>
               Gestión de productos
             </h4>
@@ -51,7 +53,7 @@ const GestionProductos = () => {
                 <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
                     <input onChange={((e) => {setBusqueda(e.target.value.toLowerCase())})} type="text"/>
                 </div>   
-                <button type="button" onClick={() => {buscar()}} class="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
+                <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
                     Buscar
                 </button>
                 <button type="button" onClick={() => {setProductos(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
@@ -86,10 +88,9 @@ const Tabla = ({listaProductos})  => {
     const eliminar = () => {
         sel.forEach(llave => {delete listaProductos[llave]})
         listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
         setReloadInfo(true)
         //enviar al backend
-        console.log(listaProductos)
+        eliminarProducto(listaProductos)
     }
 
     return (

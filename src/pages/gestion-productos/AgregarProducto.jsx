@@ -1,6 +1,7 @@
 import React, {useRef} from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { crearProductos } from 'utils/apiprod';
 
 
 const AgregarProducto = () => {
@@ -13,8 +14,7 @@ const AgregarProducto = () => {
         fd.forEach((value, key) => {
             nuevoProducto[key] = value
         })
-        console.log (nuevoProducto)
-        toast.success('Producto creado exitosamente')
+        crearProductos(nuevoProducto)
         form.current.reset()
     }
 
@@ -29,16 +29,16 @@ const AgregarProducto = () => {
             <form style={{marginLeft:'10vh', marginRight:'10vh'}} onSubmit={(e) => {submitform(e)}} ref={form}>
                 <div className="row" style={{display:'block', paddingBottom: '2vh'}}>
                     <div className="col" style={{width:'30%', paddingBottom: '2vh'}}>
-                        <label htmlForm='id-producto' style={{paddingBottom: '1vh'}}>ID del producto:</label>
-                        <input name='id-producto' type="text" className="form-control" placeholder="ID" required/>
+                        <label htmlForm='idProducto' style={{paddingBottom: '1vh'}}>ID del producto:</label>
+                        <input name='idProducto' type="text" className="form-control" placeholder="ID" required/>
                     </div>
                     <div className="col" style={{width:'50%', paddingBotton: '2vh'}}>
                         <label htmlForm='descripcion' style={{paddingBotton: '1vh'}} placeholder="Agregue detalles del producto">Descripción:</label>
                         <input name='descripcion' type="text" className="form-control" style={{height: '15vh'}} />
                     </div>
                     <div className="col" style={{width:'30%', paddingBotton: '2vh'}}>
-                        <label htmlForm='valor-unitario'style={{paddingBotton: '1vh'}}>Valor unitario:</label>
-                        <input name='valor-unitario' type="number" className="form-control" placeholder="valor" required/>
+                        <label htmlForm='valorUnitario'style={{paddingBotton: '1vh'}}>Valor unitario:</label>
+                        <input name='valorUnitario' type="number" className="form-control" placeholder="valor" required/>
                     </div>
                     <div className="col" style={{width:'30%', paddingBotton: '2vh'}}>
                         <label htmlForm='estado' style={{paddingBotton: '1vh', paddingRight: '20vh'}}>Estado:</label>
