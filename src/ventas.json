@@ -6,7 +6,18 @@
         "idCliente": "40093573",
         "nombreCliente": "Teresa Machado",
         "idVendedor": "1110575672",
-        "estado": "En proceso"
+        "estado": "En proceso",
+        "Productos": [{
+            "idProducto": "1",
+            "descripción": "manufactura1",
+            "cantidad": "10",
+            "valorUnitario": "1000"},
+            {
+            "idProducto": "2",
+            "descripción": "manufactura2",
+            "cantidad": "5",
+            "valorUnitario": "2000"}
+            ]
     },
     {
         "idVenta": "2",
@@ -15,7 +26,18 @@
         "idCliente": "40093572",
         "nombreCliente": "Juan Cubillos",
         "idVendedor": "1210575672",
-        "estado": "Cancelada"
+        "estado": "Cancelada",
+        "Productos": [{
+            "idProducto": "1",
+            "descripción": "manufactura1",
+            "cantidad": "9",
+            "valorUnitario": "1000"},
+            {
+            "idProducto": "3",
+            "descripción": "manufactura3",
+            "cantidad": "8",
+            "valorUnitario": "3000"}
+            ]
     },
     {
         "idVenta": "3",
@@ -24,7 +46,18 @@
         "idCliente": "30093572",
         "nombreCliente": "Sofia Perez",
         "idVendedor": "1410675673",
-        "estado": "En proceso"
+        "estado": "En proceso",
+        "Productos": [{
+            "idProducto": "2",
+            "descripción": "manufactura2",
+            "cantidad": "10",
+            "valorUnitario": "2000"},
+            {
+            "idProducto": "4",
+            "descripción": "manufactura4",
+            "cantidad": "5",
+            "valorUnitario": "4000"}
+            ]
     },
     {
         "idVenta": "4",
@@ -33,7 +66,18 @@
         "idCliente": "33093975",
         "nombreCliente": "Alberto Martinez",
         "idVendedor": "1410675673",
-        "estado": "Entregada"
+        "estado": "Entregada",
+        "Productos": [{
+            "idProducto": "5",
+            "descripción": "manufactura5",
+            "cantidad": "7",
+            "valorUnitario": "5000"},
+            {
+            "idProducto": "2",
+            "descripción": "manufactura2",
+            "cantidad": "5",
+            "valorUnitario": "2000"}
+            ]
     },
     {
         "idVenta": "5",
@@ -42,7 +86,23 @@
         "idCliente": "40093572",
         "nombreCliente": "Juan Cubillos",
         "idVendedor": "1210575672",
-        "estado": "Cancelada"
+        "estado": "Cancelada",
+        "Productos": [{
+            "idProducto": "6",
+            "descripción": "manufactura6",
+            "cantidad": "9",
+            "valorUnitario": "6000"},
+            {
+            "idProducto": "2",
+            "descripción": "manufactura2",
+            "cantidad": "5",
+            "valorUnitario": "2000"},
+            {
+            "idProducto": "3",
+            "descripción": "manufactura3",
+            "cantidad": "6",
+            "valorUnitario": "3000"}
+            ]
     },
     {
         "idVenta": "6",
@@ -51,6 +111,17 @@
         "idCliente": "33093975",
         "nombreCliente": "Alberto Martinez",
         "idVendedor": "1410675673",
-        "estado": "Entregada"
+        "estado": "Entregada",
+        "Productos": [{
+            "idProducto": "1",
+            "descripción": "manufactura1",
+            "cantidad": "9",
+            "valorUnitario": "1000"},
+            {
+            "idProducto": "2",
+            "descripción": "manufactura2",
+            "cantidad": "5",
+            "valorUnitario": "2000"}
+            ]
     }
 ]

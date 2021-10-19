@@ -3,8 +3,7 @@ import datos from 'ventas.json';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Dialog } from '@material-ui/core';
-
+import { Tooltip, Dialog } from '@material-ui/core';
 
 
 function CurrencyFormatted(N) {
@@ -32,7 +31,7 @@ function CurrencyFormatted(N) {
 }
 
 const GestionVenta = () => {
-
+    console.log(datos[0].Productos[1].idProducto)
     const [ventas, setVentas] = useState([]);
     let [busqueda, setBusqueda] = useState('')
     const [criterio, setCriterio] = useState('idVenta')
@@ -173,19 +172,61 @@ const Tabla = ({listaVentas})  => {
                     </button>
             </div>
 
-            <Dialogo open={open} id={id}/>
+            <Dialogo open={open} setOpen={setOpen} id={id}/>
         </div>
     )
 }
 
 const Dialogo = (props) => {
+    
+    const sel = []
     const filtro = datos.find(venta => venta.idVenta === props.id)
+    const [recarga, setRecarga] = useState(false)
+    const [reloadInfo, setReloadInfo] = useState(false)
+
+    useEffect(() => {
+        setReloadInfo(false)
+    }, [reloadInfo])
+
+    useEffect(() => {
+        setRecarga(false)
+    }, [recarga])
+    
+    const total = (filtro) => {
+        var x = (filtro.Productos.map((ventas) => {
+            return(ventas.cantidad * ventas.valorUnitario)            
+        }))
+        var sum = 0;
+        for(let i=0; i<x.length; i++){
+            sum = sum + x[i]
+        }
+        return(sum)
+    }
+
+    const eliminar = () => {
+        var x = (filtro.Productos.map((ventas) => {
+            return(ventas.idProducto)
+        }))
+        for(let i=0; i<sel.length; i++){
+            delete filtro.Productos[x.indexOf(sel[i])]
+        }
+        filtro.Productos = filtro.Productos.filter(value => JSON.stringify(value) !== '{}')
+        toast.success("Operación realizada con éxito")
+        setReloadInfo(true)
+        //enviar al backend
+        console.log(filtro.Productos)
+    }
+
+
+
+
+
     return (
         <div>
             <Dialog open={props.open}>
                 <div style={{margin: '3vh'}}>
-                    <h5 style={{paddingBottom: '3px', paddingTop: '1px', display: 'flex', justifyContent: 'center'}}>Detalle de venta</h5>
-                    <ul className="list-unstyled">
+                    <h5 style={{paddingBottom: '4px', paddingTop: '1px', display: 'flex', justifyContent: 'center'}}>Detalle de venta</h5>
+                    <ul className="list-unstyled" style={{marginBottom: '3px'}}>
                         <li><b>Identificador de venta:</b> <span>{filtro.idVenta}</span></li>
                         <li><b>Fecha de venta:</b> <span>{filtro.fechaVenta}</span></li>
                         <li><b>Id cliente:</b> <span>{filtro.idCliente}</span></li>
@@ -196,41 +237,45 @@ const Dialogo = (props) => {
                         <table className="table table-hover" style={{paddingLeft: '50px'}}>
                         <thead>
                         <tr>
+                            <th> </th>
                             <th width='8%'>ID</th>
                             <th width='25%'>Descripción</th>
-                            <th width='12%'>Cantidad</th>
-                            <th width='15%'>Valor unitario</th>
-                            <th width='15%'>Total</th>
+                            <th width='12%'>Cant</th>
+                            <th width='25%'>Valor unitario</th>
+                            <th width='25%'>Total</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
+                            {filtro.Productos.map((ventas) => {
+                            return(
+                                <tr style={{height: '5vh'}} key={nanoid()}>
+                                    <td>
+                                        <div className="form-check">
+                                            <Tooltip title="Seleccionar usuario">
+                                                <input name='check' onChange={(e) => {sel.push(ventas.idProducto)}} className="form-check-input" type="checkbox"/>
+                                            </Tooltip>
+                                        </div>
+                                    </td>
+                                    <td contenteditable="true">{ventas.idProducto}</td>
+                                    <td>{ventas.descripción}</td>
+                                    <td><input style={{textAlign: 'center', width:'30px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {ventas.cantidad = e.target.value; setRecarga(true); toast.success("Cantidad modificada con éxito")}} placeholder={ventas.cantidad}/></td>
+                                    <td>{CurrencyFormatted(ventas.valorUnitario)}</td>
+                                    <td>{CurrencyFormatted(parseInt(ventas.cantidad)*parseInt(ventas.valorUnitario))}</td>
+                                </tr>
+                                
+                            )})}
                         </tbody>
                         </table>
                     </div>
-                    Total de la venta: <input type="text" disabled/>
+                    Total de la venta: <span>   
+                        {CurrencyFormatted(total(filtro))}                                                                   
+                        </span>
                     <div style={{paddingTop: '12px'}}>
-                        <button type="button" className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
-                            Modificar
-                        </button>
-                        <button type="button" className="btn btn-secondary" onclick="alert('Venta eliminada')"style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh', marginRight: '1vh'}}>
+                        <button type="button" onClick={eliminar} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
                             Eliminar
                         </button>
-                        <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
-                            Cancelar
+                        <button type="button" onClick={() => {props.setOpen(false)}} className="btn btn-secondary" onclick="alert('Venta eliminada')"style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh', marginRight: '1vh'}}>
+                            Cerrar
                         </button>
                     </div> 
                 </div>
