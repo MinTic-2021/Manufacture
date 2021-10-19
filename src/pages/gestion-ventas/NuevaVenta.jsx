@@ -1,26 +1,104 @@
 import React, { useEffect, useState } from 'react';
 import datos from 'productos.json';
+import { ToastContainer, toast } from 'react-toastify';
+import { Tooltip } from '@material-ui/core';
 
+
+function CurrencyFormatted(N) {
+    N=parseFloat(N);
+    if(!isNaN(N))N=N.toFixed(2);
+    else N='0.00';
+    const Mstring = String (N);
+    var nValor = "";
+    var cont = 0;
+    for(let step=0; step<Mstring.length; step++){
+        nValor += Mstring.charAt(Mstring.length-step-1);
+        cont += 1;
+        if(cont > 5 & cont%3 === 0){
+            nValor += ",";
+        }
+    }
+    var total = "";
+    for(let step=0; step<nValor.length; step++){
+        total += nValor.charAt(nValor.length-step-1);
+    }
+    if(total.charAt(0)===","){
+        total = total.slice(1);
+    }
+    return "$ " + total;
+}
 
 const NuevaVenta = () => {
 
     const [newProduct, setNewProduct] = useState(false);
     const [filas, setFilas] = useState([]);
+    const [recarga, setRecarga] = useState(false);
+    const sel = [];
+    const [reloadInfo, setReloadInfo] = useState(false);
 
     useEffect(() => {
-        setFilas([{idProducto:"", descripcion: "", valorUnitario: "", estado: ""}]);
+        setReloadInfo(false)
+    }, [reloadInfo])
+    
+    useEffect(() => {
+        setRecarga(false)
+    }, [recarga])
+
+    useEffect(() => {
+        setFilas([{idProducto:"", descripcion: "", cantidad: "", valorUnitario: ""}]);
     }, [])
 
     useEffect(() => {
         setNewProduct(false)
     }, [newProduct])
-
     
     const newFile = () => {
         const filaNueva = filas
-        filaNueva.push({idProducto:"",descripcion:"",valorUnitario:"",estado:""})     
+        filaNueva.push({idProducto:"",descripcion:"", cantidad: "", valorUnitario:""})     
         setFilas(filaNueva)
         setNewProduct(false)
+    }
+
+    const encontrar = (fila) => {
+        var filtro = []
+        if(fila.idProducto === ''){
+            filtro = [{idProducto:"",descripcion:"",valorUnitario:""}]
+            return(filtro)
+        }
+        else{
+            filtro = datos.find(producto => producto.idProducto === fila.idProducto)
+            return(filtro)
+        } 
+    }
+
+    const total = (filas) => {
+        var x = (filas.map((fila) => {
+            return(fila.cantidad * encontrar(fila).valorUnitario)            
+        }))
+        var sum = 0;
+        for(let i=0; i<x.length; i++){
+            sum = sum + x[i]
+        }
+        return(sum)
+    }
+
+    const enviarDatos = () => {
+        // enviar al backend
+        //window.location.reload()
+        console.log(filas)
+    }
+
+    const eliminar = () => {
+        var x = (filas.map((fila) => {
+            return(fila.idProducto)
+        }))
+        for(let i=0; i<sel.length; i++){
+            delete filas[x.indexOf(sel[i])]
+        }
+        var filasN = filas.filter(value => value.idProducto !== '{}')
+        setFilas(filasN)
+        toast.success("Operación realizada con éxito")
+        setReloadInfo(true)
     }
     
 
@@ -56,6 +134,7 @@ const NuevaVenta = () => {
                     <table className="table table-hover" style={{paddingLeft: '50px'}}>
                         <thead>
                             <tr>
+                                <th width='3%'> </th>
                                 <th width='8%'>ID</th>
                                 <th width='25%'>Descripción</th>
                                 <th width='12%'>Cantidad</th>
@@ -67,29 +146,40 @@ const NuevaVenta = () => {
                             {filas.map((fila) => {
                                 return(
                                     <tr>
-                                        <td contenteditable="true">  </td>
-                                        <td> </td>
-                                        <td contenteditable="true"> </td>
-                                        <td> </td>
-                                        <td> </td>
+                                        <td>
+                                            <div className="form-check">
+                                                <Tooltip title="Seleccionar producto">
+                                                    <input name='check' onChange={(e) => {sel.push(fila.idProducto)}} className="form-check-input" type="checkbox"/>
+                                                </Tooltip>
+                                            </div>
+                                        </td>
+                                        <td><input style={{textAlign: 'left', width:'60px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {fila.idProducto = e.target.value; setRecarga(true)}}/>  </td>
+                                        <td> {fila.descripcion = encontrar(fila).descripcion} </td>
+                                        <td> <input style={{textAlign: 'center', width:'70px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {fila.cantidad = e.target.value; setRecarga(true)}}/> </td>
+                                        <td> {CurrencyFormatted(fila.valorUnitario = encontrar(fila).valorUnitario)} </td>
+                                        <td> {CurrencyFormatted(parseInt(fila.cantidad)*parseInt(encontrar(fila).valorUnitario))} </td>
                                     </tr>
                                 )
                             })}
                         </tbody>
                     </table>
                 </div>
-                Total de la venta: <input type="text" disabled/>
+                Total de la venta: <span>   
+                        {CurrencyFormatted(total(filas))}                                                                   
+                        </span>
+
                 <div style={{paddingTop: '12px'}}>
                     <button type="button" onClick={() => {newFile(); setNewProduct(true)}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
                         Agregar producto
                     </button>
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px', marginRight: '1vh', marginLeft: '1vh'}}>
+                    <button type="button" onClick={() => {eliminar()}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px', marginRight: '1vh', marginLeft: '1vh'}}>
                         Eliminar
                     </button>
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
+                    <button type="button" onClick={() => {enviarDatos();toast.success("Venta registrada con éxito")}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
                         Registrar venta
                     </button>
                 </div>
+                <ToastContainer position="bottom-center" autoClose={3000} />
             </div>
         </div>
     )
