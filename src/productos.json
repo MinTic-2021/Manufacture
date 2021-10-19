@@ -1,0 +1,39 @@
+[
+    {
+        "idProducto": "1",
+        "descripcion": "manufactura1",
+        "valorUnitario": "1000",
+        "estado": "disponible"
+
+    },
+    {
+        "idProducto": "2",
+        "descripcion": "manufactura2",
+        "valorUnitario": "2000",
+        "estado": "disponible"
+    },
+    {
+        "idProducto": "3",
+        "descripcion": "manufactura3",
+        "valorUnitario": "3000",
+        "estado": "disponible"
+    },
+    {
+        "idProducto": "4",
+        "descripcion": "manufactura4",
+        "valorUnitario": "4000",
+        "estado": "disponible"
+    },
+    {
+        "idProducto": "5",
+        "descripcion": "manufactura5",
+        "valorUnitario": "5000",
+        "estado": "disponible"
+    },
+    {
+        "idProducto": "6",
+        "descripcion": "manufactura6",
+        "valorUnitario": "6000",
+        "estado": "disponible"
+    }
+]

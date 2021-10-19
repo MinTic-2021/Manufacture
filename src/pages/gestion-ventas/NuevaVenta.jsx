@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import datos from 'productos.json';
 
 
 const NuevaVenta = () => {
+
+    const [newProduct, setNewProduct] = useState(false);
+    const [filas, setFilas] = useState([]);
+
+    useEffect(() => {
+        setFilas([{idProducto:"", descripcion: "", valorUnitario: "", estado: ""}]);
+    }, [])
+
+    useEffect(() => {
+        setNewProduct(false)
+    }, [newProduct])
+
+    
+    const newFile = () => {
+        const filaNueva = filas
+        filaNueva.push({idProducto:"",descripcion:"",valorUnitario:"",estado:""})     
+        setFilas(filaNueva)
+        setNewProduct(false)
+    }
+    
 
     return (
         <div style={{paddingBottom: '40px'}}>
@@ -42,51 +63,32 @@ const NuevaVenta = () => {
                                 <th width='15%'>Total</th>
                             </tr>
                         </thead>
-                        <tbody style={{height: '30vh'}}>
-                            <tr>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr style={{borderBottomColor: 'black'}}>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td contenteditable="true"> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
+                        <tbody>
+                            {filas.map((fila) => {
+                                return(
+                                    <tr>
+                                        <td contenteditable="true">  </td>
+                                        <td> </td>
+                                        <td contenteditable="true"> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
                 Total de la venta: <input type="text" disabled/>
                 <div style={{paddingTop: '12px'}}>
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '2vh'}}>
-                        Agregar venta
+                    <button type="button" onClick={() => {newFile(); setNewProduct(true)}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
+                        Agregar producto
                     </button>
-                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>Limpiar</button>
+                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px', marginRight: '1vh', marginLeft: '1vh'}}>
+                        Eliminar
+                    </button>
+                    <button type="button" className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
+                        Registrar venta
+                    </button>
                 </div>
             </div>
         </div>

@@ -119,7 +119,6 @@ const Tabla = ({listaVentas})  => {
         console.log(listaVentas)
     }
 
-
     return (
         <div style={{paddingTop: '20px'}}>
             <table className="table table-hover" style={{paddingLeft: '50px'}}>
@@ -216,10 +215,6 @@ const Dialogo = (props) => {
         //enviar al backend
         console.log(filtro.Productos)
     }
-
-
-
-
 
     return (
         <div>
