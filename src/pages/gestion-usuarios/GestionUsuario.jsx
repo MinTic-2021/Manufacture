@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import datos from 'datos.json';
+import { obtenerUsuarios, editarUsuario, eliminarUsuario } from 'utils/api';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Tooltip, Dialog } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 
 const GestionUsuario = () => {
-
+    
     const [usuarios, setUsuarios] = useState([]);
     let [busqueda, setBusqueda] = useState('')
     const [criterio, setCriterio] = useState('nombre')
@@ -15,24 +15,22 @@ const GestionUsuario = () => {
         try{
             const filtro = []
             if(busqueda === '' || criterio === 'todo'){
-                console.log(datos)
-                setUsuarios(datos)
+                obtenerUsuarios(setUsuarios)
             }else{
                 for (let i = 0; i < usuarios.length; i++){
-                    if(usuarios[i][criterio].toLowerCase() === busqueda){
+                    if(usuarios[i][criterio].toLowerCase().includes(busqueda)){
                         filtro.push(usuarios[i])
                     }
                 }
                 setUsuarios(filtro)
             }
         } catch {
-            toast.error("La búsqueda no se puede realizar")
+            toast.error("Ocurrió un error al realizar la búsqueda")
         }
     }
-
+    
     useEffect(() => {
-        // obtención datos backend
-        setUsuarios(datos);
+        obtenerUsuarios(setUsuarios);
     }, [])
 
     return (
@@ -46,7 +44,7 @@ const GestionUsuario = () => {
                     <select className="form-select form-select-sm" onChange={((e) => {setCriterio(e.target.value.toLowerCase())})} style={{width: '13%'}}>
                         <option value="nombre">Nombre</option>
                         <option value="rol">Rol</option>
-                        <option value="id">ID</option>
+                        <option value="_id">ID</option>
                         <option value="todo">Mostrar todo</option>
                     </select> 
                     <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
@@ -55,7 +53,7 @@ const GestionUsuario = () => {
                     <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
                         Buscar
                     </button>
-                    <button type="button" onClick={() => {setUsuarios(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                    <button type="button" onClick={() => {obtenerUsuarios(setUsuarios)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                         Limpiar
                     </button>
                 </div>
@@ -69,29 +67,24 @@ export default GestionUsuario
 
 const Tabla = ({listaUsuarios})  => {
 
-    const sel = []
+    var sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
-    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         setReloadInfo(false)
     }, [reloadInfo])
 
-    const guardar = () => {
-        listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setOpen(false)
-        //enviar al backend
-        console.log(listaUsuarios)
+    const eliminar = (sel) => {
+        sel.forEach(id => eliminarUsuario(id))
+        window.location.reload()
+        toast.success('usuario eliminado exitosamente')               
     }
 
-    const eliminar = () => {
-        sel.forEach(llave => {delete listaUsuarios[llave]})
-        listaUsuarios = listaUsuarios.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setReloadInfo(true)
-        //enviar al backend
-        console.log(listaUsuarios)
+    const seleccion = (id) => {
+        sel.push(id)
+        if((sel.filter(el => el === id)).length > 1){
+            sel = sel.filter(el => el !== id)
+        }
     }
 
     return (
@@ -116,18 +109,18 @@ const Tabla = ({listaUsuarios})  => {
                                 <td>
                                     <div className="form-check">
                                         <Tooltip title="Seleccionar usuario">
-                                            <input name='check' onChange={(e) => {sel.push(usuario.id-1)}} className="form-check-input" type="checkbox"/>
+                                            <input name='check' onClick={() => {seleccion(usuario._id)}} className="form-check-input" type="checkbox"/>
                                         </Tooltip>
                                     </div>
                                 </td>
-                                <td>{usuario.id}</td>
+                                <td>{usuario._id.slice(15)}</td>
                                 <td>{usuario.nombre}</td>
-                                <td>{usuario.apellido}</td>
+                                <td>{usuario.apellidos}</td>
                                 <td>{usuario.telefono}</td>
                                 <td>{usuario.correo}</td>
                                 <td>{usuario.ingreso}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {usuario.rol = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                    <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {editarUsuario(usuario._id, e.target.value)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="administrador">Administrador</option>
                                         <option value="vendedor">Vendedor</option>
                                     </select>  
@@ -139,26 +132,10 @@ const Tabla = ({listaUsuarios})  => {
             </table>
             <ToastContainer position="bottom-center" autoClose={5000} />
             <div style={{paddingTop: '12px'}}>
-                <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Eliminar
                 </button>
-                <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-                    Guardar cambios
-                </button>
             </div>
-            <Dialog open={open}>
-                <div style={{margin: '3vh'}}>
-                    <h6>¿Desea confirmar los cambios?</h6>
-                    <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
-                        <button onClick={guardar} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            Sí
-                        </button>
-                        <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            No
-                        </button>
-                    </div>
-                </div>
-            </Dialog>
         </div>
     )
 }
