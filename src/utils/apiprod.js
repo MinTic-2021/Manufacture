@@ -34,7 +34,7 @@ export const editarProducto = async(id, estado) => {
     method: 'PATCH',
     url: `http://localhost:5000/gprod/${id}/`,
     headers: {'Content-Type': 'application/json'},
-    data: {"rol": estado}
+    data: {"estado": estado}
   };
   
   await axios.request(options).then(function (response) {

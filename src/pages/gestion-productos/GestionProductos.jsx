@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import datos from 'productos.json';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -56,7 +55,7 @@ const GestionProductos = () => {
                 <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
                     Buscar
                 </button>
-                <button type="button" onClick={() => {setProductos(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                <button type="button" onClick={() => {obtenerProductos(setProductos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                         Limpiar
                 </button>
             </div>
@@ -69,7 +68,7 @@ export default GestionProductos
 
 const Tabla = ({listaProductos})  => {
 
-    const sel = []
+    var sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -85,12 +84,18 @@ const Tabla = ({listaProductos})  => {
         console.log(listaProductos)
     }
 
-    const eliminar = () => {
-        sel.forEach(llave => {delete listaProductos[llave]})
-        listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
-        setReloadInfo(true)
-        //enviar al backend
-        eliminarProducto(listaProductos)
+
+    const eliminar = (sel) => {
+        sel.forEach(id => eliminarProducto(id))
+        window.location.reload()
+        toast.success('producto eliminado exitosamente')               
+    }
+
+    const seleccion = (id) => {
+        sel.push(id)
+        if((sel.filter(el => el === id)).length > 1){
+            sel = sel.filter(el => el !== id)
+        }
     }
 
     return (
@@ -112,7 +117,7 @@ const Tabla = ({listaProductos})  => {
                                 <td>
                                     <div className="form-check">
                                         <Tooltip title="Seleccionar producto">
-                                            <input name='check' onChange={(e) => {sel.push(productos.idProducto-1)}} className="form-check-input" type="checkbox"/>
+                                            <input name='check' onClick={() => {seleccion(productos._id)}} className="form-check-input" type="checkbox"/>
                                         </Tooltip>
                                     </div>
                                 </td>
@@ -132,7 +137,7 @@ const Tabla = ({listaProductos})  => {
             </table>
             <ToastContainer position="bottom-center" autoClose={5000} />
             <div style={{paddingTop: '12px'}}>
-                <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Eliminar
                 </button>
                 <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
