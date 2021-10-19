@@ -1,20 +1,20 @@
 import React, {useRef} from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { crearUsuario } from 'utils/api';
+import { ToastContainer } from 'react-toastify';
 
 const AgregarUsuario = () => {
 
     const form = useRef(null)
 
-    const submitform = (e) => {
+    const submitform = async (e) => {
         e.preventDefault()
         const fd = new FormData(form.current)
         const nuevoUsuario = {}
         fd.forEach((value, key) => {
             nuevoUsuario[key] = value
         })
-        console.log(nuevoUsuario)
-        toast.success('Usuario creado exitosamente')
+        
+        crearUsuario(nuevoUsuario)
         form.current.reset()
     }
 
@@ -68,8 +68,8 @@ const AgregarUsuario = () => {
                             <label htmlFor='rol' style={{paddingRight: '60vh', paddingBottom: '1vh'}}>Rol:</label>
                             <select name='rol' defaultValue={0} className="form-select form-select-sm" style={{width: '30%', height: '55%'}} required>
                                 <option disabled value={0}>Seleccione uno</option>
-                                <option>Administrador</option>
-                                <option>Vendedor</option>
+                                <option value='administrador'>Administrador</option>
+                                <option value='vendedor'>Vendedor</option>
                             </select>
                         </div>
                     </div>
