@@ -19,6 +19,20 @@ export const obtenerUsuarios = async (setUsuarios) => {
     });
 }
 
+export const obtenerDatosUsuario = async () => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:5000/gusu/self',
+    headers: {Authorization: getToken()}};
+  
+  await axios.request(options).then(function (response) {
+  //setUsuarios(response.data)
+  console.log(response.data)
+}).catch(function (error) {
+  console.error(error);
+  });
+}
+
 export const crearUsuario = async (datos) => {
   const options = {
     method: 'POST',

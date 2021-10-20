@@ -31,22 +31,22 @@ const AgregarUsuario = () => {
                 <form style={{marginLeft: '10vh', marginRight: '10vh'}} onSubmit={submitform} ref={form}>
                     <div className="row" style={{display: 'flex', paddingBottom: '2vh'}}>
                         <div className="col">
-                            <label htmlFor='nombre' style={{paddingBottom: '1vh'}}>Nombres:</label>
-                            <input type="text" name='nombre' className="form-control" placeholder="Nombres" required />
+                            <label htmlFor='given_name' style={{paddingBottom: '1vh'}}>Nombres:</label>
+                            <input type="text" name='given_name' className="form-control" placeholder="Nombres" required />
                         </div>
                         <div className="col">
-                            <label htmlFor='apellidos' style={{paddingBottom: '1vh'}}>Apellidos:</label>
-                            <input name='apellidos' type="text" className="form-control" placeholder="Apellidos" required />
+                            <label htmlFor='family_name' style={{paddingBottom: '1vh'}}>Apellidos:</label>
+                            <input name='family_name' type="text" className="form-control" placeholder="Apellidos" required />
                         </div>
                     </div>
                     <div className="row" style={{display: 'flex', paddingBottom: '2vh'}}>
                         <div className="col" >
-                            <label htmlFor='correo' style={{paddingBottom: '1vh'}}>Correo electrónico:</label>
-                            <input name='correo' type="email" className="form-control" placeholder="E-mail" required />
+                            <label htmlFor='email' style={{paddingBottom: '1vh'}}>Correo electrónico:</label>
+                            <input name='email' type="email" className="form-control" placeholder="E-mail" required />
                         </div>
                         <div className="col" >
-                            <label htmlFor='telefono' style={{paddingBottom: '1vh'}}>Teléfono:</label>
-                            <input name='telefono' type="number" className="form-control" placeholder="Celular" required />
+                            <label htmlFor='tel' style={{paddingBottom: '1vh'}}>Teléfono:</label>
+                            <input name='tel' type="number" className="form-control" placeholder="Celular" required />
                         </div>
                     </div>
                     <div className="row" style={{display: 'flex', paddingBottom: '2vh'}}>

@@ -114,15 +114,16 @@ const Tabla = ({listaUsuarios})  => {
                                     </div>
                                 </td>
                                 <td>{usuario._id.slice(15)}</td>
-                                <td>{usuario.nombre}</td>
-                                <td>{usuario.apellidos}</td>
-                                <td>{usuario.telefono}</td>
-                                <td>{usuario.correo}</td>
+                                <td>{usuario.given_name}</td>
+                                <td>{usuario.family_name}</td>
+                                <td>{usuario.tel}</td>
+                                <td>{usuario.email}</td>
                                 <td>{usuario.ingreso}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
                                     <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {editarUsuario(usuario._id, e.target.value)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="administrador">Administrador</option>
                                         <option value="vendedor">Vendedor</option>
+                                        <option value="inactivo">Inactivo</option>
                                     </select>  
                                 </td>
                             </tr>
