@@ -44,8 +44,8 @@ const AgregarProducto = () => {
                         <label htmlForm='estado' style={{paddingBotton: '1vh', paddingRight: '20vh'}}>Estado:</label>
                         <select name='estado' defaultValue={0} className="form-select form-select-sm" style={{width: '50%', height: '55%'}} required>
                             <option disabled value={0}>Seleccione uno</option>
-                            <option>Disponible</option>
-                            <option>No disponible</option>
+                            <option value="disponible">Disponible</option>
+                            <option value="noDisponible">No disponible</option>
                         </select>
                     </div>
                 </div>

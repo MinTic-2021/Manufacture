@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Tooltip, Dialog } from '@material-ui/core';
+import { Tooltip} from '@material-ui/core';
 import { obtenerProductos } from 'utils/apiprod';
 import { eliminarProducto } from 'utils/apiprod';
+import { editarProducto } from 'utils/apiprod';
 
 const GestionProductos = () => {
 
     const [productos, setProductos] = useState([]);
     let [busqueda, setBusqueda] = useState('')
-    const [criterio, setCriterio] = useState('nombre')
+    const [criterio, setCriterio] = useState('idProducto')
     
         const buscar = () =>{
             try{
@@ -70,19 +71,12 @@ const Tabla = ({listaProductos})  => {
 
     var sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
-    const [open, setOpen] = useState(false)
+
 
     useEffect(() => {
         setReloadInfo(false)
     }, [reloadInfo])
 
-    const guardar = () => {
-        listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setOpen(false)
-        //enviar al backend
-        console.log(listaProductos)
-    }
 
 
     const eliminar = (sel) => {
@@ -125,7 +119,7 @@ const Tabla = ({listaProductos})  => {
                                 <td>{productos.descripcion}</td>
                                 <td>{productos.valorUnitario}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" defaultValue={productos.estado} name='estado' onChange={(e) => {productos.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                    <select className="form-select form-select-sm" defaultValue={productos.estado} name='estado' onChange={(e) => {editarProducto(productos._id, e.target.value)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="disponible">Disponible</option>
                                         <option value="noDisponible">No disponible</option>
                                     </select>  
@@ -140,23 +134,7 @@ const Tabla = ({listaProductos})  => {
                 <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Eliminar
                 </button>
-                <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-                    Guardar cambios
-                </button>
             </div>
-            <Dialog open={open}>
-                <div style={{margin: '3vh'}}>
-                    <h6>¿Desea confirmar los cambios?</h6>
-                    <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
-                        <button onClick={guardar} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            Sí
-                        </button>
-                        <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            No
-                        </button>
-                    </div>
-                </div>
-            </Dialog>
         </div>
     )
 }
