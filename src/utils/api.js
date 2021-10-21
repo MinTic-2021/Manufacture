@@ -19,15 +19,15 @@ export const obtenerUsuarios = async (setUsuarios) => {
     });
 }
 
-export const obtenerDatosUsuario = async () => {
+export const obtenerDatosUsuario = async (set) => {
   const options = {
     method: 'GET',
     url: 'http://localhost:5000/gusu/self',
     headers: {Authorization: getToken()}};
   
   await axios.request(options).then(function (response) {
-  //setUsuarios(response.data)
-  console.log(response.data)
+  set(response.data)
+  //console.log(response.data)
 }).catch(function (error) {
   console.error(error);
   });
@@ -61,6 +61,23 @@ export const editarUsuario = async(id, nuevo) => {
   await axios.request(options).then(function (response) {
     console.log(response.data);
     toast.success('Rol actualizado exitosamente')
+  }).catch(function (error) {
+    console.error(error);
+    toast.error('Ocurrió un problema al realizar la operación solicitada')
+  });
+}
+
+export const ActualizarUsuario = async(id, nuevo) => {
+  const options = {
+    method: 'PATCH',
+    url: `http://localhost:5000/gusu/${id}/`,
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
+    data: nuevo
+  };
+  console.log(id, nuevo)
+  await axios.request(options).then(function (response) {
+    console.log(response.data);
+    toast.success('Información actualizada exitosamente')
   }).catch(function (error) {
     console.error(error);
     toast.error('Ocurrió un problema al realizar la operación solicitada')
