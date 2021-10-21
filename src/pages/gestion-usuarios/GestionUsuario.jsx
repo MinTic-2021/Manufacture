@@ -42,7 +42,7 @@ const GestionUsuario = () => {
                 <h6>Buscar usuario:</h6>
                 <div style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
                     <select className="form-select form-select-sm" onChange={((e) => {setCriterio(e.target.value.toLowerCase())})} style={{width: '13%'}}>
-                        <option value="nombre">Nombre</option>
+                        <option value="given_name">Nombre</option>
                         <option value="rol">Rol</option>
                         <option value="_id">ID</option>
                         <option value="todo">Mostrar todo</option>
