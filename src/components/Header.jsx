@@ -16,11 +16,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Solicitudes from 'components/Solicitudes';
 import { OpenDialogContext } from 'contex/OpenDialog';
 import PrivateComponent from './PrivateComponent';
+import { useUsuario } from 'contex/usuarioContext';
 
 const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const { user, logout } = useAuth0();
+    const { usuarios } = useUsuario()
 
     const cerrarSesion = () => {
         logout({ returnTo: window.location.origin })
@@ -28,6 +30,7 @@ const Header = (props) => {
     }
 
     const [open, setOpen] = useState(false)
+    const filtro = usuarios.filter(usuario => usuario.rol === "inactivo")
 
     return (
         <header >
@@ -106,8 +109,13 @@ const Header = (props) => {
                                 <DropdownMenu right style={{right: '10px'}}>
                                     <PrivateComponent roleList={['administrador' ]}>
                                         <DropdownItem href="" onClick={() => {setOpen(true)}}>
-                                            <div style={{textDecoration: 'none', color: 'black'}}>
-                                                Solicitudes
+                                            <div style={{textDecoration: 'none', color: 'black', display: 'flex', flexDirection: 'row'}}>
+                                                <div style={{paddingRight: '1vh'}}>Solicitudes</div> {
+                                                    filtro.length > 0 && 
+                                                    <div style={{backgroundColor: '#517392', borderRadius: '100vh', width: '15%', display: 'flex', justifyContent: 'center', color: 'white'}}>
+                                                        {filtro.length}
+                                                    </div>
+                                                }
                                             </div>
                                             <Solicitudes/> 
                                         </DropdownItem>

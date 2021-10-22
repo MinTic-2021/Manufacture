@@ -4,10 +4,12 @@ import { Dialog, DialogContent } from '@material-ui/core'
 import { nanoid } from 'nanoid'
 import { obtenerUsuarios, editarUsuario } from 'utils/api'
 import { useOpenDialog } from 'contex/OpenDialog';
+import { useUsuario } from 'contex/usuarioContext'
 
-const Solicitudes = (props) => {
+const Solicitudes = () => {
 
-    const [usuarios, setUsuarios] = useState([])
+    const {usuarios} = useUsuario()
+    const {setUsuarios} = useUsuario()
     const [reload, setReload] = useState(false)
     const { setOpen } = useOpenDialog()
     const { open } = useOpenDialog()
@@ -17,7 +19,7 @@ const Solicitudes = (props) => {
             obtenerUsuarios(setUsuarios)
         }
         traerUsuarios()
-    }, [reload])
+    }, [reload, setUsuarios, open])
     
     useEffect(() => {
         setReload(false)
@@ -74,9 +76,6 @@ const Solicitudes = (props) => {
                     <img src={check} alt="Check" style={{width: '5%', paddingRight: '1vh'}}/>
                     No hay solicitudes pendientes
                 </span> }
-                <button onClick={() => {setOpen(false)}} className="btn btn-secondary" style={{width: '14%', marginLeft: '4vh', padding: '2px'}}>
-                    cerrar
-                </button>
             </DialogContent>
         </Dialog>
     )

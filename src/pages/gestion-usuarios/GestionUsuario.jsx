@@ -4,10 +4,12 @@ import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from '@material-ui/core';
+import { useUsuario } from 'contex/usuarioContext';
 
 const GestionUsuario = () => {
     
-    const [usuarios, setUsuarios] = useState([]);
+    const {usuarios} = useUsuario()
+    const {setUsuarios} = useUsuario()
     let [busqueda, setBusqueda] = useState('')
     const [criterio, setCriterio] = useState('nombre')
 
@@ -31,7 +33,7 @@ const GestionUsuario = () => {
     
     useEffect(() => {
         obtenerUsuarios(setUsuarios);
-    }, [])
+    }, [setUsuarios])
 
     return (
         <div style={{paddingBottom: '40px'}}>

@@ -18,10 +18,12 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { UserContext } from 'contex/userContext';
 import { useState } from 'react'
 import PrivateRoute from 'components/PrivateRoute';
+import { UsuarioContext } from 'contex/usuarioContext';
 
 function App() {
 
   const [userData, setUserData] = useState({})
+  const [usuarios, setUsuarios] = useState([])
 
   return (
     <Auth0Provider
@@ -30,6 +32,7 @@ function App() {
     redirectUri='http://localhost:3000/bienvenida'
     audience="api-autenticacion-manufacture">
       <UserContext.Provider value={{userData, setUserData}}>
+        <UsuarioContext.Provider value={{usuarios, setUsuarios}} >
         <Router>
           <Switch>
             <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
@@ -94,6 +97,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
+        </UsuarioContext.Provider>
       </UserContext.Provider>
     </Auth0Provider>
   );
