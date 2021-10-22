@@ -17,18 +17,11 @@ import ActualizarInformacion from 'pages/ActualizarInformacion';
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UserContext } from 'contex/userContext';
 import { useState } from 'react'
+import PrivateRoute from 'components/PrivateRoute';
 
 function App() {
 
   const [userData, setUserData] = useState({})
-
-  /*const redireccion = (userData) => {
-    if(userData.rol === 'inactivo'){
-      return 'http://localhost:3000/actualizar'
-    }else{
-      return 'http://localhost:3000/bienvenida'
-    }
-  }*/
 
   return (
     <Auth0Provider
@@ -46,22 +39,34 @@ function App() {
                     <Inicio />
                   </Route>
                   <Route path='/gprod-agregar'>
-                    <AgregarProducto/>
+                    <PrivateRoute roleList={'administrador'}>
+                      <AgregarProducto/>
+                    </PrivateRoute>
                   </Route>
                   <Route path='/gprod-admin'>
-                    <GestionProductos />
+                    <PrivateRoute roleList={'administrador'}>
+                      <GestionProductos />
+                    </PrivateRoute>
                   </Route>
                   <Route path='/gusu-admin'>
-                    <GestionUsuario />
+                    <PrivateRoute roleList={'administrador'}>
+                      <GestionUsuario />
+                    </PrivateRoute>
                   </Route>
                   <Route path='/gusu-agregar'>
-                    <AgregarUsuario/>
+                    <PrivateRoute roleList={'administrador'}>
+                      <AgregarUsuario/>
+                    </PrivateRoute>
                   </Route>
                   <Route path='/gven-nueva'>
-                    <NuevaVenta/>
+                    <PrivateRoute roleList={['administrador', 'vendedor']}>
+                      <NuevaVenta/>
+                    </PrivateRoute>
                   </Route>
                   <Route path='/gven-admin'>
-                    <GestionVenta />
+                    <PrivateRoute roleList={['administrador', 'vendedor']}>
+                      <GestionVenta />
+                    </PrivateRoute>
                   </Route>
                   <Route path='/gven-detalle'>
                     <DetalleVenta />

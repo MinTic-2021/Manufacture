@@ -1,37 +1,19 @@
-import React, { useEffect} from 'react'
-import { useAuth0 } from "@auth0/auth0-react";
-import ReactLoading from 'react-loading';
-import { obtenerDatosUsuario } from 'utils/api';
-import { useUser } from 'contex/userContext';
+import { useUser } from 'contex/userContext'
+import React from 'react'
 
-const PrivateRoute = ({ children }) => {
-
-    const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently  } = useAuth0();
-    const { setUserData } = useUser() 
-
-    useEffect(() => {
-
-        const fetchAuth0Token = async() => {
-            const accessToken = await getAccessTokenSilently({audience: 'api-autenticacion-manufacture'})
-            localStorage.setItem('Token', accessToken)
-            obtenerDatosUsuario(setUserData)
-        }
-            
-        if(isAuthenticated){
-            fetchAuth0Token()
-        }
-    }, [isAuthenticated, getAccessTokenSilently, setUserData])
-
-    if (isLoading) return(
-        <div style={{display: 'flex', justifyContent: 'center', margin: '50vh'}} >
-            <ReactLoading type={"spokes"} color={"#95CCBB"} height={'20%'} width={'20%'} />
-        </div>
-        ) 
-        
-    if (!isAuthenticated){
-        return loginWithRedirect()
+const PrivateRoute = ({ roleList, children }) => {
+    
+    const { userData } = useUser()
+    
+    if(roleList.includes(userData.rol)){
+        return children
     }
-    return <>{children}</>
+
+    return (
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '70vh', fontSize: '5vh', fontWeight: 'bold', color: '#2C4B44'}}>
+            Lo sentimos, usted no está autorizado para acceder a este sitio
+        </div>
+    )
 }
 
 export default PrivateRoute
