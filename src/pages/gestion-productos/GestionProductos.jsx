@@ -5,13 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip} from '@material-ui/core';
 import { obtenerProductos } from 'utils/apiprod';
 import { eliminarProducto } from 'utils/apiprod';
-<<<<<<< HEAD
 import { CurrencyFormatted } from 'pages/gestion-ventas/GestionVenta';
-
-
-=======
 import { editarProducto } from 'utils/apiprod';
->>>>>>> a3138ba8f938ef04fdd01fb1a72009892ea2fa39
 
 const GestionProductos = () => {
 
@@ -136,13 +131,8 @@ const Tabla = ({listaProductos})  => {
                 </tbody>
             </table>
             <ToastContainer position="bottom-center" autoClose={5000} />
-<<<<<<< HEAD
-            <div style={{paddingTop: '12px', marginBottom:'20px'}}>
-                <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-=======
             <div style={{paddingTop: '12px'}}>
-                <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
->>>>>>> a3138ba8f938ef04fdd01fb1a72009892ea2fa39
+                <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px', marginBottom: '20px'}}>
                     Eliminar
                 </button>
             </div>
