@@ -2,8 +2,15 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const getToken = () => {
+  return `Bearer ${localStorage.getItem('Token')}`
+}
+
 export const obtenerUsuarios = async (setUsuarios) => {
-    const options = {method: 'GET', url: 'http://localhost:5000/gusu/'};
+    const options = {
+      method: 'GET',
+      url: 'http://localhost:5000/gusu/',
+      headers: {Authorization: getToken()}};
     
     await axios.request(options).then(function (response) {
     setUsuarios(response.data)
@@ -12,11 +19,25 @@ export const obtenerUsuarios = async (setUsuarios) => {
     });
 }
 
+export const obtenerDatosUsuario = async (set) => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:5000/gusu/self',
+    headers: {Authorization: getToken()}};
+  
+  await axios.request(options).then(function (response) {
+  set(response.data)
+  //console.log(response.data)
+}).catch(function (error) {
+  console.error(error);
+  });
+}
+
 export const crearUsuario = async (datos) => {
   const options = {
     method: 'POST',
     url: 'http://localhost:5000/gusu/',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: datos
   };
   
@@ -33,7 +54,7 @@ export const editarUsuario = async(id, nuevo) => {
   const options = {
     method: 'PATCH',
     url: `http://localhost:5000/gusu/${id}/`,
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: {"rol": nuevo}
   };
   
@@ -46,12 +67,29 @@ export const editarUsuario = async(id, nuevo) => {
   });
 }
 
+export const ActualizarUsuario = async(id, nuevo) => {
+  const options = {
+    method: 'PATCH',
+    url: `http://localhost:5000/gusu/${id}/`,
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
+    data: nuevo
+  };
+  console.log(id, nuevo)
+  await axios.request(options).then(function (response) {
+    console.log(response.data);
+    toast.success('Información actualizada exitosamente')
+  }).catch(function (error) {
+    console.error(error);
+    toast.error('Ocurrió un problema al realizar la operación solicitada')
+  });
+}
+
 export const eliminarUsuario = async(id) => {
   
   const options = {
     method: 'DELETE',
     url: `http://localhost:5000/gusu/${id}/`,
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: {"id": id}
   };
   

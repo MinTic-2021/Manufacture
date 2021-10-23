@@ -16,66 +16,94 @@ import 'bootstrap/dist/css/bootstrap.css';
 import ActualizarInformacion from 'pages/ActualizarInformacion';
 import {useState} from 'react';
 import { ventasContext } from 'context/ventasContext';
+import { Auth0Provider } from "@auth0/auth0-react";
+import { UserContext } from 'contex/userContext';
+import PrivateRoute from 'components/PrivateRoute';
+import { UsuarioContext } from 'contex/usuarioContext';
 
 function App() {
 
+  const [userData, setUserData] = useState({})
+  const [usuarios, setUsuarios] = useState([])
   const [ventas, setVentas] = useState([])
 
   return (
-    <Router>
-      <Switch>
-        <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
-          <PrivateLayout>
-            <Switch>
-              <Route path='/bienvenida'>
-                <Inicio />
-              </Route>
-              <Route path='/gprod-agregar'>
-                <AgregarProducto/>
-              </Route>
-              <Route path='/gprod-admin'>
-                <GestionProductos />
-              </Route>
-              <Route path='/gusu-admin'>
-                <GestionUsuario />
-              </Route>
-              <Route path='/gusu-agregar'>
-                <AgregarUsuario/>
-              </Route>
-              <Route path='/gven-nueva'>
-                <NuevaVenta/>
-              </Route>
-              <Route path='/gven-admin'>
-                <ventasContext.Provider value = {{ventas, setVentas}}>
-                  <GestionVenta />
-                </ventasContext.Provider>
-              </Route>
-              <Route path='/gven-detalle'>
-                <DetalleVenta />
-              </Route>
-              <Route path='/actualizar'>
-                <ActualizarInformacion />
-              </Route>
-            </Switch>
-          </PrivateLayout>
-        </Route>
-        <Route  path={['/', '/login', '/registro']}>
-          <PublicLayout>
-            <Switch>
-              <Route path='/login'>
-                <Login />
-              </Route>
-              <Route path='/registro'>
-                <Registro />
-              </Route>
-              <Route path='/'>
-                <Index />
-              </Route>
-            </Switch>
-          </PublicLayout>
-        </Route>
-      </Switch>
-    </Router>
+    <Auth0Provider
+    domain="mintinc-manufacture.us.auth0.com"
+    clientId="vs5Q2z3dkLPTtisE135M4SXlHUg8WqX3"
+    redirectUri='http://localhost:3000/bienvenida'
+    audience="api-autenticacion-manufacture">
+      <UserContext.Provider value={{userData, setUserData}}>
+        <UsuarioContext.Provider value={{usuarios, setUsuarios}} >
+        <Router>
+          <Switch>
+            <Route path={['/bienvenida', '/gprod-agregar', '/gprod-admin', '/gusu-agregar', '/gusu-admin', '/gven-nueva', '/gven-admin', '/gven-detalle', '/actualizar']}> 
+              <PrivateLayout>
+                <Switch>
+                  <Route path='/bienvenida'>
+                    <Inicio />
+                  </Route>
+                  <Route path='/gprod-agregar'>
+                    <PrivateRoute roleList={'administrador'}>
+                      <AgregarProducto/>
+                    </PrivateRoute>
+                  </Route>
+                  <Route path='/gprod-admin'>
+                    <PrivateRoute roleList={'administrador'}>
+                      <GestionProductos />
+                    </PrivateRoute>
+                  </Route>
+                  <Route path='/gusu-admin'>
+                    <PrivateRoute roleList={'administrador'}>
+                      <GestionUsuario />
+                    </PrivateRoute>
+                  </Route>
+                  <Route path='/gusu-agregar'>
+                    <PrivateRoute roleList={'administrador'}>
+                      <AgregarUsuario/>
+                    </PrivateRoute>
+                  </Route>
+                  <Route path='/gven-nueva'>
+                    <PrivateRoute roleList={['administrador', 'vendedor']}>
+                      <NuevaVenta/>
+                    </PrivateRoute>
+                  </Route>
+                  <Route path='/gven-admin'>
+                    <PrivateRoute roleList={['administrador', 'vendedor']}>
+                      <ventasContext.Provider value = {{ventas, setVentas}}>
+                        <GestionVenta />
+                      </ventasContext.Provider>
+                    </PrivateRoute>
+                  </Route>
+                  <Route path='/gven-detalle'>
+                    <DetalleVenta />
+                  </Route>
+                  <Route path='/actualizar'>
+                    <ActualizarInformacion />
+                  </Route>
+                </Switch>
+              </PrivateLayout>
+            </Route>
+            <Route  path={['/', '/login', '/registro']}>
+              <PublicLayout>
+                <Switch>
+                  <Route path='/login'>
+                    <Login />
+                  </Route>
+                  <Route path='/registro'>
+                    <Registro />
+                  </Route>
+                  <Route path='/'>
+                    <Index />
+                  </Route>
+                </Switch>
+              </PublicLayout>
+            </Route>
+          </Switch>
+        </Router>
+        </UsuarioContext.Provider>
+      </UserContext.Provider>
+    </Auth0Provider>
   );
 };
 

@@ -50,7 +50,7 @@ const GestionVenta = () => {
             }else{
                 for (let i = 0; i < ventas.length; i++){
                     console.log(ventas[i])
-                    if(ventas[i][criterio].toLowerCase() === busqueda){
+                    if(ventas[i][criterio].toLowerCase().includes(busqueda)){
                         filtro.push(ventas[i])
                     }
                 }

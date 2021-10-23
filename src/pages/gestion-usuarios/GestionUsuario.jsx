@@ -4,10 +4,12 @@ import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from '@material-ui/core';
+import { useUsuario } from 'contex/usuarioContext';
 
 const GestionUsuario = () => {
     
-    const [usuarios, setUsuarios] = useState([]);
+    const {usuarios} = useUsuario()
+    const {setUsuarios} = useUsuario()
     let [busqueda, setBusqueda] = useState('')
     const [criterio, setCriterio] = useState('nombre')
 
@@ -31,7 +33,7 @@ const GestionUsuario = () => {
     
     useEffect(() => {
         obtenerUsuarios(setUsuarios);
-    }, [])
+    }, [setUsuarios])
 
     return (
         <div style={{paddingBottom: '40px'}}>
@@ -42,7 +44,7 @@ const GestionUsuario = () => {
                 <h6>Buscar usuario:</h6>
                 <div style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
                     <select className="form-select form-select-sm" onChange={((e) => {setCriterio(e.target.value.toLowerCase())})} style={{width: '13%'}}>
-                        <option value="nombre">Nombre</option>
+                        <option value="given_name">Nombre</option>
                         <option value="rol">Rol</option>
                         <option value="_id">ID</option>
                         <option value="todo">Mostrar todo</option>
@@ -114,15 +116,16 @@ const Tabla = ({listaUsuarios})  => {
                                     </div>
                                 </td>
                                 <td>{usuario._id.slice(15)}</td>
-                                <td>{usuario.nombre}</td>
-                                <td>{usuario.apellidos}</td>
-                                <td>{usuario.telefono}</td>
-                                <td>{usuario.correo}</td>
+                                <td>{usuario.given_name}</td>
+                                <td>{usuario.family_name}</td>
+                                <td>{usuario.tel}</td>
+                                <td>{usuario.email}</td>
                                 <td>{usuario.ingreso}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
                                     <select className="form-select form-select-sm" defaultValue={usuario.rol} name='rol' onChange={(e) => {editarUsuario(usuario._id, e.target.value)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="administrador">Administrador</option>
                                         <option value="vendedor">Vendedor</option>
+                                        <option value="inactivo">Inactivo</option>
                                     </select>  
                                 </td>
                             </tr>
