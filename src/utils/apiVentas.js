@@ -1,12 +1,16 @@
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getToken } from "./api";
 
 //const baseURL = 'http://localhost:5000'
 const baseURL = 'https://desolate-garden-80672.herokuapp.com'
 
 export const obtenerVentas = async (setVentas) => {
-    const options = {method: 'GET', url: `${baseURL}/gvent/`};
+    const options = {
+    method: 'GET',
+    url: `${baseURL}/gvent/`,
+    headers: {Authorization: getToken()}};
     
     await axios.request(options).then(function (response) {
     setVentas(response.data)
@@ -19,7 +23,7 @@ export const crearVentas = async (ventas) => {
   const options = {
     method: 'POST',
     url: `${baseURL}/gvent`,
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: ventas
   };
   
@@ -36,7 +40,7 @@ export const editarVenta = async(id, nuevo, total) => {
   const options = {
     method: 'PATCH',
     url: `${baseURL}/gvent/${id}/`,
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: {"productos": nuevo, "valorTotal":total}
   };
   
@@ -53,7 +57,7 @@ export const estadoVenta = async(id, nuevo) => {
   const options = {
     method: 'PATCH',
     url: `${baseURL}/gvent/${id}/`,
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: {"estado": nuevo}
   };
   

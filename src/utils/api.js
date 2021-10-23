@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //const baseURL = 'http://localhost:5000'
 const baseURL = 'https://desolate-garden-80672.herokuapp.com'
 
-const getToken = () => {
+export const getToken = () => {
   return `Bearer ${localStorage.getItem('Token')}`
 }
 
