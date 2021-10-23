@@ -14,8 +14,13 @@ import GestionVenta from 'pages/gestion-ventas/GestionVenta';
 import DetalleVenta from 'pages/gestion-ventas/DetalleVenta';
 import 'bootstrap/dist/css/bootstrap.css';
 import ActualizarInformacion from 'pages/ActualizarInformacion';
+import {useState} from 'react';
+import { ventasContext } from 'context/ventasContext';
 
 function App() {
+
+  const [ventas, setVentas] = useState([])
+
   return (
     <Router>
       <Switch>
@@ -41,7 +46,9 @@ function App() {
                 <NuevaVenta/>
               </Route>
               <Route path='/gven-admin'>
-                <GestionVenta />
+                <ventasContext.Provider value = {{ventas, setVentas}}>
+                  <GestionVenta />
+                </ventasContext.Provider>
               </Route>
               <Route path='/gven-detalle'>
                 <DetalleVenta />
