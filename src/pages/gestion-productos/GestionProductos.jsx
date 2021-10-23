@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import datos from 'productos.json';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Tooltip, Dialog } from '@material-ui/core';
+import { Tooltip} from '@material-ui/core';
 import { obtenerProductos } from 'utils/apiprod';
 import { eliminarProducto } from 'utils/apiprod';
+<<<<<<< HEAD
 import { CurrencyFormatted } from 'pages/gestion-ventas/GestionVenta';
 
 
+=======
+import { editarProducto } from 'utils/apiprod';
+>>>>>>> a3138ba8f938ef04fdd01fb1a72009892ea2fa39
 
 const GestionProductos = () => {
 
     const [productos, setProductos] = useState([]);
     let [busqueda, setBusqueda] = useState('')
-    const [criterio, setCriterio] = useState('nombre')
+    const [criterio, setCriterio] = useState('idProducto')
     
         const buscar = () =>{
             try{
@@ -59,7 +62,7 @@ const GestionProductos = () => {
                 <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                     Buscar
                 </button>
-                <button type="button" onClick={() => {setProductos(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                <button type="button" onClick={() => {obtenerProductos(setProductos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                         Limpiar
                 </button>
             </div>
@@ -72,28 +75,27 @@ export default GestionProductos
 
 const Tabla = ({listaProductos})  => {
 
-    const sel = []
+    var sel = []
     const [reloadInfo, setReloadInfo] = useState(false)
-    const [open, setOpen] = useState(false)
+
 
     useEffect(() => {
         setReloadInfo(false)
     }, [reloadInfo])
 
-    const guardar = () => {
-        listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setOpen(false)
-        //enviar al backend
-        console.log(listaProductos)
+
+
+    const eliminar = (sel) => {
+        sel.forEach(id => eliminarProducto(id))
+        window.location.reload()
+        toast.success('producto eliminado exitosamente')               
     }
 
-    const eliminar = () => {
-        sel.forEach(llave => {delete listaProductos[llave]})
-        listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
-        setReloadInfo(true)
-        //enviar al backend
-        eliminarProducto(listaProductos)
+    const seleccion = (id) => {
+        sel.push(id)
+        if((sel.filter(el => el === id)).length > 1){
+            sel = sel.filter(el => el !== id)
+        }
     }
 
     return (
@@ -115,7 +117,7 @@ const Tabla = ({listaProductos})  => {
                                 <td>
                                     <div className="form-check">
                                         <Tooltip title="Seleccionar producto">
-                                            <input name='check' onChange={(e) => {sel.push(productos.idProducto-1)}} className="form-check-input" type="checkbox"/>
+                                            <input name='check' onClick={() => {seleccion(productos._id)}} className="form-check-input" type="checkbox"/>
                                         </Tooltip>
                                     </div>
                                 </td>
@@ -123,7 +125,7 @@ const Tabla = ({listaProductos})  => {
                                 <td>{productos.descripcion}</td>
                                 <td>{CurrencyFormatted(productos.valorUnitario)}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" defaultValue={productos.estado} name='estado' onChange={(e) => {productos.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                    <select className="form-select form-select-sm" defaultValue={productos.estado} name='estado' onChange={(e) => {editarProducto(productos._id, e.target.value)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="disponible">Disponible</option>
                                         <option value="noDisponible">No disponible</option>
                                     </select>  
@@ -134,27 +136,16 @@ const Tabla = ({listaProductos})  => {
                 </tbody>
             </table>
             <ToastContainer position="bottom-center" autoClose={5000} />
+<<<<<<< HEAD
             <div style={{paddingTop: '12px', marginBottom:'20px'}}>
                 <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+=======
+            <div style={{paddingTop: '12px'}}>
+                <button type="button" onClick={() => {eliminar(sel)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+>>>>>>> a3138ba8f938ef04fdd01fb1a72009892ea2fa39
                     Eliminar
                 </button>
-                <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
-                    Guardar cambios
-                </button>
             </div>
-            <Dialog open={open}>
-                <div style={{margin: '3vh'}}>
-                    <h6>¿Desea confirmar los cambios?</h6>
-                    <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
-                        <button onClick={guardar} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            Sí
-                        </button>
-                        <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
-                            No
-                        </button>
-                    </div>
-                </div>
-            </Dialog>
         </div>
     )
 }
