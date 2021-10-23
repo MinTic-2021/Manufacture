@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip, Dialog } from '@material-ui/core';
 import { obtenerVentas } from 'utils/apiVentas';
 import { useVentas } from 'context/ventasContext';
+import { editarVenta } from 'utils/apiVentas';
+import { estadoVenta } from 'utils/apiVentas';
 
 
 function CurrencyFormatted(N) {
@@ -115,16 +117,6 @@ const Tabla = ({listaVentas})  => {
         setReloadInfo(false)
     }, [reloadInfo])
 
-
-    const guardar = () => {
-        listaVentas = listaVentas.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setReloadInfo(true)
-        //enviar al backend
-        console.log(listaVentas)
-    }
-
-
     return (
         <div style={{paddingTop: '20px'}}>
             <table className="table table-hover" style={{paddingLeft: '50px'}}>
@@ -151,7 +143,7 @@ const Tabla = ({listaVentas})  => {
                                 <td>{ventas.idVendedor}</td>
                                 <td style={{textAlign: 'right', paddingRight: '30px', width:'26vh'}}>{CurrencyFormatted(ventas.valorTotal)}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
-                                    <select className="form-select form-select-sm" defaultValue={ventas.estado} name='estado' onChange={(e) => {ventas.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)',marginTop:'4px',marginBottom:'3px'}}>
+                                    <select className="form-select form-select-sm" defaultValue={ventas.estado} name='estado' onChange={(e) => {estadoVenta(ventas._id, e.target.value); ventas.estado=e.target.value; setReloadInfo(true)}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)',marginTop:'4px',marginBottom:'3px'}}>
                                         <option value="En proceso">En proceso</option>
                                         <option value="Cancelada">Cancelada</option>
                                         <option value="Entregada">Entregada</option>
@@ -171,12 +163,6 @@ const Tabla = ({listaVentas})  => {
             </table>
             <ToastContainer position="bottom-center" autoClose={3000} />
 
-            <div style={{paddingTop: '12px', paddingBottom: '60px', display: 'flex', justifyContent: 'left'}}>
-                    <button type="button" className="btn btn-secondary" onClick= {guardar} style={{paddingTop: '0px', paddingBottom: '1px'}}>
-                        Actualizar Estado
-                    </button>
-            </div>
-
             <Dialogo open={open} setOpen={setOpen} id={id} />
         </div>
     )
@@ -187,7 +173,7 @@ const Dialogo = (props) => {
     const {setVentas} = useVentas()
     const {ventas} = useVentas()
     var filtro
-    const sel = []
+    var sel = []
     const [recarga, setRecarga] = useState(false)
     const [reloadInfo, setReloadInfo] = useState(false)
 
@@ -250,14 +236,16 @@ const Dialogo = (props) => {
             delete filtro.productos[x.indexOf(sel[i])]
         }
         filtro.productos = filtro.productos.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setReloadInfo(true)
         //enviar al backend
-        console.log(filtro.productos)
+        
+        setReloadInfo(true)
     }
 
-    console.log("La venta es", ventas)
-    console.log("El filtro es", filtro)
+    const guardar = () => {
+        editarVenta(filtro._id, filtro.productos, total(filtro))
+    }
+
+
     return(
         <Dialog open={props.open} maxWidth="sm" fullWidth>
 
@@ -308,13 +296,13 @@ const Dialogo = (props) => {
                     {CurrencyFormatted(total(filtro))}                                                                   
                     </span>
                 <div style={{paddingTop: '12px'}}>
-                    <button type="button" onClick={() => {props.setOpen(false)}} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                    <button type="button" onClick={guardar} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
                         Guardar
                     </button>
-                    <button type="button" onClick={eliminar} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                    <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                         Eliminar
                     </button>
-                    <button type="button" onClick={() => {props.setOpen(false)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh', marginRight: '1vh'}}>
+                    <button type="button" onClick={() => {props.setOpen(false); window.location.reload()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh', marginRight: '1vh'}}>
                         Cerrar
                     </button>
                 </div> 

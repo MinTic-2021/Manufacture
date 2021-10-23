@@ -29,36 +29,36 @@ export const crearVentas = async (ventas) => {
   });
 }
 
-export const editarUsuario = async(id, nuevo) => {
+export const editarVenta = async(id, nuevo, total) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:5000/gusu/${id}/`,
+    url: `http://localhost:5000/gvent/${id}/`,
     headers: {'Content-Type': 'application/json'},
-    data: {"rol": nuevo}
+    data: {"productos": nuevo, "valorTotal":total}
   };
   
   await axios.request(options).then(function (response) {
     console.log(response.data);
-    toast.success('Rol actualizado exitosamente')
+    toast.success('Venta editada exitosamente')
   }).catch(function (error) {
     console.error(error);
     toast.error('Ocurrió un problema al realizar la operación solicitada')
   });
 }
 
-export const eliminarUsuario = async(id) => {
-  
+export const estadoVenta = async(id, nuevo) => {
   const options = {
-    method: 'DELETE',
-    url: `http://localhost:5000/gusu/${id}/`,
+    method: 'PATCH',
+    url: `http://localhost:5000/gvent/${id}/`,
     headers: {'Content-Type': 'application/json'},
-    data: {"id": id}
+    data: {"estado": nuevo}
   };
   
-  axios.request(options).then(function (response) {
+  await axios.request(options).then(function (response) {
     console.log(response.data);
+    toast.success('Estado de venta cambiado exitosamente')
   }).catch(function (error) {
     console.error(error);
-    toast.success('Ocurrió un error al eliminar el usuario ', id)
+    toast.error('Ocurrió un problema al realizar la operación solicitada')
   });
 }
