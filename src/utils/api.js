@@ -2,6 +2,9 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+//const baseURL = 'http://localhost:5000'
+const baseURL = 'https://desolate-garden-80672.herokuapp.com'
+
 const getToken = () => {
   return `Bearer ${localStorage.getItem('Token')}`
 }
@@ -9,7 +12,7 @@ const getToken = () => {
 export const obtenerUsuarios = async (setUsuarios) => {
     const options = {
       method: 'GET',
-      url: 'http://localhost:5000/gusu/',
+      url: `${baseURL}/gusu/`,
       headers: {Authorization: getToken()}};
     
     await axios.request(options).then(function (response) {
@@ -22,7 +25,7 @@ export const obtenerUsuarios = async (setUsuarios) => {
 export const obtenerDatosUsuario = async (set) => {
   const options = {
     method: 'GET',
-    url: 'http://localhost:5000/gusu/self',
+    url: `${baseURL}/gusu/self`,
     headers: {Authorization: getToken()}};
   
   await axios.request(options).then(function (response) {
@@ -36,7 +39,7 @@ export const obtenerDatosUsuario = async (set) => {
 export const crearUsuario = async (datos) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:5000/gusu/',
+    url: `${baseURL}/gusu/`,
     headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: datos
   };
@@ -53,7 +56,7 @@ export const crearUsuario = async (datos) => {
 export const editarUsuario = async(id, nuevo) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:5000/gusu/${id}/`,
+    url: `${baseURL}/gusu/${id}/`,
     headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: {"rol": nuevo}
   };
@@ -70,7 +73,7 @@ export const editarUsuario = async(id, nuevo) => {
 export const ActualizarUsuario = async(id, nuevo) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:5000/gusu/${id}/`,
+    url: `${baseURL}/gusu/${id}/`,
     headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: nuevo
   };
@@ -88,7 +91,7 @@ export const eliminarUsuario = async(id) => {
   
   const options = {
     method: 'DELETE',
-    url: `http://localhost:5000/gusu/${id}/`,
+    url: `${baseURL}/gusu/${id}/`,
     headers: {'Content-Type': 'application/json', Authorization: getToken()},
     data: {"id": id}
   };

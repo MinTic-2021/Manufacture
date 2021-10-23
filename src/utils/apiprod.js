@@ -2,8 +2,11 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+//const baseURL = 'http://localhost:5000'
+const baseURL = 'https://desolate-garden-80672.herokuapp.com'
+
 export const obtenerProductos = async (setProductos) => {
-    const options = {method: 'GET', url: 'http://localhost:5000/gprod/'};
+    const options = {method: 'GET', url: `${baseURL}/gprod/`};
     
     await axios.request(options).then(function (response) {
     setProductos(response.data)
@@ -15,7 +18,7 @@ export const obtenerProductos = async (setProductos) => {
 export const crearProductos = async (datos) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:5000/gprod/',
+    url: `${baseURL}/gprod/`,
     headers: {'Content-Type': 'application/json'},
     data: datos
   };
@@ -32,7 +35,7 @@ export const crearProductos = async (datos) => {
 export const editarProducto = async(id, estado) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:5000/gprod/${id}/`,
+    url: `${baseURL}/gprod/${id}/`,
     headers: {'Content-Type': 'application/json'},
     data: {"estado": estado}
   };
@@ -50,7 +53,7 @@ export const eliminarProducto = async(id) => {
   
   const options = {
     method: 'DELETE',
-    url: `http://localhost:5000/gprod/${id}/`,
+    url: `${baseURL}/gprod/${id}/`,
     headers: {'Content-Type': 'application/json'},
     data: {"id": id}
   };
