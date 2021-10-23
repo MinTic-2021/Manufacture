@@ -217,7 +217,7 @@ const Dialogo = (props) => {
             "nombreCliente": "",
             "idVendedor": "",
             "estado": "",
-            "Productos": [{
+            "productos": [{
                 "idProducto": "",
                 "descripción": "",
                 "cantidad": "",
@@ -232,7 +232,7 @@ const Dialogo = (props) => {
     }
     
     const total = (filtro) => {
-        var x = (filtro.Productos.map((ventas) => {
+        var x = (filtro.productos.map((ventas) => {
             return(ventas.cantidad * ventas.valorUnitario)            
         }))
         var sum = 0;
@@ -243,23 +243,23 @@ const Dialogo = (props) => {
     }
 
     const eliminar = () => {
-        var x = (filtro.Productos.map((ventas) => {
+        var x = (filtro.productos.map((ventas) => {
             return(ventas.idProducto)
         }))
         for(let i=0; i<sel.length; i++){
-            delete filtro.Productos[x.indexOf(sel[i])]
+            delete filtro.productos[x.indexOf(sel[i])]
         }
-        filtro.Productos = filtro.Productos.filter(value => JSON.stringify(value) !== '{}')
+        filtro.productos = filtro.productos.filter(value => JSON.stringify(value) !== '{}')
         toast.success("Operación realizada con éxito")
         setReloadInfo(true)
         //enviar al backend
-        console.log(filtro.Productos)
+        console.log(filtro.productos)
     }
 
     console.log("La venta es", ventas)
     console.log("El filtro es", filtro)
     return(
-        <Dialog open={props.open}>
+        <Dialog open={props.open} maxWidth="sm" fullWidth>
 
             <div style={{margin: '3vh'}}>
                 <h5 style={{paddingBottom: '4px', paddingTop: '1px', display: 'flex', justifyContent: 'center'}}>Detalle de venta</h5>
@@ -278,12 +278,12 @@ const Dialogo = (props) => {
                         <th width='8%'>ID</th>
                         <th width='25%'>Descripción</th>
                         <th width='12%'>Cant</th>
-                        <th width='25%'>Valor unitario</th>
-                        <th width='25%'>Total</th>
+                        <th width='30%'>Valor unitario</th>
+                        <th width='35%'>Total</th>
                     </tr>
                     </thead>
                     <tbody>
-                        {filtro.Productos.map((ventas) => {
+                        {filtro.productos.map((ventas) => {
                         return(
                             <tr style={{height: '5vh'}} key={nanoid()}>
                                 <td>
@@ -294,8 +294,8 @@ const Dialogo = (props) => {
                                     </div>
                                 </td>
                                 <td contenteditable="true">{ventas.idProducto}</td>
-                                <td>{ventas.descripción}</td>
-                                <td><input style={{textAlign: 'center', width:'30px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {ventas.cantidad = e.target.value; setRecarga(true); toast.success("Cantidad modificada con éxito")}} value={ventas.cantidad}/></td>
+                                <td>{ventas.descripcion}</td>
+                                <td><input style={{textAlign: 'center', width:'30px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {ventas.cantidad = e.target.value; setRecarga(true)}} value={ventas.cantidad}/></td>
                                 <td>{CurrencyFormatted(ventas.valorUnitario)}</td>
                                 <td>{CurrencyFormatted(parseInt(ventas.cantidad)*parseInt(ventas.valorUnitario))}</td>
                             </tr>
@@ -308,7 +308,10 @@ const Dialogo = (props) => {
                     {CurrencyFormatted(total(filtro))}                                                                   
                     </span>
                 <div style={{paddingTop: '12px'}}>
-                    <button type="button" onClick={eliminar} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                    <button type="button" onClick={() => {props.setOpen(false)}} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
+                        Guardar
+                    </button>
+                    <button type="button" onClick={eliminar} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                         Eliminar
                     </button>
                     <button type="button" onClick={() => {props.setOpen(false)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh', marginRight: '1vh'}}>
@@ -320,107 +323,3 @@ const Dialogo = (props) => {
         </Dialog>
     )
 }
-
-/* const Dialogo = (props) => {
-    
-    const sel = []
-    const filtro = props.ventas.find(venta => venta.idVenta === props.id)
-    const [recarga, setRecarga] = useState(false)
-    const [reloadInfo, setReloadInfo] = useState(false)
-    console.log(filtro)
-
-    useEffect(() => {
-        setReloadInfo(false)
-    }, [reloadInfo])
-
-    useEffect(() => {
-        setRecarga(false)
-    }, [recarga])
-    
-    const total = (filtro) => {
-        var x = (filtro.Productos.map((ventas) => {
-            return(ventas.cantidad * ventas.valorUnitario)            
-        }))
-        var sum = 0;
-        for(let i=0; i<x.length; i++){
-            sum = sum + x[i]
-        }
-        return(sum)
-    }
-
-    const eliminar = () => {
-        var x = (filtro.Productos.map((ventas) => {
-            return(ventas.idProducto)
-        }))
-        for(let i=0; i<sel.length; i++){
-            delete filtro.Productos[x.indexOf(sel[i])]
-        }
-        filtro.Productos = filtro.Productos.filter(value => JSON.stringify(value) !== '{}')
-        toast.success("Operación realizada con éxito")
-        setReloadInfo(true)
-        //enviar al backend
-        console.log(filtro.Productos)
-    }
-
-    return (
-        <div>
-            <Dialog open={props.open}>
-                <div style={{margin: '3vh'}}>
-                    <h5 style={{paddingBottom: '4px', paddingTop: '1px', display: 'flex', justifyContent: 'center'}}>Detalle de venta</h5>
-                    <ul className="list-unstyled" style={{marginBottom: '3px'}}>
-                        <li><b>Identificador de venta:</b> <span>{filtro.idVenta}</span></li>
-                        <li><b>Fecha de venta:</b> <span>{filtro.fechaVenta}</span></li>
-                        <li><b>Id cliente:</b> <span>{filtro.idCliente}</span></li>
-                        <li><b>Nombre cliente:</b> <span>{filtro.nombreCliente}</span></li>
-                        <li><b>Id vendedor:</b> <span>{filtro.idVendedor}</span></li>
-                    </ul>
-                    <div>
-                        <table className="table table-hover" style={{paddingLeft: '50px'}}>
-                        <thead>
-                        <tr>
-                            <th> </th>
-                            <th width='8%'>ID</th>
-                            <th width='25%'>Descripción</th>
-                            <th width='12%'>Cant</th>
-                            <th width='25%'>Valor unitario</th>
-                            <th width='25%'>Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {filtro.Productos.map((ventas) => {
-                            return(
-                                <tr style={{height: '5vh'}} key={nanoid()}>
-                                    <td>
-                                        <div className="form-check">
-                                            <Tooltip title="Seleccionar usuario">
-                                                <input name='check' onChange={(e) => {sel.push(ventas.idProducto)}} className="form-check-input" type="checkbox"/>
-                                            </Tooltip>
-                                        </div>
-                                    </td>
-                                    <td contenteditable="true">{ventas.idProducto}</td>
-                                    <td>{ventas.descripción}</td>
-                                    <td><input style={{textAlign: 'center', width:'30px', border: '0px', backgroundColor: 'transparent'}} onChange={(e) => {ventas.cantidad = e.target.value; setRecarga(true); toast.success("Cantidad modificada con éxito")}} value={ventas.cantidad}/></td>
-                                    <td>{CurrencyFormatted(ventas.valorUnitario)}</td>
-                                    <td>{CurrencyFormatted(parseInt(ventas.cantidad)*parseInt(ventas.valorUnitario))}</td>
-                                </tr>
-                                
-                            )})}
-                        </tbody>
-                        </table>
-                    </div>
-                    Total de la venta: <span>   
-                        {CurrencyFormatted(total(filtro))}                                                                   
-                        </span>
-                    <div style={{paddingTop: '12px'}}>
-                        <button type="button" onClick={eliminar} className="btn btn-secondary" onclick="alert('Venta actualizada')" style={{paddingTop: '0.8px', paddingBottom: '1px'}}>
-                            Eliminar
-                        </button>
-                        <button type="button" onClick={() => {props.setOpen(false)}} className="btn btn-secondary" onclick="alert('Venta eliminada')"style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh', marginRight: '1vh'}}>
-                            Cerrar
-                        </button>
-                    </div> 
-                </div>
-            </Dialog>
-        </div>
-    )
-}*/

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import datos from 'productos.json';
 //import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from '@material-ui/core';
+import { obtenerProductos } from 'utils/apiprod';
+import { crearVentas } from 'utils/apiVentas';
 
 
 function CurrencyFormatted(N) {
@@ -32,20 +33,16 @@ function CurrencyFormatted(N) {
 
 const NuevaVenta = () => {
 
-    const [newProduct, setNewProduct] = useState(false);
     const [filas, setFilas] = useState([]);
     const [ventas, setVentas] = useState([]);
     const [recarga, setRecarga] = useState(false);
     const sel = [];
-    const [reloadInfo, setReloadInfo] = useState(false);
+    const [productos, setProductos] = useState([{idProducto: "", descripcion: "", valorUnitario: "", estado: ""}]);
 
     useEffect(() => {
         setVentas([{idVenta:"",fechaVenta:"",idCliente:"",nombreCliente:"",idVendedor:"",productos:[{idProducto:"",descripcion:"",cantidad:"",valorUnitario:""}]}])
     }, [])
 
-    useEffect(() => {
-        setReloadInfo(false)
-    }, [reloadInfo])
     
     useEffect(() => {
         setRecarga(false)
@@ -55,30 +52,31 @@ const NuevaVenta = () => {
         setFilas([{idProducto:"", descripcion: "", cantidad: "", valorUnitario: ""}]);
     }, [])
 
-    useEffect(() => {
-        setNewProduct(false)
-    }, [newProduct])
-    
+    console.log(filas)
+
     const newFile = () => {
         const filaNueva = filas
         filaNueva.push({idProducto:"",descripcion:"", cantidad: "", valorUnitario:""})     
         setFilas(filaNueva)
-        setNewProduct(false)
+        setRecarga(false)
     }
 
+    useEffect(() => {
+        // obtención datos backend
+        obtenerProductos(setProductos)
+    }, [])
+
     const encontrar = (fila) => {
-        try{
-            var filtro = []
-            if(fila.idProducto === ''){
-                filtro = [{idProducto:"",descripcion:"",valorUnitario:""}]
-                return(filtro)
-            }
-            else{
-                filtro = datos.find(producto => producto.idProducto === fila.idProducto)
-                return(filtro)
-            }
-        } catch {
-            toast.error("La búsqueda no se puede realizar")
+        var ides = []
+        productos.forEach(producto => {ides.push(producto.idProducto)})
+        var filtro = []
+        filtro = {idProducto:"",descripcion:"",valorUnitario:""}         
+        if(!ides.includes(fila.idProducto)){
+            return(filtro)
+        }
+        else{
+            filtro = productos.filter(producto => producto.idProducto.includes(fila.idProducto))
+            return(filtro[0])
         }         
     }
 
@@ -93,12 +91,21 @@ const NuevaVenta = () => {
         return(sum)
     }
 
-    const enviarDatos = () => {
+    const enviarDatos = (ventas) => {
         // enviar al backend
-        //window.location.reload()
-        ventas.estado = "En proceso"
-        ventas.Productos = filas
-        console.log(ventas)
+        ventas[0].estado = "En proceso"
+        ventas[0].productos = filas
+        var total = []
+        ventas[0].productos.forEach(elem => {total.push(elem.cantidad*elem.valorUnitario)})
+        var sum = 0
+        for(let i=0; i<total.length; i++){
+            sum = sum + total[i]
+        }
+        ventas[0].valorTotal = sum
+        crearVentas(ventas[0])
+        console.log("mis ventas",ventas)
+        window.location.reload()
+        
     }
 
     const eliminar = () => {
@@ -113,8 +120,9 @@ const NuevaVenta = () => {
         setFilas(filasN)
         console.log(filasN)
         toast.success("Operación realizada con éxito")
-        setReloadInfo(true)
+        setRecarga(true)
     }
+
     
 
     return (
@@ -125,23 +133,23 @@ const NuevaVenta = () => {
                     <div className="row">
                         <div className="col">
                         <label htmlFor='idVenta'>Identificador de venta:</label>
-                        <input type="text" name='idVenta' onChange={(e) => {ventas.idVenta = e.target.value}} className="form-control" placeholder="ID" required/>
+                        <input type="text" name='idVenta' onChange={(e) => {ventas[0].idVenta = e.target.value; console.log("mi idVenta",ventas.idVenta)}} className="form-control" placeholder="ID" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='fechaVenta'>Fecha de venta:</label>
-                        <input type="date" name='fechaVenta' onChange={(e) => {ventas.fechaVenta = e.target.value}} className="form-control" required/>
+                        <input type="date" name='fechaVenta' onChange={(e) => {ventas[0].fechaVenta = e.target.value}} className="form-control" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='idCliente'>Id cliente:</label>
-                        <input type="number" name='idCliente' onChange={(e) => {ventas.idCliente = e.target.value}} className="form-control" placeholder="ID cliente" required/>
+                        <input type="number" name='idCliente' onChange={(e) => {ventas[0].idCliente = e.target.value}} className="form-control" placeholder="ID cliente" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='nombreCliente'>Nombre cliente:</label>
-                        <input type="text" name='nombreCliente' onChange={(e) => {ventas.nombreCliente = e.target.value}} className="form-control" placeholder="cliente" required/>
+                        <input type="text" name='nombreCliente' onChange={(e) => {ventas[0].nombreCliente = e.target.value}} className="form-control" placeholder="cliente" required/>
                         </div>
                         <div className="col">
                         <label htmlFor='idVendedor'>Id vendedor:</label>
-                        <input type="number" name='idVendedor' onChange={(e) => {ventas.idVendedor = e.target.value}} className="form-control" placeholder="vendedor"/>
+                        <input type="number" name='idVendedor' onChange={(e) => {ventas[0].idVendedor = e.target.value}} className="form-control" placeholder="vendedor"/>
                         </div>
                     </div>
                 </form>
@@ -168,7 +176,7 @@ const NuevaVenta = () => {
                                                 </Tooltip>
                                             </div>
                                         </td>
-                                        <td><input style={{textAlign: 'left', width:'60px', border: '0px', backgroundColor: 'transparent'}} value={fila.idProducto} onChange={(e) => {fila.idProducto = e.target.value; setRecarga(true)}}/>  </td>
+                                        <td><input style={{textAlign: 'left', width:'60px', border: '0px', backgroundColor: 'transparent'}} value={fila.idProducto} onChange={(e) => {fila.idProducto = e.target.value; setRecarga(true); console.log(e.target.value)}} />  </td>
                                         <td> {fila.descripcion = encontrar(fila).descripcion} </td>
                                         <td> <input style={{textAlign: 'center', width:'70px', border: '0px', backgroundColor: 'transparent'}} value={fila.cantidad} onChange={(e) => {fila.cantidad = e.target.value; setRecarga(true)}}/> </td>
                                         <td> {CurrencyFormatted(fila.valorUnitario = encontrar(fila).valorUnitario)} </td>
@@ -184,13 +192,13 @@ const NuevaVenta = () => {
                         </span>
 
                 <div style={{paddingTop: '12px'}}>
-                    <button type="button" onClick={() => {newFile(); setNewProduct(true)}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
+                    <button type="button" onClick={() => {newFile(); setRecarga(true)}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
                         Agregar producto
                     </button>
                     <button type="button" onClick={() => {eliminar()}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px', marginRight: '1vh', marginLeft: '1vh'}}>
                         Eliminar
                     </button>
-                    <button type="button" onClick={() => {enviarDatos();toast.success("Venta registrada con éxito")}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
+                    <button type="button" onClick={() => {enviarDatos(ventas)}} className="btn btn-secondary" style={{paddingTop: '0px', paddingBottom: '1px'}}>
                         Registrar venta
                     </button>
                 </div>

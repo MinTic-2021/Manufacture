@@ -12,20 +12,20 @@ export const obtenerVentas = async (setVentas) => {
     });
 }
 
-export const crearUsuario = async (datos) => {
+export const crearVentas = async (ventas) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:5000/gusu/',
+    url: 'http://localhost:5000/gvent',
     headers: {'Content-Type': 'application/json'},
-    data: datos
+    data: ventas
   };
   
   await axios.request(options).then(function (response) {
     console.log(response.data);
-    toast.success('Usuario creado exitosamente')
+    toast.success('Venta registrada exitosamente')
   }).catch(function (error) {
     console.error(error);
-    toast.error('Ocurrió un problema al crear el usuario')
+    toast.error('Ocurrió un problema al registrar la venta')
   });
 }
 
