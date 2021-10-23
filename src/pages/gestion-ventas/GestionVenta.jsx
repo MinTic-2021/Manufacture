@@ -9,7 +9,7 @@ import { editarVenta } from 'utils/apiVentas';
 import { estadoVenta } from 'utils/apiVentas';
 
 
-function CurrencyFormatted(N) {
+export function CurrencyFormatted(N) {
     N=parseFloat(N);
     if(!isNaN(N))N=N.toFixed(2);
     else N='0.00';

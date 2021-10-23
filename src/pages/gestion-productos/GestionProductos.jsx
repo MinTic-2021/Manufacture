@@ -6,6 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip, Dialog } from '@material-ui/core';
 import { obtenerProductos } from 'utils/apiprod';
 import { eliminarProducto } from 'utils/apiprod';
+import { CurrencyFormatted } from 'pages/gestion-ventas/GestionVenta';
+
+
 
 const GestionProductos = () => {
 
@@ -53,7 +56,7 @@ const GestionProductos = () => {
                 <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
                     <input onChange={((e) => {setBusqueda(e.target.value.toLowerCase())})} type="text"/>
                 </div>   
-                <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
+                <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
                     Buscar
                 </button>
                 <button type="button" onClick={() => {setProductos(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
@@ -118,7 +121,7 @@ const Tabla = ({listaProductos})  => {
                                 </td>
                                 <td>{productos.idProducto}</td>
                                 <td>{productos.descripcion}</td>
-                                <td>{productos.valorUnitario}</td>
+                                <td>{CurrencyFormatted(productos.valorUnitario)}</td>
                                 <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
                                     <select className="form-select form-select-sm" defaultValue={productos.estado} name='estado' onChange={(e) => {productos.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
                                         <option value="disponible">Disponible</option>
@@ -131,7 +134,7 @@ const Tabla = ({listaProductos})  => {
                 </tbody>
             </table>
             <ToastContainer position="bottom-center" autoClose={5000} />
-            <div style={{paddingTop: '12px'}}>
+            <div style={{paddingTop: '12px', marginBottom:'20px'}}>
                 <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
                     Eliminar
                 </button>
