@@ -1,108 +1,159 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import datos from 'productos.json';
+import { nanoid } from 'nanoid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Tooltip, Dialog } from '@material-ui/core';
+import { obtenerProductos } from 'utils/apiprod';
+import { eliminarProducto } from 'utils/apiprod';
 
 const GestionProductos = () => {
+
+    const [productos, setProductos] = useState([]);
+    let [busqueda, setBusqueda] = useState('')
+    const [criterio, setCriterio] = useState('nombre')
+    
+        const buscar = () =>{
+            try{
+                const filtro = []
+                if(busqueda === '' || criterio === 'todo'){
+                    obtenerProductos(setProductos)
+                }else{
+                    for (let i = 0; i < productos.length; i++){
+                        if(productos[i][criterio].toLowerCase() === busqueda){
+                            filtro.push(productos[i])
+                        }
+                    }
+                    setProductos(filtro)
+                }
+            } catch {
+                toast.error("La búsqueda no se puede realizar")
+            }
+        }
+    
+        useEffect(() => {
+            // obtención datos backend
+            obtenerProductos(setProductos);
+        }, [])
+        console.log(productos)
+
+
     return (
-        <div class="container-sm">
+        <div className="container-sm">
             <h4 style={{paddingBotton: '20px', paddingTop: '20px', display: 'flex', justifyContent: 'center'}}>
               Gestión de productos
             </h4>
             <h6>Buscar producto:</h6>
             <div style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
-                <select class="form-select form-select-sm" style={{width: '13%'}}>
-                    <option value="nombre">ID</option>
-                    <option value="rol">Descripción</option>
+                <select className="form-select form-select-sm" onChange={((e) => {setCriterio(e.target.value.toLowerCase())})} style={{width: '13%'}}>
+                    <option value="idProducto">ID</option>
+                    <option value="descripcion">Descripción</option>
                     <option value="todo">Mostrar todo</option>
                 </select> 
                 <div style={{paddingRight: '12px', paddingLeft: '12px'}}>     
-                    <input type="text"/>
+                    <input onChange={((e) => {setBusqueda(e.target.value.toLowerCase())})} type="text"/>
                 </div>   
-                <button type="button" class="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
+                <button type="button" onClick={() => {buscar()}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
                     Buscar
                 </button>
+                <button type="button" onClick={() => {setProductos(datos)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginLeft: '1vh'}}>
+                        Limpiar
+                </button>
             </div>
-            <div style={{paddingTop: '20px'}}>
-            <table class="table table-hover" style={{paddingLeft: '50px'}}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descripción</th>
-                        <th>Valor unitario</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody style={{height: '20vh'}}>
-                    <tr style={{height: '5vh'}}>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td width='13%' style={{paddingTop: '0%', paddingBotton: '0%', paddingRight: '0%'}}>
-                            <select class="form-select form-select-sm" style={{width: '100%', borderColor:'rgba(255, 255, 255, 0)'}}>
-                              <option value="mayor">Disponible</option>
-                              <option value="menor">No disponible</option>
-                            </select>  
-                        </td>
-                    </tr>
-                    <tr style={{height: '5vh'}}>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td width='12%' style={{paddingTop: '0%', paddingBotton:  '0%', paddingRight: '0%'}}>
-                            <select class="form-select form-select-sm" style={{width: '100%', borderColor:'rgba(255, 255, 255, 0)'}}>
-                              <option value="mayor">Disponible</option>
-                              <option value="menor">No disponible</option>
-                            </select>  
-                        </td>
-                    </tr>
-                    <tr style={{height: '2vh'}}>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td width='12%' style={{paddingTop: '0%', paddingBotton: '0%',  paddingRight: '0%'}}>
-                            <select class="form-select form-select-sm" style={{width: '100%', borderColor:'rgba(255, 255, 255, 0)'}}>
-                              <option value="mayor">Disponible</option>
-                              <option value="menor">No Disponible</option>
-                            </select>  
-                        </td>
-                    </tr>
-                    <tr style={{height: '2vh'}}>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td width='12%' style={{paddingTop: '0%', paddingBotton: '0%',  paddingRight: '0%'}}>
-                            <select class="form-select form-select-sm" style={{width: '100%', borderColor:'rgba(255, 255, 255, 0)'}}>
-                              <option value="mayor">Disponible</option>
-                              <option value="menor">No Disponible</option>
-                            </select>  
-                        </td>
-                    </tr>
-                    <tr style={{borderBottomColor: 'black', height: '5vh'}}>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td width='12%' style={{paddingTop: '0%', paddingBotton: '0%',  paddingRight: '0%'}}>
-                            <select class="form-select form-select-sm" style={{width: '100%', borderColor:'rgba(255, 255, 255, 0)'}}>
-                              <option value="mayor">Disponible</option>
-                              <option value="menor">No Disponible</option>
-                            </select>  
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style={{paddingTop: '12px'}}>
-            <button type="button" class="btn btn-secondary" style={{paddingTop: '0.8px', paddingBotton: '1px', marginRight: '2vh'}}>
-              Modificar
-            </button>
-            <button type="button" class="btn btn-secondary" onclick="alert('Producto eliminado exitosamente')" style={{paddingTop: '0.8px', paddingBotton: '1px', marginRight: '2vh'}}>
-              Eliminar
-            </button>          
-            <button type="button" class="btn btn-secondary" onclick="alert('Información actualizada')" style={{paddingTop: '0.8px', paddingBotton: '1px'}}>
-                Guardar cambios
-            </button>
-          </div>
+            <Tabla listaProductos={productos} />
         </div>
     )
 }
 
-export default GestionProductos
+export default GestionProductos        
+
+const Tabla = ({listaProductos})  => {
+
+    const sel = []
+    const [reloadInfo, setReloadInfo] = useState(false)
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        setReloadInfo(false)
+    }, [reloadInfo])
+
+    const guardar = () => {
+        listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
+        toast.success("Operación realizada con éxito")
+        setOpen(false)
+        //enviar al backend
+        console.log(listaProductos)
+    }
+
+    const eliminar = () => {
+        sel.forEach(llave => {delete listaProductos[llave]})
+        listaProductos = listaProductos.filter(value => JSON.stringify(value) !== '{}')
+        setReloadInfo(true)
+        //enviar al backend
+        eliminarProducto(listaProductos)
+    }
+
+    return (
+        <div style={{paddingTop: '20px'}}>
+            <table className="table table-hover" style={{paddingLeft: '50px'}}>
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th>ID Producto</th>
+                        <th>Descripción</th>
+                        <th>Valor Unitario</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody style={{height: '20vh'}}>
+                    {listaProductos.map((productos) => {
+                        return(
+                            <tr style={{height: '5vh'}} key={nanoid()}>
+                                <td>
+                                    <div className="form-check">
+                                        <Tooltip title="Seleccionar producto">
+                                            <input name='check' onChange={(e) => {sel.push(productos.idProducto-1)}} className="form-check-input" type="checkbox"/>
+                                        </Tooltip>
+                                    </div>
+                                </td>
+                                <td>{productos.idProducto}</td>
+                                <td>{productos.descripcion}</td>
+                                <td>{productos.valorUnitario}</td>
+                                <td style={{width: '17%', paddingTop: '0%', paddingBottom: '0%', paddingRight: '0%'}}>
+                                    <select className="form-select form-select-sm" defaultValue={productos.estado} name='estado' onChange={(e) => {productos.estado = e.target.value}} style={{width: '80%', borderColor: 'rgba(255, 255, 255, 0)'}}>
+                                        <option value="disponible">Disponible</option>
+                                        <option value="noDisponible">No disponible</option>
+                                    </select>  
+                                </td>
+                            </tr>
+                        )}
+                    )}
+                </tbody>
+            </table>
+            <ToastContainer position="bottom-center" autoClose={5000} />
+            <div style={{paddingTop: '12px'}}>
+                <button type="button" onClick={eliminar} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                    Eliminar
+                </button>
+                <button type="button" onClick={() => {setOpen(true)}} className="btn btn-secondary" style={{paddingTop: '0.8px', paddingBottom: '1px', marginRight: '4px'}}>
+                    Guardar cambios
+                </button>
+            </div>
+            <Dialog open={open}>
+                <div style={{margin: '3vh'}}>
+                    <h6>¿Desea confirmar los cambios?</h6>
+                    <div style={{display: 'flex', justifyContent: 'space-around', paddingTop: '2vh'}}>
+                        <button onClick={guardar} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
+                            Sí
+                        </button>
+                        <button onClick={() => {setOpen(false)}} style={{width: '10vh', borderRadius: '0.7vh', border: '1px solid gray', backgroundColor: '#515C5F', color: 'white'}}>
+                            No
+                        </button>
+                    </div>
+                </div>
+            </Dialog>
+        </div>
+    )
+}
+
 

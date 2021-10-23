@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 const AgregarUsuario = () => {
 
-    const form = useRef(null)
+    const form = useRef()
 
     const submitform = async (e) => {
         e.preventDefault()
