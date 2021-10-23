@@ -31,7 +31,7 @@ function App() {
     <Auth0Provider
     domain="mintinc-manufacture.us.auth0.com"
     clientId="vs5Q2z3dkLPTtisE135M4SXlHUg8WqX3"
-    redirectUri='http://localhost:3000/bienvenida'
+    redirectUri='https://secure-basin-70754.herokuapp.com/bienvenida'
     audience="api-autenticacion-manufacture">
       <UserContext.Provider value={{userData, setUserData}}>
         <UsuarioContext.Provider value={{usuarios, setUsuarios}} >
