@@ -91,6 +91,10 @@ const NuevaVenta = () => {
         return(sum)
     }
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
     const enviarDatos = (ventas) => {
         // enviar al backend
         ventas[0].estado = "En proceso"
@@ -104,9 +108,10 @@ const NuevaVenta = () => {
         ventas[0].valorTotal = sum
         crearVentas(ventas[0])
         console.log("mis ventas",ventas)
-        window.location.reload()
-        
-    }
+        sleep(5000).then(r => {
+            window.location.reload()
+      	})
+        }
 
     const eliminar = () => {
         var x = (filas.map((fila) => {
